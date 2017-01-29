@@ -3,6 +3,9 @@
 # JustLog
 
 [![Build Status](https://www.bitrise.io/app/cd3b5cb7da89003d.svg?token=gDRpYMHJJg_QMKMZ6Jv7xw&branch=master)](https://www.bitrise.io/app/cd3b5cb7da89003d)
+[![Version](https://img.shields.io/cocoapods/v/JustLog.svg?style=flat)](http://cocoapods.org/pods/JustLog)
+[![License](https://img.shields.io/cocoapods/l/JustLog.svg?style=flat)](http://cocoapods.org/pods/JustLog)
+[![Platform](https://img.shields.io/cocoapods/p/JustLog.svg?style=flat)](http://cocoapods.org/pods/JustLog)
 
 JustLog takes logging on iOS to the next level. It supports console, file and remote Logstash logging via TCP socket with no effort. Support for logz.io available.
 
