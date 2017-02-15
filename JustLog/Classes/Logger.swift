@@ -60,26 +60,26 @@ public final class Logger: NSObject {
         let format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $T $C$L$c: $M"
         
         // console
-        console = JustLog.ConsoleDestination()
-        console.format = format
         if enableConsoleLogging {
+            console = JustLog.ConsoleDestination()
+            console.format = format
             internalLogger.addDestination(console)
         }
         
         // file
-        file = JustLog.FileDestination()
-        file.format = format
-        if let baseURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first {
-            file.logFileURL = baseURL.appendingPathComponent(logFilename ?? "justeat.log", isDirectory: false)
-        }
         if enableFileLogging {
+            file = JustLog.FileDestination()
+            file.format = format
+            if let baseURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first {
+                file.logFileURL = baseURL.appendingPathComponent(logFilename ?? "justeat.log", isDirectory: false)
+            }
             internalLogger.addDestination(file)
         }
         
         // logstash
-        logstash = LogstashDestination(host: logstashHost, port: logstashPort, timeout: logstashTimeout, logActivity: logLogstashSocketActivity)
-        logstash.logzioToken = logzioToken
         if enableLogstashLogging {
+            logstash = LogstashDestination(host: logstashHost, port: logstashPort, timeout: logstashTimeout, logActivity: logLogstashSocketActivity)
+            logstash.logzioToken = logzioToken
             internalLogger.addDestination(logstash)
         }
         
