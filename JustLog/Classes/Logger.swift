@@ -42,13 +42,13 @@ public final class Logger: NSObject {
     public var enableConsoleLogging: Bool = true
     public var enableFileLogging: Bool = true
     public var enableLogstashLogging: Bool = true
-    private let internalLogger = SwiftyBeaver.self
+    public let internalLogger = SwiftyBeaver.self
     private var dispatchTimer: Timer?
     
     // destinations
-    private var console: ConsoleDestination!
-    private var logstash: LogstashDestination!
-    private var file: FileDestination!
+    public var console: ConsoleDestination!
+    public var logstash: LogstashDestination!
+    public var file: FileDestination!
     
     deinit {
         dispatchTimer?.invalidate()
