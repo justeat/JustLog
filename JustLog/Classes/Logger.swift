@@ -87,7 +87,9 @@ public final class Logger: NSObject {
     }
     
     public func forceSend(_ completionHandler: @escaping () -> Void = {}) {
-        logstash.forceSend(completionHandler)
+        if enableLogstashLogging {
+            logstash.forceSend(completionHandler)
+        }
     }
     
     public func verbose(_ message: String, error: NSError? = nil, userInfo: [String : Any]? = nil, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
