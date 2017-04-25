@@ -35,10 +35,16 @@ public class LogstashDestination: BaseDestination  {
     }
     
     deinit {
+        cancelSending()
+    }
+    
+    public func cancelSending() {
         self.logDispatchQueue.cancelAllOperations()
         self.socketManager.disconnect()
     }
     
+    // MARK: - Log dispatching
+
     override public func send(_ level: SwiftyBeaver.Level, msg: String, thread: String,
                               file: String, function: String, line: Int) -> String? {
         
@@ -52,13 +58,7 @@ public class LogstashDestination: BaseDestination  {
         
         return nil
     }
-    
-}
 
-//MARK:- Log dispatching
-
-extension LogstashDestination {
-    
     public func forceSend(_ completionHandler: @escaping () -> Void  = {}) {
         
         self.completionHandler = completionHandler
@@ -110,7 +110,7 @@ extension LogstashDestination {
     
 }
 
-//MARK: - GCDAsyncSocketManager Delegate
+// MARK: - GCDAsyncSocketManager Delegate
 
 extension LogstashDestination: AsyncSocketManagerDelegate {
     
