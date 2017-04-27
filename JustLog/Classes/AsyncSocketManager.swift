@@ -12,6 +12,7 @@ import CocoaAsyncSocket
 protocol AsyncSocketManagerDelegate: class {
     func socketDidSecure(_ socket: GCDAsyncSocket)
     func socket(_ socket: GCDAsyncSocket, didWriteDataWithTag tag: Int)
+    func socket(_ socket: GCDAsyncSocket, didDisconnectWithError error: Error?)
 }
 
 class AsyncSocketManager: NSObject {
@@ -62,7 +63,7 @@ class AsyncSocketManager: NSObject {
     }
 }
 
-//MARK: - Connection Management
+// MARK: - Connection Management
 
 extension AsyncSocketManager {
     
@@ -93,7 +94,7 @@ extension AsyncSocketManager {
     }
 }
 
-//MARK: - Socket Attributes
+// MARK: - Socket Attributes
 
 extension AsyncSocketManager {
     
@@ -106,7 +107,7 @@ extension AsyncSocketManager {
     }
 }
 
-//MARK: - Swift Delegate wrapper
+// MARK: - Swift Delegate wrapper
 
 extension AsyncSocketManager: GCDAsyncSocketDelegate {
 
@@ -139,5 +140,6 @@ extension AsyncSocketManager: GCDAsyncSocketDelegate {
                 print("🔌 <AsyncSocket>, disconnected!")
             }
         }
+        self.delegate?.socket(sock, didDisconnectWithError: err)
     }
 }

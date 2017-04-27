@@ -86,9 +86,15 @@ public final class Logger: NSObject {
         dispatchTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(scheduledForceSend(_:)), userInfo: nil, repeats: true)
     }
     
-    public func forceSend(_ completionHandler: @escaping () -> Void = {}) {
+    public func forceSend(_ completionHandler: @escaping (_ error: Error?) -> Void = {_ in }) {
         if enableLogstashLogging {
             logstash.forceSend(completionHandler)
+        }
+    }
+    
+    public func cancelSending() {
+        if enableLogstashLogging {
+            logstash.cancelSending()
         }
     }
     

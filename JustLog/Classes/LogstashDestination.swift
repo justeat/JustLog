@@ -15,7 +15,7 @@ public class LogstashDestination: BaseDestination  {
     public var logzioToken: String?
     
     var logsToShip = [Int : [String : Any]]()
-    fileprivate var completionHandler: (() -> Void)?
+    fileprivate var completionHandler: ((_ error: Error?) -> Void)?
     private let logzioTokenKey = "token"
     
     var logActivity: Bool = false
@@ -35,10 +35,16 @@ public class LogstashDestination: BaseDestination  {
     }
     
     deinit {
+        cancelSending()
+    }
+    
+    public func cancelSending() {
         self.logDispatchQueue.cancelAllOperations()
         self.socketManager.disconnect()
     }
     
+    // MARK: - Log dispatching
+
     override public func send(_ level: SwiftyBeaver.Level, msg: String, thread: String,
                               file: String, function: String, line: Int) -> String? {
         
@@ -52,18 +58,15 @@ public class LogstashDestination: BaseDestination  {
         
         return nil
     }
-    
-}
 
-//MARK:- Log dispatching
-
-extension LogstashDestination {
-    
-    public func forceSend(_ completionHandler: @escaping () -> Void  = {}) {
+    public func forceSend(_ completionHandler: @escaping (_ error: Error?) -> Void  = {_ in }) {
         
+        if self.logsToShip.count == 0 || self.socketManager.isConnected() {
+            completionHandler(nil)
+            return
+        }
+
         self.completionHandler = completionHandler
-        
-        if self.logsToShip.count == 0 || self.socketManager.isConnected() { return }
         
         logDispatchQueue.addOperation { [weak self] in
             self?.socketManager.send()
@@ -110,7 +113,7 @@ extension LogstashDestination {
     
 }
 
-//MARK: - GCDAsyncSocketManager Delegate
+// MARK: - GCDAsyncSocketManager Delegate
 
 extension LogstashDestination: AsyncSocketManagerDelegate {
     
@@ -120,7 +123,7 @@ extension LogstashDestination: AsyncSocketManagerDelegate {
         }
         
         if let completionHandler = self.completionHandler {
-            completionHandler()
+            completionHandler(nil)
         }
         
         completionHandler = nil
@@ -130,4 +133,13 @@ extension LogstashDestination: AsyncSocketManagerDelegate {
         self.writeLogs()
     }
     
+    func socket(_ socket: GCDAsyncSocket, didDisconnectWithError error: Error?) {
+        
+        if let completionHandler = self.completionHandler {
+            completionHandler(error)
+        }
+        
+        completionHandler = nil
+    }
 }
+ 
