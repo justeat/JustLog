@@ -97,6 +97,9 @@ public final class Logger: NSObject {
             logstash.cancelSending()
         }
     }
+}
+
+extension Logger: Logging {
     
     public func verbose(_ message: String, error: NSError? = nil, userInfo: [String : Any]? = nil, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
         let updatedUserInfo = [logTypeKey: "verbose"].merged(with: userInfo ?? [String : String]())
@@ -127,6 +130,7 @@ public final class Logger: NSObject {
         let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
         internalLogger.error(logMessage, file, function, line: line)
     }
+    
 }
 
 extension Logger {
