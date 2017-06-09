@@ -97,41 +97,45 @@ public final class Logger: NSObject {
             logstash.cancelSending()
         }
     }
+}
+
+extension Logger: Logging {
     
-    public func verbose(_ message: String, error: NSError? = nil, userInfo: [String : Any]? = nil, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+    public func verbose(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: Int) {
         let updatedUserInfo = [logTypeKey: "verbose"].merged(with: userInfo ?? [String : String]())
         let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
         internalLogger.verbose(logMessage, file, function, line: line)
     }
     
-    public func debug(_ message: String, error: NSError? = nil, userInfo: [String : Any]? = nil, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+    public func debug(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: Int) {
         let updatedUserInfo = [logTypeKey: "debug"].merged(with: userInfo ?? [String : String]())
         let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
         internalLogger.debug(logMessage, file, function, line: line)
     }
     
-    public func info(_ message: String, error: NSError? = nil, userInfo: [String : Any]? = nil, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+    public func info(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: Int) {
         let updatedUserInfo = [logTypeKey: "info"].merged(with: userInfo ?? [String : String]())
         let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
         internalLogger.info(logMessage, file, function, line: line)
     }
     
-    public func warning(_ message: String, error: NSError? = nil, userInfo: [String : Any]? = nil, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+    public func warning(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: Int) {
         let updatedUserInfo = [logTypeKey: "warning"].merged(with: userInfo ?? [String : String]())
         let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
         internalLogger.warning(logMessage, file, function, line: line)
     }
     
-    public func error(_ message: String, error: NSError? = nil, userInfo: [String : Any]? = nil, _ file: String = #file, _ function: String = #function, _ line: Int = #line) {
+    public func error(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: Int) {
         let updatedUserInfo = [logTypeKey: "error"].merged(with: userInfo ?? [String : Any]())
         let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
         internalLogger.error(logMessage, file, function, line: line)
     }
+    
 }
 
 extension Logger {
     
-    fileprivate func logMessage(_ message: String, error: NSError? = nil, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: Int) -> String {
+    fileprivate func logMessage(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: Int) -> String {
     
         let messageConst = "message"
         let userInfoConst = "userInfo"
