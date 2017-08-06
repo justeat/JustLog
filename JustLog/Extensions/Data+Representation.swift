@@ -11,7 +11,7 @@ import Foundation
 extension Data {
     
     func stringRepresentation() -> String {
-        let retVal = NSString(data: self, encoding: String.Encoding.utf8.rawValue) as? String
+        let retVal = String(data: self, encoding: .utf8)
         return retVal ?? ""
     }
 }
