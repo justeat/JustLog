@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0820"
+   LastUpgradeVersion = "0830"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4FD9220EF19234EA7CD5B7550386CCE0"
+               BlueprintIdentifier = "FDEB41665571893A594DFEE6919B8C35"
                BuildableName = "Pods_JustLog_Example.framework"
                BlueprintName = "Pods-JustLog_Example"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
