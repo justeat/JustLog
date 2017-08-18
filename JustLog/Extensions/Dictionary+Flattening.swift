@@ -8,19 +8,6 @@
 
 import Foundation
 
-public func mergeDictionary(_ dictionary: Dictionary<String, Any>, with dictionary2: Dictionary<String, Any>) -> Dictionary<String, Any> {
-    var retVal: Dictionary<String, Any> = [:]
-    dictionary2.forEach { (key, value) in
-        if let value1 = dictionary[key] {
-            let mergedValue: [Any] = [value1, value]
-            retVal.updateValue(mergedValue, forKey: key)
-        }
-        else {
-            retVal.updateValue(value, forKey: key)
-        }
-    }
-    return retVal
-}
 
 extension Dictionary {
     
@@ -66,19 +53,34 @@ extension Dictionary where Key == String {
         case encapsulateFlatten
     }
     
-    mutating func merge(with dictionary: Dictionary) {
-        dictionary.forEach { _ = updateValue($1, forKey: $0) }
-    }
-    
-    
-    func merged(with dictionary: Dictionary, policy: KeyMergePolicy = .override) -> Dictionary<String, Any> {
+    func merged(with dictionary: Dictionary<String, Any>, policy: KeyMergePolicy = .override) -> Dictionary<String, Any> {
         switch policy {
         case .override:
-            var dict = self
-            dict.merge(with: dictionary)
-            return dict
+            return mergeDictionaryByReplacingValues(self, with: dictionary)
         case .encapsulateFlatten:
-            return mergeDictionary(self, with: dictionary)
+            return mergeDictionariesByGroupingValues(self, with: dictionary)
         }
+    }
+    
+    private func mergeDictionaryByReplacingValues(_ dictionary: Dictionary<String, Any>, with dictionary2: Dictionary<String, Any>) -> Dictionary<String, Any> {
+        var retValue = dictionary
+        dictionary2.forEach { (key, value) in
+            retValue.updateValue(value, forKey: key)
+        }
+        return retValue
+    }
+    
+    private func mergeDictionariesByGroupingValues(_ dictionary: Dictionary<String, Any>, with dictionary2: Dictionary<String, Any>) -> Dictionary<String, Any> {
+        var retVal: Dictionary<String, Any> = [:]
+        dictionary2.forEach { (key, value) in
+            if let value1 = dictionary[key] {
+                let mergedValue: [Any] = [value1, value]
+                retVal.updateValue(mergedValue, forKey: key)
+            }
+            else {
+                retVal.updateValue(value, forKey: key)
+            }
+        }
+        return retVal
     }
 }
