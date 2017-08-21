@@ -10,3 +10,14 @@ target 'JustLog_Example' do
     
   end
 end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        if target.name == "JustLog"
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_TREAT_WARNINGS_AS_ERRORS'] = 'YES'
+                config.build_settings['GCC_TREAT_WARNINGS_AS_ERRORS'] = 'YES'
+            end
+        end
+    end
+end
