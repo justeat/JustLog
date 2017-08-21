@@ -35,12 +35,20 @@ extension NSError {
     }
     
     func underlyingErrors() -> [NSError] {
+        guard let underError = self.userInfo[NSUnderlyingErrorKey] as? NSError else {
+            return []
+        }
+        
+        return [underError] + underError.underlyingErrors()
+    }
+    
+    func errorChain() -> [NSError] {
         
         guard let underError = self.userInfo[NSUnderlyingErrorKey] as? NSError else {
             return [self]
         }
         
-        return [self] + underError.underlyingErrors()
+        return [self] + underError.errorChain()
     }
 
     

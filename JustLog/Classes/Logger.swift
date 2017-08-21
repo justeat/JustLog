@@ -145,7 +145,7 @@ extension Logger: Logging {
 
 extension Logger {
     
-    fileprivate func logMessage(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: UInt) -> String {
+    internal func logMessage(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: UInt) -> String {
     
         let messageConst = "message"
         let userInfoConst = "userInfo"
@@ -181,15 +181,22 @@ extension Logger {
         }
         
         if let error = error {
-            let errorInfo = [errorDomain: error.domain,
-                             errorCode: error.code] as [String : Any]
-            let errorUserInfo = error.humanReadableError().userInfo as! [String : Any]
-            options = options.merged(with: errorInfo).merged(with: errorUserInfo.flattened())
+            error.errorChain().forEach({ (underlyingError) in
+                mergeOptions(from: underlyingError, to: &options)
+            })
         }
         
         retVal[userInfoConst] = options
         
         return retVal.toJSON() ?? ""
+    }
+    
+    private func mergeOptions(from error:NSError, to dictionary: inout [String:Any]) {
+        let errorInfo = [errorDomain: error.domain,
+                         errorCode: error.code] as [String : Any]
+        let errorUserInfo = error.humanReadableError().userInfo as! [String : Any]
+        let metadataUserInfo = dictionary.merged(with: errorInfo.flattened(), policy: .encapsulateFlatten)
+        dictionary = metadataUserInfo.merged(with: errorUserInfo.flattened(), policy: .encapsulateFlatten)
     }
     
     @objc fileprivate func scheduledForceSend(_ timer: Timer) {

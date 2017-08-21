@@ -57,6 +57,16 @@ class Dictionary_Flattening: XCTestCase {
         XCTAssertEqual(NSDictionary(dictionary: merged), NSDictionary(dictionary: target))
     }
     
+    func test_merge_byEncapsulatingFlatten_DoubleWithDifferentCountOfElements() {
+        let d1 = ["k1": 1.0, "k2": 2.0 ]
+        let d2 = ["k1": 3.0, "k2": 4.0, "k3" : 1.44]
+        
+        let merged = d1.merged(with: d2, policy: .encapsulateFlatten)
+        let target = ["k1": [1.0, 3.0], "k2" : [2.0, 4.0], "k3" : 1.44] as [String : Any]
+        
+        XCTAssertEqual(NSDictionary(dictionary: merged), NSDictionary(dictionary: target))
+    }
+    
     func test_merge_byEncapsulatingFlatten_differentTypes() {
 
         let d1 = ["k1": "v1", "k2": "v2"]
@@ -117,4 +127,45 @@ class Dictionary_Flattening: XCTestCase {
         XCTAssertEqual(flattened["k5"] as! String, "v5")
     }
     
+    func test_flattenedArray_withSimpleFlattenedArray() {
+        let input: [Any] = [1,2,3,4,5,6,7]
+        let target: [Any] = [1,2,3,4,5,6,7]
+        
+        XCTAssertEqual(NSArray(array:input.flattened()), NSArray(array:target))
+    }
+
+    func test_flattenedArray_withSimpleNestedArrays() {
+        let input: [Any] = [[1,2,3],4,[5,6,7]]
+        let target: [Any] = [1,2,3,4,5,6,7]
+        
+        XCTAssertEqual(NSArray(array:input.flattened()), NSArray(array:target))
+    }
+    
+    func test_flattenedArray_withSimpleDeepNestedArrays() {
+        let input: [Any] = [[1,[2,3]],4,[5,[6,7]]]
+        let target: [Any] = [1,2,3,4,5,6,7]
+        
+        XCTAssertEqual(NSArray(array:input.flattened()), NSArray(array:target))
+    }
+
+    func test_flattenedArray_withMixedFlattenedArray() {
+        let input: [Any] = [1,2,"3",4,5,true,7.0]
+        let target: [Any] = [1,2,"3",4,5,true,7.0]
+        
+        XCTAssertEqual(NSArray(array:input.flattened()), NSArray(array:target))
+    }
+    
+    func test_flattenedArray_withMixedNestedArrays() {
+        let input: [Any] = [[1,"2",3],4,[true,6.0,7]]
+        let target: [Any] = [1,"2",3,4,true,6.0,7]
+        
+        XCTAssertEqual(NSArray(array:input.flattened()), NSArray(array:target))
+    }
+    
+    func test_flattenedArray_withMixedDeepNestedArrays() {
+        let input: [Any] = [[1,["2",3]],4,[5.9,[6,false]]]
+        let target: [Any] = [1,"2",3,4,5.9,6,false]
+        
+        XCTAssertEqual(NSArray(array:input.flattened()), NSArray(array:target))
+    }
 }
