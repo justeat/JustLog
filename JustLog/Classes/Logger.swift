@@ -183,7 +183,7 @@ extension Logger {
         if let error = error {
             let errorInfo = [errorDomain: error.domain,
                              errorCode: error.code] as [String : Any]
-            let errorUserInfo = error.humanReadableError().userInfo
+            let errorUserInfo = error.humanReadableError().userInfo as! [String : Any]
             options = options.merged(with: errorInfo).merged(with: errorUserInfo.flattened())
         }
         

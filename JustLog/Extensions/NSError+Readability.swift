@@ -34,4 +34,14 @@ extension NSError {
 
     }
     
+    func underlyingErrors() -> [NSError] {
+        
+        guard let underError = self.userInfo[NSUnderlyingErrorKey] as? NSError else {
+            return [self]
+        }
+        
+        return [self] + underError.underlyingErrors()
+    }
+
+    
 }
