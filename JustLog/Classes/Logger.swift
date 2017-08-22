@@ -17,6 +17,14 @@ public final class Logger: NSObject {
         case multipleEvents
     }
     
+    internal enum LogType {
+        case debug
+        case warning
+        case verbose
+        case error
+        case info
+    }
+    
     public var logTypeKey = "log_type"
     
     public var fileKey = "file"
@@ -111,42 +119,71 @@ extension Logger: Logging {
         let file = String(describing: file)
         let function = String(describing: function)
         let updatedUserInfo = [logTypeKey: "verbose"].merged(with: userInfo ?? [String : String]())
-        let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
-        internalLogger.verbose(logMessage, file, function, line: Int(line))
+        log(.verbose, message, error: error, userInfo: updatedUserInfo, file, function, line)
     }
     
     public func debug(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: StaticString, _ function: StaticString, _ line: UInt) {
         let file = String(describing: file)
         let function = String(describing: function)
         let updatedUserInfo = [logTypeKey: "debug"].merged(with: userInfo ?? [String : String]())
-        let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
-        internalLogger.debug(logMessage, file, function, line: Int(line))
+        log(.debug, message, error: error, userInfo: updatedUserInfo, file, function, line)
     }
     
     public func info(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: StaticString, _ function: StaticString, _ line: UInt) {
         let file = String(describing: file)
         let function = String(describing: function)
         let updatedUserInfo = [logTypeKey: "info"].merged(with: userInfo ?? [String : String]())
-        let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
-        internalLogger.info(logMessage, file, function, line: Int(line))
+        log(.info, message, error: error, userInfo: updatedUserInfo, file, function, line)
     }
     
     public func warning(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: StaticString, _ function: StaticString, _ line: UInt) {
         let file = String(describing: file)
         let function = String(describing: function)
         let updatedUserInfo = [logTypeKey: "warning"].merged(with: userInfo ?? [String : String]())
-        let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
-        internalLogger.warning(logMessage, file, function, line: Int(line))
+        log(.warning, message, error: error, userInfo: updatedUserInfo, file, function, line)
+
     }
     
     public func error(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: StaticString, _ function: StaticString, _ line: UInt) {
         let file = String(describing: file)
         let function = String(describing: function)
         let updatedUserInfo = [logTypeKey: "error"].merged(with: userInfo ?? [String : Any]())
-        let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
-        internalLogger.error(logMessage, file, function, line: Int(line))
+        log(.error, message, error: error, userInfo: updatedUserInfo, file, function, line)
     }
     
+    internal func log(_ type: LogType, _ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: UInt) {
+        switch self.eventLogingPolicy {
+        case .singleEvent :
+            let logMessage = self.logMessage(message, error: error, userInfo: userInfo, file, function, line)
+            sendLogMessage(with: type, logMessage: logMessage, file, function, line)
+        case .multipleEvents:
+            if let error  = error {
+                for error in error.disassociatedErrorChain() {
+                    let logMessage = self.logMessage(message, error: error, userInfo: userInfo, file, function, line)
+                    sendLogMessage(with: type, logMessage: logMessage, file, function, line)
+                }
+            }
+            else {
+                let logMessage = self.logMessage(message, error: error, userInfo: userInfo, file, function, line)
+                sendLogMessage(with: type, logMessage: logMessage, file, function, line)
+            }
+        }
+    }
+    
+    internal func sendLogMessage(with type: LogType, logMessage: String, _ file: String, _ function: String, _ line: UInt) {
+        switch type {
+        case .error:
+            internalLogger.error(logMessage, file, function, line: Int(line))
+        case .warning:
+            internalLogger.warning(logMessage, file, function, line: Int(line))
+        case .debug:
+            internalLogger.debug(logMessage, file, function, line: Int(line))
+        case .info:
+            internalLogger.info(logMessage, file, function, line: Int(line))
+        case .verbose:
+            internalLogger.verbose(logMessage, file, function, line: Int(line))
+        }
+    }
 }
 
 extension Logger {
@@ -187,7 +224,7 @@ extension Logger {
         }
         
         if let error = error {
-            let keyMergePolicy: KeyMergePolicy = self.eventLogingPolicy == .singleEvent ? .override : .encapsulateFlatten
+            let keyMergePolicy: KeyMergePolicy = self.eventLogingPolicy == .singleEvent ? .encapsulateFlatten : .override
             error.errorChain().forEach({ (underlyingError) in
                 mergeOptions(from: underlyingError, to: &options, policy: keyMergePolicy)
             })
@@ -198,7 +235,7 @@ extension Logger {
         return retVal.toJSON() ?? ""
     }
     
-    private func mergeOptions(from error:NSError, to dictionary: inout [String:Any], policy: KeyMergePolicy = .override) {
+    private func mergeOptions(from error:NSError, to dictionary: inout [String:Any], policy: KeyMergePolicy = .encapsulateFlatten) {
         let errorInfo = [errorDomain: error.domain,
                          errorCode: error.code] as [String : Any]
         let errorUserInfo = error.humanReadableError().userInfo as! [String : Any]
