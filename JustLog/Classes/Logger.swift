@@ -12,6 +12,11 @@ import SwiftyBeaver
 @objc
 public final class Logger: NSObject {
     
+    public enum ErrorLoggingPolicy {
+        case singleEvent
+        case multipleEvents
+    }
+    
     public var logTypeKey = "log_type"
     
     public var fileKey = "file"
@@ -43,6 +48,7 @@ public final class Logger: NSObject {
     public var enableFileLogging: Bool = true
     public var enableLogstashLogging: Bool = true
     public let internalLogger = SwiftyBeaver.self
+    public var eventLogingPolicy: ErrorLoggingPolicy = .singleEvent
     private var dispatchTimer: Timer?
     
     // destinations
@@ -181,8 +187,9 @@ extension Logger {
         }
         
         if let error = error {
+            let keyMergePolicy: KeyMergePolicy = self.eventLogingPolicy == .singleEvent ? .override : .encapsulateFlatten
             error.errorChain().forEach({ (underlyingError) in
-                mergeOptions(from: underlyingError, to: &options)
+                mergeOptions(from: underlyingError, to: &options, policy: keyMergePolicy)
             })
         }
         
@@ -191,12 +198,12 @@ extension Logger {
         return retVal.toJSON() ?? ""
     }
     
-    private func mergeOptions(from error:NSError, to dictionary: inout [String:Any]) {
+    private func mergeOptions(from error:NSError, to dictionary: inout [String:Any], policy: KeyMergePolicy = .override) {
         let errorInfo = [errorDomain: error.domain,
                          errorCode: error.code] as [String : Any]
         let errorUserInfo = error.humanReadableError().userInfo as! [String : Any]
-        let metadataUserInfo = dictionary.merged(with: errorInfo.flattened(), policy: .encapsulateFlatten)
-        dictionary = metadataUserInfo.merged(with: errorUserInfo.flattened(), policy: .encapsulateFlatten)
+        let metadataUserInfo = dictionary.merged(with: errorInfo.flattened(), policy: policy)
+        dictionary = metadataUserInfo.merged(with: errorUserInfo.flattened(), policy: policy)
     }
     
     @objc fileprivate func scheduledForceSend(_ timer: Timer) {

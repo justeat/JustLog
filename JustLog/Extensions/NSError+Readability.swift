@@ -10,6 +10,10 @@ import Foundation
 
 extension NSError {
     
+    
+    /// Parses Data values in the user info key as String and recursively does the same to all associated underying errors.
+    ///
+    /// - Returns: A copy of the error including 
     func humanReadableError() -> NSError {
         
         var flattenedUserInfo = userInfo
@@ -27,29 +31,7 @@ extension NSError {
             default:
                 continue
             }
-            
         }
-        
         return NSError(domain: domain, code: code, userInfo: flattenedUserInfo)
-
     }
-    
-    func underlyingErrors() -> [NSError] {
-        guard let underError = self.userInfo[NSUnderlyingErrorKey] as? NSError else {
-            return []
-        }
-        
-        return [underError] + underError.underlyingErrors()
-    }
-    
-    func errorChain() -> [NSError] {
-        
-        guard let underError = self.userInfo[NSUnderlyingErrorKey] as? NSError else {
-            return [self]
-        }
-        
-        return [self] + underError.errorChain()
-    }
-
-    
 }

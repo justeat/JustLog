@@ -7,19 +7,18 @@
 //
 
 import Foundation
-
+enum KeyMergePolicy {
+    case override
+    case encapsulateFlatten
+}
 extension Dictionary where Key == String {
     
     /// Defines how the dictionary will be flattened and the key-value pairs will be merged.
     ///
     /// - override: Overrides the keys and the values.
     /// - encapsulateFlatten: keeps the keys and adds the values to an array.
-    enum KeyMergePolicy {
-        case override
-        case encapsulateFlatten
-    }
     
-    func flattened() -> [String : Any] {
+    func flattened(policy: KeyMergePolicy = .override) -> [String : Any] {
         
         var retVal = [String : Any]()
         
@@ -32,8 +31,8 @@ extension Dictionary where Key == String {
                 retVal.updateValue(v, forKey: k)
             case is [String : Any]:
                 if let value: [String : Any] = v as? [String : Any] {
-                    let inner = value.flattened()
-                    retVal = retVal.merged(with: inner)
+                    let inner = value.flattened(policy: policy)
+                    retVal = retVal.merged(with: inner, policy: policy)
                 }
                 else {
                     continue
@@ -42,7 +41,7 @@ extension Dictionary where Key == String {
                 retVal.updateValue(String(describing: v), forKey: k)
             case is NSError:
                 if let inner = v as? NSError, let userInfo: [String: Any] = inner.userInfo as? [String : Any] {
-                    retVal = retVal.merged(with: userInfo.flattened())
+                    retVal = retVal.merged(with: userInfo.flattened(policy: policy), policy: policy)
                 }
                 else {
                     continue
@@ -105,5 +104,6 @@ extension Array where Element == Any {
         }
         return arraythings
     }
+    
 
 }

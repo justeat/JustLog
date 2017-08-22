@@ -19,6 +19,7 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		CB9EA83A1F4C68AB002D3EF5 /* NSError_UnderlyingError_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EA8391F4C68AB002D3EF5 /* NSError_UnderlyingError_tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		9BC0DBDFF6F20D0F760626A4 /* Pods-JustLog_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustLog_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustLog_Example/Pods-JustLog_Example.release.xcconfig"; sourceTree = "<group>"; };
 		B779DCB16EBC83342A6D171D /* Pods_JustLog_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustLog_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD372BE74878367C4FFD8637 /* Pods-JustLog_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustLog_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustLog_Tests/Pods-JustLog_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		CB9EA8391F4C68AB002D3EF5 /* NSError_UnderlyingError_tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSError_UnderlyingError_tests.swift; sourceTree = "<group>"; };
 		CDD0E7F9B7B30113E921A4BB /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		F17BCAE05ED5D114342EB2A1 /* Pods-JustLog_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustLog_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustLog_Example/Pods-JustLog_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		F3D8E67BA655C94F1421168D /* Pods-JustLog_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustLog_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustLog_Tests/Pods-JustLog_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				4F5519E81E0313F4009A8F68 /* Data_RepresentationTests.swift */,
 				4F5519DF1E02F0D7009A8F68 /* NSError_ReadabilityTests.swift */,
 				4FD9AF521E1325E600EAF51B /* String_ConversionTests.swift */,
+				CB9EA8391F4C68AB002D3EF5 /* NSError_UnderlyingError_tests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
 			path = Tests;
@@ -387,6 +390,7 @@
 				4F5519E21E02F0D9009A8F68 /* Dictionary_FlatteningTests.swift in Sources */,
 				4FD9AF531E1325E600EAF51B /* String_ConversionTests.swift in Sources */,
 				4FD9AF511E12EE5F00EAF51B /* Dictionary_JSONTests.swift in Sources */,
+				CB9EA83A1F4C68AB002D3EF5 /* NSError_UnderlyingError_tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

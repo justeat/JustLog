@@ -67,6 +67,16 @@ class Dictionary_Flattening: XCTestCase {
         XCTAssertEqual(NSDictionary(dictionary: merged), NSDictionary(dictionary: target))
     }
     
+    func test_merge_byEncapsulatingFlatten_DoubleWithSameElements() {
+        let d1 = ["k1": 1.0, "k2": 2.0 ]
+        let d2 = ["k1": 3.0, "k2": 2.0, "k3" : 1.44]
+        
+        let merged = d1.merged(with: d2, policy: .encapsulateFlatten)
+        let target = ["k1": [1.0, 3.0], "k2" : [2.0, 2.0], "k3" : 1.44] as [String : Any]
+        
+        XCTAssertEqual(NSDictionary(dictionary: merged), NSDictionary(dictionary: target))
+    }
+    
     func test_merge_byEncapsulatingFlatten_differentTypes() {
 
         let d1 = ["k1": "v1", "k2": "v2"]
