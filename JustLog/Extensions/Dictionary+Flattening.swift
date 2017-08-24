@@ -92,17 +92,17 @@ extension Dictionary where Key == String {
 extension Array where Element == Any {
     
     func flattened() -> [Any] {
-        var arraythings: [Any] = []
-        for thing in self {
-            switch thing {
+        var flattenedArray: [Any] = []
+        for element in self {
+            switch element {
             case is [Any]:
-               let arrayThing = thing as! [Any]
-               arraythings.append(contentsOf: arrayThing.flattened())
+               let elementsArray = element as! [Any]
+               flattenedArray.append(contentsOf: elementsArray.flattened())
             default:
-               arraythings.append(thing)
+               flattenedArray.append(element)
             }
         }
-        return arraythings
+        return flattenedArray
     }
     
 
