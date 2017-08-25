@@ -67,7 +67,8 @@ let logger = Logger.shared
 
 // file destination
 logger.logFilename = "justeat-demo.log"
-
+// logger configuration
+logger.loggingPolicy = .signleEvent
 // logstash destination
 logger.logstashHost = "my.logstash.endpoint.com"
 logger.logstashPort = 3515
@@ -76,13 +77,15 @@ logger.logLogstashSocketActivity = true
 
 // default info
 logger.defaultUserInfo = ["app": "my iOS App",
-                          "environment": "production",
-                          "tenant": "UK",
-                          "sessionID": someSessionID]
+"environment": "production",
+"tenant": "UK",
+"sessionID": someSessionID]
 logger.setup()
 ```
 
 The `defaultUserInfo` dictionary contains a set of basic information to add to every log. 
+
+The `loggingPolicy` allows for NSErrors associated under the `NSUnderlyingErrorKey` to be send either as a single event or as multiple events for every underlying error.
 
 The Logger class exposes 5 functions for the different types of logs. The only required parameter is the message, optional error and userInfo can be provided. Here are some examples of sending logs to JustLog:
 
@@ -108,19 +111,30 @@ The Logger unifies the information from `message`, `error`, `error.userInfo`, `u
 
 ```json
 {
-  "message": ...,
-  "userInfo": {
-    "NSLocalizedDescription": ...,
-    "error_domain": ...,
-    "some key": ...,
-    ...
-  },  
-  "metadata": {
-    "file": ...,
-    "function": ...,
-    "line": ...,
-    ...
-  }
+"message": ...,
+"userInfo": {
+"customKey": "CustomValue",
+"errors": [
+{
+"error_domain" : "com.domain",
+"error_code" : "1234",
+"NSLocalizedDescription": ...,
+"NSLocalizedFailureReasonError": ...,
+...
+},
+{
+"error_domain" : "com.domain.inner",
+"error_code" : "5678",
+"NSLocalizedDescription": ...,
+"NSLocalizedFailureReasonError": ...,
+...
+}],  
+"metadata": {
+"file": ...,
+"function": ...,
+"line": ...,
+...
+}
 }
 
 ```
@@ -162,25 +176,26 @@ Before sending a log to Logstash, the 'aggregated form' is flattened to a simple
 
 ```json
 {
-  "message": "ouch, an error did occur!",
+"message": "ouch, an error did occur!",
 
-  "environment": "production",
-  "log_type": "error",
-  "version": "10.1",
-  "app": "iOS UK app",
-  "tenant": "UK",
-  "app_version": "1.0 (1)",
-  "device": "x86_64",
+"environment": "production",
+"log_type": "error",
+"version": "10.1",
+"app": "iOS UK app",
+"tenant": "UK",
+"app_version": "1.0 (1)",
+"device": "x86_64",
 
-  "file": "ViewController.swift",
-  "function": "error()",
-  "line": "47",
-
-  "error_domain": "com.just-eat.test",
-  "error_code": "1234",
-  "NSLocalizedDescription": "description",
-  "NSLocalizedFailureReason": "error value",
-  "NSLocalizedRecoverySuggestion": "recovery suggestion"
+"file": "ViewController.swift",
+"function": "error()",
+"line": "47",
+"errors": [{
+"error_domain": "com.just-eat.test",
+"error_code": "1234",
+"NSLocalizedDescription": "description",
+"NSLocalizedFailureReason": "error value",
+"NSLocalizedRecoverySuggestion": "recovery suggestion"
+}]
 }
 ```
 
@@ -216,26 +231,26 @@ or, more generally, in the `applicationDidEnterBackground` and `applicationWillT
 
 ```swift
 func applicationDidEnterBackground(_ application: UIApplication) {
-    forceSendLogs(application)
+forceSendLogs(application)
 }
 
 func applicationWillTerminate(_ application: UIApplication) {
-    forceSendLogs(application)
+forceSendLogs(application)
 }
 
 private func forceSendLogs(_ application: UIApplication) {
 
-    var identifier: UIBackgroundTaskIdentifier = 0
+var identifier: UIBackgroundTaskIdentifier = 0
 
-    identifier = application.beginBackgroundTask(expirationHandler: {
-        application.endBackgroundTask(identifier)
-        identifier = UIBackgroundTaskInvalid
-    })
+identifier = application.beginBackgroundTask(expirationHandler: {
+application.endBackgroundTask(identifier)
+identifier = UIBackgroundTaskInvalid
+})
 
-    Logger.shared.forceSend { completionHandler in
-        application.endBackgroundTask(identifier)
-        identifier = UIBackgroundTaskInvalid
-    }
+Logger.shared.forceSend { completionHandler in
+application.endBackgroundTask(identifier)
+identifier = UIBackgroundTaskInvalid
+}
 }
 ```
 
