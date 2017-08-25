@@ -86,7 +86,6 @@ class Dictionary_Flattening: XCTestCase {
         let target = ["k1": ["v1", 2], "k2" : ["v2", 3]]
         
         XCTAssertEqual(NSDictionary(dictionary: merged), NSDictionary(dictionary: target))
-        
     }
     
     func test_flattened() {
@@ -133,6 +132,8 @@ class Dictionary_Flattening: XCTestCase {
         
         XCTAssertEqual(flattened.keys.count, 3)
         XCTAssertEqual(flattened["k1"] as! String, "v1")
+        XCTAssertNil(flattened["k2"])
+        XCTAssertNil(flattened["k4"])
         XCTAssertEqual(flattened["k3"] as! String, "v3")
         XCTAssertEqual(flattened["k5"] as! String, "v5")
     }

@@ -46,4 +46,9 @@ class LoggerTests: XCTestCase {
         XCTAssertEqual(userInfo[NSLocalizedRecoverySuggestionErrorKey] as! String, dictUserInfo[NSLocalizedRecoverySuggestionErrorKey] as! String)
         XCTAssertNotNil(dict["error_domain"])
     }
+    
+//    func test_metadataDictionary_ReturnsDictionaryForMetadata() {
+//        let metadataDictionary = Logger.shared.metadataDictionary("thisFile.swift", "a function name", 33)
+//        XCTAssert
+//    }
 }

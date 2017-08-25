@@ -56,7 +56,7 @@ public final class Logger: NSObject {
     public var enableFileLogging: Bool = true
     public var enableLogstashLogging: Bool = true
     public let internalLogger = SwiftyBeaver.self
-    public var eventLogingPolicy: ErrorLoggingPolicy = .singleEvent
+    public var loggingPolicy: ErrorLoggingPolicy = .singleEvent
     private var dispatchTimer: Timer?
     
     // destinations
@@ -152,21 +152,17 @@ extension Logger: Logging {
     }
     
     internal func log(_ type: LogType, _ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: UInt) {
-        switch self.eventLogingPolicy {
-        case .singleEvent :
-            let logMessage = self.logMessage(message, error: error, userInfo: userInfo, file, function, line)
-            sendLogMessage(with: type, logMessage: logMessage, file, function, line)
-        case .multipleEvents:
+        switch loggingPolicy {
+        case .multipleEvents where type == .error:
             if let error  = error {
                 for error in error.disassociatedErrorChain() {
-                    let logMessage = self.logMessage(message, error: error, userInfo: userInfo, file, function, line)
-                    sendLogMessage(with: type, logMessage: logMessage, file, function, line)
+                    let messageToLog = logMessage(message, error: error, userInfo: userInfo, file, function, line)
+                    sendLogMessage(with: type, logMessage: messageToLog, file, function, line)
                 }
             }
-            else {
-                let logMessage = self.logMessage(message, error: error, userInfo: userInfo, file, function, line)
-                sendLogMessage(with: type, logMessage: logMessage, file, function, line)
-            }
+        default:
+            let messageToLog = logMessage(message, error: error, userInfo: userInfo, file, function, line)
+            sendLogMessage(with: type, logMessage: messageToLog, file, function, line)
         }
     }
     

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 enum KeyMergePolicy {
     case override
     case encapsulateFlatten
@@ -53,7 +54,6 @@ extension Dictionary where Key == String {
         
         return retVal
     }
-
     
     func merged(with dictionary: [String : Any], policy: KeyMergePolicy = .override) -> [String : Any] {
         switch policy {
