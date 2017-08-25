@@ -99,11 +99,14 @@ class NSError_Flattening: XCTestCase {
         
         let message = Logger.shared.logMessage("Message to attach", error: unreadableError, userInfo: ["SomeCustomKey" : "SomeCustomValue"], #file, #function, #line)
         
-//        let target = "{\"metadata\":{\"file\":\"NSError_ReadabilityTests.swift\",\"je_feature_version\":\"1.2.0 (1)\",\"je_ios_version\":\"10.3.1\",\"function\":\"test_GivenAnErrorWithUnderlyingError_WhenCallingLogMessage_ThenJsonStructureOfErrorShouldBeReturned()\",\"je_ios_device\":\"x86_64\",\"line\":\"100\"},\"userInfo\":{\"error_code\":[1234,5678,9999],\"je_environment\":\"production\",\"x-je-conversation\":\"FB7DF45D-F491-49DE-B9BF-EABAAC2F95E8\",\"error_domain\":[\"com.just-eat.test\",\"com.just-eat.test.inner\",\"com.just-eat.test.inner.inner\"],\"SomeCustomKey\":\"SomeCustomValue\",\"NSLocalizedDescription\":[\"inner inner description\",\"inner inner description\",\"inner inner description\"],\"NSLocalizedRecoverySuggestion\":[\"inner inner recovery suggestion\",\"inner inner recovery suggestion\",\"inner inner recovery suggestion\"],\"je_feature\":\"ios cia\",\"je_tenant\":\"UK\",\"NSLocalizedFailureReason\":[\"error value\",\"inner error value\",\"inner inner error value\"]},\"message\":\"Message to attach\"}"
-//        
-//        XCTAssertTrue(message == target)
+        if let dict = message.toDictionary()
+        {
+            print(dict)
+        }
+        let flattenedUserInfo = (unreadableError.userInfo as! [String: Any]).flattened(policy: .encapsulateFlatten)
         
-//        let data = JSONSerialization.jsonObject(with: target.data(using: .utf8), options: .allowFragments)
+        
+        print(flattenedUserInfo)
         print(message)
         
     }

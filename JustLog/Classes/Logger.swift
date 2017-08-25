@@ -193,12 +193,36 @@ extension Logger {
         let messageConst = "message"
         let userInfoConst = "userInfo"
         let metadataConst = "metadata"
+        let errorsConst = "errors"
         
         var options = defaultUserInfo ?? [String : Any]()
         
         var retVal = [String : Any]()
         retVal[messageConst] = message
+        retVal[metadataConst] = metadataDictionary(file, function, line)
         
+        if let userInfo = userInfo {
+            for (key, value) in userInfo {
+                _ = options.updateValue(value, forKey: key)
+            }
+            retVal[userInfoConst] = options
+        }
+
+        
+        if let error = error {
+            var errorInfoArray: [[String : Any]] = []
+            error.disassociatedErrorChain().forEach({ (underlyingError) in
+                let errorDict = errorDictionary(for: underlyingError)
+                errorInfoArray.append(errorDict)
+            })
+            retVal[errorsConst] = errorInfoArray
+        }
+        
+        
+        return retVal.toJSON() ?? ""
+    }
+    
+    private func metadataDictionary(_ file: String, _ function: String, _ line: UInt) -> [String: Any] {
         var fileMetadata = [String : String]()
         
         if let url = URL(string: file) {
@@ -215,32 +239,16 @@ extension Logger {
         fileMetadata[iosVersionKey] = UIDevice.current.systemVersion
         fileMetadata[deviceTypeKey] = UIDevice.current.platform()
         
-        retVal[metadataConst] = fileMetadata
-        
-        if let userInfo = userInfo {
-            for (key, value) in userInfo {
-                _ = options.updateValue(value, forKey: key)
-            }
-        }
-        
-        if let error = error {
-            let keyMergePolicy: KeyMergePolicy = self.eventLogingPolicy == .singleEvent ? .encapsulateFlatten : .override
-            error.errorChain().forEach({ (underlyingError) in
-                mergeOptions(from: underlyingError, to: &options, policy: keyMergePolicy)
-            })
-        }
-        
-        retVal[userInfoConst] = options
-        
-        return retVal.toJSON() ?? ""
+        return fileMetadata
     }
     
-    private func mergeOptions(from error:NSError, to dictionary: inout [String:Any], policy: KeyMergePolicy = .encapsulateFlatten) {
-        let errorInfo = [errorDomain: error.domain,
+    internal func errorDictionary(for error: NSError) -> [String : Any] {
+        let userInfoConst = "userInfo"
+        var errorInfo = [errorDomain: error.domain,
                          errorCode: error.code] as [String : Any]
         let errorUserInfo = error.humanReadableError().userInfo as! [String : Any]
-        let metadataUserInfo = dictionary.merged(with: errorInfo.flattened(), policy: policy)
-        dictionary = metadataUserInfo.merged(with: errorUserInfo.flattened(), policy: policy)
+        errorInfo[userInfoConst] = errorUserInfo
+        return errorInfo
     }
     
     @objc fileprivate func scheduledForceSend(_ timer: Timer) {
