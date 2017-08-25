@@ -67,47 +67,4 @@ class NSError_Flattening: XCTestCase {
         // Then
         XCTAssertEqual(expectedReadableError, readableError)
     }
-    
-    func test_GivenAnErrorWithUnderlyingError_WhenCallingLogMessage_ThenJsonStructureOfErrorShouldBeReturned() {
-        
-        let innerInnerUserInfoError = [
-            NSLocalizedFailureReasonErrorKey: "inner inner error value",
-            NSLocalizedDescriptionKey: "inner inner description",
-            NSLocalizedRecoverySuggestionErrorKey: "inner inner recovery suggestion"
-            ] as [String : Any]
-        
-        let underlyingReadableUserInfoError = [
-            NSUnderlyingErrorKey: NSError(domain: "com.just-eat.test.inner.inner", code: 9999, userInfo: innerInnerUserInfoError),
-            NSLocalizedFailureReasonErrorKey: "inner error value",
-            NSLocalizedDescriptionKey: "inner description",
-            NSLocalizedRecoverySuggestionErrorKey: "inner recovery suggestion"
-            ] as [String : Any]
-        
-        let readableUserInfos = [
-            NSUnderlyingErrorKey: NSError(domain: "com.just-eat.test.inner", code: 5678, userInfo: underlyingReadableUserInfoError),
-            NSLocalizedFailureReasonErrorKey: "error value",
-            NSLocalizedDescriptionKey: "description",
-            NSLocalizedRecoverySuggestionErrorKey: "recovery suggestion"
-            ] as [String : Any]
-        
-        let unreadableError = NSError(domain: "com.just-eat.test", code:1234, userInfo:readableUserInfos)
-        
-        let errors = unreadableError.underlyingErrors()
-        let errorsIncludingSelf = unreadableError.errorChain()
-        XCTAssertEqual(errors.count, 2)
-        XCTAssertEqual(errorsIncludingSelf.count, 3)
-        
-        let message = Logger.shared.logMessage("Message to attach", error: unreadableError, userInfo: ["SomeCustomKey" : "SomeCustomValue"], #file, #function, #line)
-        
-        if let dict = message.toDictionary()
-        {
-            print(dict)
-        }
-        let flattenedUserInfo = (unreadableError.userInfo as! [String: Any]).flattened(policy: .encapsulateFlatten)
-        
-        
-        print(flattenedUserInfo)
-        print(message)
-        
-    }
 }
