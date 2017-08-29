@@ -25,7 +25,7 @@ class LoggerTests: XCTestCase {
         let error = NSError(domain: "com.just-eat.error", code: 1234, userInfo: userInfo)
         let dict = Logger.shared.errorDictionary(for: error)
         
-        XCTAssertNotNil(dict["userInfo"])
+        XCTAssertNotNil(dict["user_info"])
         XCTAssertNotNil(dict["error_code"])
         XCTAssertNotNil(dict["error_domain"])
         

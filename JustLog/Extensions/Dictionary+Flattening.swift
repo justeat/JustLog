@@ -59,20 +59,3 @@ extension Dictionary where Key == String {
         return retValue
     }
 }
-
-extension Array where Element == Any {
-    
-    func flattened() -> [Any] {
-        var flattenedArray: [Any] = []
-        for element in self {
-            switch element {
-            case is [Any]:
-               let elementsArray = element as! [Any]
-               flattenedArray.append(contentsOf: elementsArray.flattened())
-            default:
-               flattenedArray.append(element)
-            }
-        }
-        return flattenedArray
-    }
-}

@@ -12,11 +12,6 @@ import SwiftyBeaver
 @objc
 public final class Logger: NSObject {
     
-    public enum ErrorLoggingPolicy {
-        case singleEvent
-        case multipleEvents
-    }
-    
     internal enum LogType {
         case debug
         case warning
@@ -56,7 +51,6 @@ public final class Logger: NSObject {
     public var enableFileLogging: Bool = true
     public var enableLogstashLogging: Bool = true
     public let internalLogger = SwiftyBeaver.self
-    public var loggingPolicy: ErrorLoggingPolicy = .singleEvent
     private var dispatchTimer: Timer?
     
     // destinations
@@ -152,18 +146,8 @@ extension Logger: Logging {
     }
     
     internal func log(_ type: LogType, _ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: UInt) {
-        switch loggingPolicy {
-        case .multipleEvents where type == .error:
-            if let error  = error {
-                for error in error.disassociatedErrorChain() {
-                    let messageToLog = logMessage(message, error: error, userInfo: userInfo, file, function, line)
-                    sendLogMessage(with: type, logMessage: messageToLog, file, function, line)
-                }
-            }
-        default:
-            let messageToLog = logMessage(message, error: error, userInfo: userInfo, file, function, line)
-            sendLogMessage(with: type, logMessage: messageToLog, file, function, line)
-        }
+        let messageToLog = logMessage(message, error: error, userInfo: userInfo, file, function, line)
+        sendLogMessage(with: type, logMessage: messageToLog, file, function, line)
     }
     
     internal func sendLogMessage(with type: LogType, logMessage: String, _ file: String, _ function: String, _ line: UInt) {
