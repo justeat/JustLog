@@ -12,6 +12,14 @@ import SwiftyBeaver
 @objc
 public final class Logger: NSObject {
     
+    internal enum LogType {
+        case debug
+        case warning
+        case verbose
+        case error
+        case info
+    }
+    
     public var logTypeKey = "log_type"
     
     public var fileKey = "file"
@@ -105,57 +113,91 @@ extension Logger: Logging {
         let file = String(describing: file)
         let function = String(describing: function)
         let updatedUserInfo = [logTypeKey: "verbose"].merged(with: userInfo ?? [String : String]())
-        let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
-        internalLogger.verbose(logMessage, file, function, line: Int(line))
+        log(.verbose, message, error: error, userInfo: updatedUserInfo, file, function, line)
     }
     
     public func debug(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: StaticString, _ function: StaticString, _ line: UInt) {
         let file = String(describing: file)
         let function = String(describing: function)
         let updatedUserInfo = [logTypeKey: "debug"].merged(with: userInfo ?? [String : String]())
-        let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
-        internalLogger.debug(logMessage, file, function, line: Int(line))
+        log(.debug, message, error: error, userInfo: updatedUserInfo, file, function, line)
     }
     
     public func info(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: StaticString, _ function: StaticString, _ line: UInt) {
         let file = String(describing: file)
         let function = String(describing: function)
         let updatedUserInfo = [logTypeKey: "info"].merged(with: userInfo ?? [String : String]())
-        let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
-        internalLogger.info(logMessage, file, function, line: Int(line))
+        log(.info, message, error: error, userInfo: updatedUserInfo, file, function, line)
     }
     
     public func warning(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: StaticString, _ function: StaticString, _ line: UInt) {
         let file = String(describing: file)
         let function = String(describing: function)
         let updatedUserInfo = [logTypeKey: "warning"].merged(with: userInfo ?? [String : String]())
-        let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
-        internalLogger.warning(logMessage, file, function, line: Int(line))
+        log(.warning, message, error: error, userInfo: updatedUserInfo, file, function, line)
+
     }
     
     public func error(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: StaticString, _ function: StaticString, _ line: UInt) {
         let file = String(describing: file)
         let function = String(describing: function)
         let updatedUserInfo = [logTypeKey: "error"].merged(with: userInfo ?? [String : Any]())
-        let logMessage = self.logMessage(message, error: error, userInfo: updatedUserInfo, file, function, line)
-        internalLogger.error(logMessage, file, function, line: Int(line))
+        log(.error, message, error: error, userInfo: updatedUserInfo, file, function, line)
     }
     
+    internal func log(_ type: LogType, _ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: UInt) {
+        let messageToLog = logMessage(message, error: error, userInfo: userInfo, file, function, line)
+        sendLogMessage(with: type, logMessage: messageToLog, file, function, line)
+    }
+    
+    internal func sendLogMessage(with type: LogType, logMessage: String, _ file: String, _ function: String, _ line: UInt) {
+        switch type {
+        case .error:
+            internalLogger.error(logMessage, file, function, line: Int(line))
+        case .warning:
+            internalLogger.warning(logMessage, file, function, line: Int(line))
+        case .debug:
+            internalLogger.debug(logMessage, file, function, line: Int(line))
+        case .info:
+            internalLogger.info(logMessage, file, function, line: Int(line))
+        case .verbose:
+            internalLogger.verbose(logMessage, file, function, line: Int(line))
+        }
+    }
 }
 
 extension Logger {
     
-    fileprivate func logMessage(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: UInt) -> String {
+    internal func logMessage(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: UInt) -> String {
     
         let messageConst = "message"
-        let userInfoConst = "userInfo"
+        let userInfoConst = "user_info"
         let metadataConst = "metadata"
+        let errorsConst = "errors"
         
         var options = defaultUserInfo ?? [String : Any]()
         
         var retVal = [String : Any]()
         retVal[messageConst] = message
+        retVal[metadataConst] = metadataDictionary(file, function, line)
         
+        if let userInfo = userInfo {
+            for (key, value) in userInfo {
+                _ = options.updateValue(value, forKey: key)
+            }
+            retVal[userInfoConst] = options
+        }
+
+        
+        if let error = error {
+            retVal[errorsConst] = error.disassociatedErrorChain().map { return errorDictionary(for: $0) }
+        }
+        
+        
+        return retVal.toJSON() ?? ""
+    }
+    
+    private func metadataDictionary(_ file: String, _ function: String, _ line: UInt) -> [String: Any] {
         var fileMetadata = [String : String]()
         
         if let url = URL(string: file) {
@@ -172,24 +214,16 @@ extension Logger {
         fileMetadata[iosVersionKey] = UIDevice.current.systemVersion
         fileMetadata[deviceTypeKey] = UIDevice.current.platform()
         
-        retVal[metadataConst] = fileMetadata
-        
-        if let userInfo = userInfo {
-            for (key, value) in userInfo {
-                _ = options.updateValue(value, forKey: key)
-            }
-        }
-        
-        if let error = error {
-            let errorInfo = [errorDomain: error.domain,
-                             errorCode: error.code] as [String : Any]
-            let errorUserInfo = error.humanReadableError().userInfo
-            options = options.merged(with: errorInfo).merged(with: errorUserInfo.flattened())
-        }
-        
-        retVal[userInfoConst] = options
-        
-        return retVal.toJSON() ?? ""
+        return fileMetadata
+    }
+    
+    internal func errorDictionary(for error: NSError) -> [String : Any] {
+        let userInfoConst = "user_info"
+        var errorInfo = [errorDomain: error.domain,
+                         errorCode: error.code] as [String : Any]
+        let errorUserInfo = error.humanReadableError().userInfo as! [String : Any]
+        errorInfo[userInfoConst] = errorUserInfo
+        return errorInfo
     }
     
     @objc fileprivate func scheduledForceSend(_ timer: Timer) {

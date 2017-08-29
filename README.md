@@ -108,13 +108,28 @@ The Logger unifies the information from `message`, `error`, `error.userInfo`, `u
 
 ```json
 {
-  "message": ...,
-  "userInfo": {
-    "NSLocalizedDescription": ...,
-    "error_domain": ...,
-    "some key": ...,
+  "message": "the log message",
+  "user_info": {
+    "app": "my iOS App",
+    "environment": "production",
+    "custom_key": "some custom value",
     ...
-  },  
+  },
+  "errors": [
+  {
+    "error_domain" : "com.domain",
+    "error_code" : "1234",
+    "NSLocalizedDescription": ...,
+    "NSLocalizedFailureReasonError": ...,
+    ...
+  },
+  {
+    "errorDomain" : "com.domain.inner",
+    "errorCode" : "5678",
+    "NSLocalizedDescription": ...,
+    "NSLocalizedFailureReasonError": ...,
+    ...
+  }],  
   "metadata": {
     "file": ...,
     "function": ...,
@@ -148,11 +163,11 @@ The console prints only the message.
 On file we store all the log info in the 'aggregated form'. 
 
 ```json
-2016-12-24 12:31:02.734  📣 VERBOSE: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"verbose()","device":"x86_64","line":"15"},"userInfo":{"environment":"production","app":"my iOS App","log_type":"verbose","tenant":"UK"},"message":"not so important"}
-2016-12-24 12:31:36.777  📝 DEBUG: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"debug()","device":"x86_64","line":"19"},"userInfo":{"environment":"production","app":"my iOS App","log_type":"debug","tenant":"UK"},"message":"something to debug"}
-2016-12-24 12:31:37.368  ℹ️ INFO: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"info()","device":"x86_64","line":"23"},"userInfo":{"environment":"production","app":"my iOS App","log_type":"info","tenant":"UK","some key":"some extra info"},"message":"a nice information"}
-2016-12-24 12:31:37.884  ⚠️ WARNING: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"warning()","device":"x86_64","line":"27"},"userInfo":{"environment":"production","app":"my iOS App","log_type":"warning","tenant":"UK","some key":"some extra info"},"message":"oh no, that won’t be good"}
-2016-12-24 12:31:38.475  ☠️ ERROR: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"error()","device":"x86_64","line":"47"},"userInfo":{"error_code":1234,"environment":"production","error_domain":"com.just-eat.test","log_type":"error","some key":"some extra info","NSLocalizedDescription":"description","NSLocalizedRecoverySuggestion":"recovery suggestion","app":"my iOS App","tenant":"UK","NSLocalizedFailureReason":"error value"},"message":"ouch, an error did occur!"}
+2016-12-24 12:31:02.734  📣 VERBOSE: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"verbose()","device":"x86_64","line":"15"},"user_info":{"environment":"production","app":"my iOS App","log_type":"verbose","tenant":"UK"},"message":"not so important"}
+2016-12-24 12:31:36.777  📝 DEBUG: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"debug()","device":"x86_64","line":"19"},"user_info":{"environment":"production","app":"my iOS App","log_type":"debug","tenant":"UK"},"message":"something to debug"}
+2016-12-24 12:31:37.368  ℹ️ INFO: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"info()","device":"x86_64","line":"23"},"user_info":{"environment":"production","app":"my iOS App","log_type":"info","tenant":"UK","some key":"some extra info"},"message":"a nice information"}
+2016-12-24 12:31:37.884  ⚠️ WARNING: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"warning()","device":"x86_64","line":"27"},"user_info":{"environment":"production","app":"my iOS App","log_type":"warning","tenant":"UK","some key":"some extra info"},"message":"oh no, that won’t be good"}
+2016-12-24 12:31:38.475  ☠️ ERROR: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"error()","device":"x86_64","line":"47"},"user_info":{"environment":"production","log_type":"error","some key":"some extra info","app":"my iOS App","tenant":"UK","NSLocalizedFailureReason":"error value"},"errors":[{"error_code":1234,"error_domain":"com.just-eat.test","NSLocalizedDescription":"description","NSLocalizedRecoverySuggestion":"recovery suggestion"}],"message":"ouch, an error did occur!"}
 ```
 
 
@@ -175,12 +190,12 @@ Before sending a log to Logstash, the 'aggregated form' is flattened to a simple
   "file": "ViewController.swift",
   "function": "error()",
   "line": "47",
-
-  "error_domain": "com.just-eat.test",
-  "error_code": "1234",
-  "NSLocalizedDescription": "description",
-  "NSLocalizedFailureReason": "error value",
-  "NSLocalizedRecoverySuggestion": "recovery suggestion"
+  "errors": [{
+    "error_domain": "com.just-eat.test",
+    "error_code": "1234",
+    "NSLocalizedDescription": "description",
+    "NSLocalizedFailureReason": "error value"
+  }]
 }
 ```
 
@@ -216,26 +231,26 @@ or, more generally, in the `applicationDidEnterBackground` and `applicationWillT
 
 ```swift
 func applicationDidEnterBackground(_ application: UIApplication) {
-    forceSendLogs(application)
+  forceSendLogs(application)
 }
 
 func applicationWillTerminate(_ application: UIApplication) {
-    forceSendLogs(application)
+  forceSendLogs(application)
 }
 
 private func forceSendLogs(_ application: UIApplication) {
 
-    var identifier: UIBackgroundTaskIdentifier = 0
+  var identifier: UIBackgroundTaskIdentifier = 0
 
-    identifier = application.beginBackgroundTask(expirationHandler: {
-        application.endBackgroundTask(identifier)
-        identifier = UIBackgroundTaskInvalid
-    })
+  identifier = application.beginBackgroundTask(expirationHandler: {
+    application.endBackgroundTask(identifier)
+    identifier = UIBackgroundTaskInvalid
+  })
 
-    Logger.shared.forceSend { completionHandler in
-        application.endBackgroundTask(identifier)
-        identifier = UIBackgroundTaskInvalid
-    }
+  Logger.shared.forceSend { completionHandler in
+    application.endBackgroundTask(identifier)
+    identifier = UIBackgroundTaskInvalid
+  }
 }
 ```
 

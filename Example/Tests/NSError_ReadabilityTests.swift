@@ -67,5 +67,4 @@ class NSError_Flattening: XCTestCase {
         // Then
         XCTAssertEqual(expectedReadableError, readableError)
     }
-    
 }
