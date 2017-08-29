@@ -45,8 +45,8 @@ public class LogstashDestination: BaseDestination  {
     
     // MARK: - Log dispatching
 
-    override public func send(_ level: SwiftyBeaver.Level, msg: String, thread: String,
-                              file: String, function: String, line: Int) -> String? {
+    override public func send(_ level: SwiftyBeaver.Level, msg: String, thread: String, file: String,
+                              function: String, line: Int, context: Any? = nil) -> String? {
         
         if let dict = msg.toDictionary() {
             var flattened = dict.flattened()
