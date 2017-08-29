@@ -21,13 +21,12 @@ extension NSError {
         for (key, value) in userInfo {
             
             switch (value) {
-            case is String:
-                flattenedUserInfo[key] = value
-            case is Data:
-                flattenedUserInfo[key] = String(data: value as! Data, encoding: String.Encoding.utf8)
-            case is NSError:
-                let innerErr = value as! NSError
-                flattenedUserInfo[key] = innerErr.humanReadableError()
+            case let string as String:
+                flattenedUserInfo[key] = string
+            case let data as Data:
+                flattenedUserInfo[key] = String(data: data, encoding: String.Encoding.utf8)
+            case let error as NSError:
+                flattenedUserInfo[key] = error.humanReadableError()
             default:
                 continue
             }
