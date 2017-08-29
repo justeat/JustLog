@@ -190,12 +190,7 @@ extension Logger {
 
         
         if let error = error {
-            var errorInfoArray: [[String : Any]] = []
-            error.disassociatedErrorChain().forEach({ (underlyingError) in
-                let errorDict = errorDictionary(for: underlyingError)
-                errorInfoArray.append(errorDict)
-            })
-            retVal[errorsConst] = errorInfoArray
+            retVal[errorsConst] = error.disassociatedErrorChain().map { return errorDictionary(for: $0) }
         }
         
         
