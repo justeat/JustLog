@@ -171,7 +171,7 @@ extension Logger {
     internal func logMessage(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: UInt) -> String {
     
         let messageConst = "message"
-        let userInfoConst = "userInfo"
+        let userInfoConst = "user_info"
         let metadataConst = "metadata"
         let errorsConst = "errors"
         
@@ -223,7 +223,7 @@ extension Logger {
     }
     
     internal func errorDictionary(for error: NSError) -> [String : Any] {
-        let userInfoConst = "userInfo"
+        let userInfoConst = "user_info"
         var errorInfo = [errorDomain: error.domain,
                          errorCode: error.code] as [String : Any]
         let errorUserInfo = error.humanReadableError().userInfo as! [String : Any]

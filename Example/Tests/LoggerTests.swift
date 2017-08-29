@@ -39,7 +39,7 @@ class LoggerTests: XCTestCase {
             ] as [String : Any]
         let error = NSError(domain: "com.just-eat.error", code: 1234, userInfo: userInfo)
         let dict = Logger.shared.errorDictionary(for: error)
-        let dictUserInfo = dict["userInfo"] as! [String : Any]
+        let dictUserInfo = dict["user_info"] as! [String : Any]
         
         XCTAssertEqual(userInfo[NSLocalizedFailureReasonErrorKey] as! String, dictUserInfo[NSLocalizedFailureReasonErrorKey] as! String)
         XCTAssertEqual(userInfo[NSLocalizedDescriptionKey] as! String, dictUserInfo[NSLocalizedDescriptionKey] as! String)
