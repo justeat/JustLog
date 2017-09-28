@@ -94,6 +94,7 @@ public class LogstashDestination: BaseDestination  {
             let logTag = Int(truncatingIfNeeded: time)
         #else
             let logTag = Int(truncatingBitPattern: time)
+        #endif
         logsToShip[logTag] = dict
     }
     
