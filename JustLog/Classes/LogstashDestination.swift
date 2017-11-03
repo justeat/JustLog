@@ -90,7 +90,11 @@ public class LogstashDestination: BaseDestination  {
     
     func addLog(_ dict: [String: Any]) {
         let time = mach_absolute_time()
-        let logTag = Int(truncatingBitPattern: time)
+        #if swift(>=4.0)
+            let logTag = Int(truncatingIfNeeded: time)
+        #else
+            let logTag = Int(truncatingBitPattern: time)
+        #endif
         logsToShip[logTag] = dict
     }
     
