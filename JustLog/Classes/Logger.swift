@@ -221,7 +221,7 @@ extension Logger {
         let userInfoConst = "user_info"
         var errorInfo = [errorDomain: error.domain,
                          errorCode: error.code] as [String : Any]
-        let errorUserInfo = error.humanReadableError().userInfo as! [String : Any]
+        let errorUserInfo = error.humanReadableError().userInfo
         errorInfo[userInfoConst] = errorUserInfo
         return errorInfo
     }
