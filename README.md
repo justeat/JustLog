@@ -49,10 +49,10 @@ We decided to adopt SwiftyBeaver due to the following reasons:
 A log can be of one of 5 different types, to be used according to the specific need. A reasonable adopted convention on mobile could be the following:
 
 - 📣 **verbose**: Use to trace the code, trying to find one part of a function specifically, sort of debugging with extensive information.
-- 📝 **debug**: Information that is helpful to developers to diagnose an issue. 
-- ℹ️ **info**: Generally useful information to log (service start/stop, configuration assumptions, etc). Info to always have available but usually don't care about under normal circumstances. Out-of-the-box config level. 
-- ⚠️ **warning**: Anything that can potentially cause application oddities but an automatic recovery is possible (such as retrying an operation, missing data, etc.) 
-- ☠️ **error**: Any error which is fatal to the operation, but not the service or application (can't open a required file, missing data, etc.). These errors will force user intervention. These are usually reserved for failed API calls, missing services, etc. 
+- 📝 **debug**: Information that is helpful to developers to diagnose an issue.
+- ℹ️ **info**: Generally useful information to log (service start/stop, configuration assumptions, etc). Info to always have available but usually don't care about under normal circumstances. Out-of-the-box config level.
+- ⚠️ **warning**: Anything that can potentially cause application oddities but an automatic recovery is possible (such as retrying an operation, missing data, etc.)
+- ☠️ **error**: Any error which is fatal to the operation, but not the service or application (can't open a required file, missing data, etc.). These errors will force user intervention. These are usually reserved for failed API calls, missing services, etc.
 
 When using JustLog, the only object to interact with is the shared instance of the `Logger` class, which supports 3 destinations:
 
@@ -60,7 +60,7 @@ When using JustLog, the only object to interact with is the shared instance of t
 - sync writing to File (custom destination)
 - async sending logs to [Logstash](https://www.elastic.co/products/logstash) (usually part of an [ELK](https://www.elastic.co/webinars/introduction-elk-stack) stack)
 
-Following is a code sample to configure and setup the Logger. It should be done at app startup time, in the `applicationDidFinishLaunchingWithOptions` method in the AppDelegate. 
+Following is a code sample to configure and setup the Logger. It should be done at app startup time, in the `applicationDidFinishLaunchingWithOptions` method in the AppDelegate.
 
 ```swift
 let logger = Logger.shared
@@ -82,7 +82,7 @@ logger.defaultUserInfo = ["app": "my iOS App",
 logger.setup()
 ```
 
-The `defaultUserInfo` dictionary contains a set of basic information to add to every log. 
+The `defaultUserInfo` dictionary contains a set of basic information to add to every log.
 
 The Logger class exposes 5 functions for the different types of logs. The only required parameter is the message, optional error and userInfo can be provided. Here are some examples of sending logs to JustLog:
 
@@ -102,6 +102,8 @@ It plays nicely with Objective-C too:
 [Logger.shared error_objc:@"some message" error:someError];
 [Logger.shared error_objc:@"some message" error:someError userInfo:someUserInfo];
 ```
+
+*Please note that metadata such as filename and line number are unavailable in Objective-C.*
 
 The message is the only required argument for each log type, while userInfo and error are optional.
 The Logger unifies the information from `message`, `error`, `error.userInfo`, `userInfo`, `defaultUserInfo` and call-site info/metadata in a single dictionary with the following schema form of type [String : Any] (we call this 'aggregated form'). E.g. in JSON representation:
@@ -160,7 +162,7 @@ The console prints only the message.
 
 ## File
 
-On file we store all the log info in the 'aggregated form'. 
+On file we store all the log info in the 'aggregated form'.
 
 ```json
 2016-12-24 12:31:02.734  📣 VERBOSE: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"verbose()","device":"x86_64","line":"15"},"user_info":{"environment":"production","app":"my iOS App","log_type":"verbose","tenant":"UK"},"message":"not so important"}
