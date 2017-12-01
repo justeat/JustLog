@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyBeaver
 
-@objc
+@objcMembers
 public final class Logger: NSObject {
     
     internal enum LogType {
