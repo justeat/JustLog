@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JustLog'
-  s.version          = '2.0.0'
+  s.version          = '2.0.1'
   s.summary          = 'JustLog brings logging on iOS to the next level. It supports console, file and remote Logstash logging via TCP socket with no effort.'
 
   s.description      = "<<-DESC
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
 
   s.source_files = 'JustLog/Classes/**/*', 'JustLog/Extensions/**/*'
 
-  s.dependency 'SwiftyBeaver', '~> 1.4.0'
+  s.dependency 'SwiftyBeaver', '~> 1.4.1'
   s.dependency 'CocoaAsyncSocket', '~> 7.6.1'
 
 end
