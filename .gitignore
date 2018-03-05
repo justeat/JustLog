@@ -19,7 +19,6 @@ DerivedData
 *.hmap
 *.ipa
 *.xcworkspace
-Podfile.lock
 
 # Bundler
 .bundle
