@@ -1,0 +1,6 @@
+framework module JustLog {
+  umbrella header "JustLog-umbrella.h"
+
+  export *
+  module * { export * }
+}
