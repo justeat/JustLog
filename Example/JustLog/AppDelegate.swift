@@ -61,9 +61,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         logger.logstashPort = 5052
         logger.logstashTimeout = 5
         logger.logLogstashSocketActivity = true
-        logger.isTrustedServer = false
+        // change this in case of self-signed certificate on server side
+        logger.isTrustedServer = true
         logger.didReceiveTrustHandler = { _, _, completionHandler in
-            completionHandler(false)
+            completionHandler(true)
         }
 
         // logz.io support
