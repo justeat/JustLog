@@ -61,6 +61,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         logger.logstashPort = 5052
         logger.logstashTimeout = 5
         logger.logLogstashSocketActivity = true
+        logger.isTrustedServer = false
+        logger.didReceiveTrustHandler = { _, _, completionHandler in
+            completionHandler(false)
+        }
 
         // logz.io support
         //logger.logzioToken = <logzioToken>

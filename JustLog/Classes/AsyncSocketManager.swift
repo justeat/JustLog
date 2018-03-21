@@ -13,6 +13,7 @@ protocol AsyncSocketManagerDelegate: class {
     func socketDidSecure(_ socket: GCDAsyncSocket)
     func socket(_ socket: GCDAsyncSocket, didWriteDataWithTag tag: Int)
     func socket(_ socket: GCDAsyncSocket, didDisconnectWithError error: Error?)
+    func socket(_ socket: GCDAsyncSocket, didReceiveTrust trust:SecTrust, completionHandler:(Bool) -> Void)
 }
 
 class AsyncSocketManager: NSObject {
@@ -28,16 +29,18 @@ class AsyncSocketManager: NSObject {
     let host: String
     let port: UInt16
     let timeout: TimeInterval
+    var isTrustedServer:Bool = true
     
     let localSocketQueue = DispatchQueue(label: "com.justeat.gcdAsyncSocketDelegateQueue")
     
-    init(host: String, port: UInt16, timeout: TimeInterval, delegate: AsyncSocketManagerDelegate, logActivity: Bool) {
+    init(host: String, port: UInt16, timeout: TimeInterval, delegate: AsyncSocketManagerDelegate, logActivity: Bool, isTrustedServer:Bool = true) {
         
         self.host = host
         self.port = port
         self.timeout = timeout
         self.delegate = delegate
         self.logActivity = logActivity
+        self.isTrustedServer = isTrustedServer
         super.init()
         
         self.socket = GCDAsyncSocket(delegate: self, delegateQueue: localSocketQueue)
@@ -51,7 +54,10 @@ class AsyncSocketManager: NSObject {
                 print("🔌 <AsyncSocket>, Could not startTLS: \(error.localizedDescription)")
             }
         }
-        self.socket.startTLS([String(kCFStreamSSLPeerName): NSString(string: host)])
+        self.socket.startTLS(self.isTrustedServer ?
+            [String(kCFStreamSSLPeerName): NSString(string: self.host)] :
+            [String(GCDAsyncSocketManuallyEvaluateTrust): NSNumber(value:true)]
+        )
     }
     
     func write(_ data: Data, withTimeout timeout: TimeInterval, tag: Int) {
@@ -141,5 +147,12 @@ extension AsyncSocketManager: GCDAsyncSocketDelegate {
             }
         }
         self.delegate?.socket(sock, didDisconnectWithError: err)
+    }
+
+    func socket(_ sock: GCDAsyncSocket, didReceive trust: SecTrust, completionHandler: @escaping (Bool) -> Void) {
+        if logActivity {
+            print("🔌 <AsyncSocket>, did receive trust")
+        }
+        self.delegate?.socket(sock, didReceiveTrust: trust, completionHandler: completionHandler)
     }
 }

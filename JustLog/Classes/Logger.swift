@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyBeaver
+import CocoaAsyncSocket
 
 @objcMembers
 public final class Logger: NSObject {
@@ -44,6 +45,17 @@ public final class Logger: NSObject {
     public var logstashTimeout: TimeInterval = 20
     public var logLogstashSocketActivity: Bool = false
     public var logzioToken: String?
+    /**
+     Default to true, set it to false whenever manual security evaluation handling is needed.
+
+     - Note: if `false`, then `didReceiveTrustHandler` must be set or the connection will be rejected
+     */
+    public var isTrustedServer:Bool = true
+
+    /**
+     Set it to manually handle the security evaluation.
+     */
+    public var didReceiveTrustHandler:((GCDAsyncSocket, SecTrust, (Bool) -> Void) -> Void)?
     
     // logger conf
     public var defaultUserInfo: [String : Any]?
@@ -86,7 +98,8 @@ public final class Logger: NSObject {
         
         // logstash
         if enableLogstashLogging {
-            logstash = LogstashDestination(host: logstashHost, port: logstashPort, timeout: logstashTimeout, logActivity: logLogstashSocketActivity)
+            logstash = LogstashDestination(host: logstashHost, port: logstashPort, timeout: logstashTimeout, logActivity: logLogstashSocketActivity, isTrustedServer: self.isTrustedServer)
+            logstash.didReceiveTrustHandler = self.didReceiveTrustHandler
             logstash.logzioToken = logzioToken
             internalLogger.addDestination(logstash)
         }
