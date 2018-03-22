@@ -1,0 +1,4 @@
+github "Quick/Nimble" "v7.0.3"
+github "Quick/Quick" "v1.2.0"
+github "SwiftyBeaver/SwiftyBeaver" "1.5.1"
+github "robbiehanson/CocoaAsyncSocket" "26befdc3041bee72d9249e9f3e9e0ef03fee569c"
