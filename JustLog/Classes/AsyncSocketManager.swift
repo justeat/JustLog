@@ -28,16 +28,18 @@ class AsyncSocketManager: NSObject {
     let host: String
     let port: UInt16
     let timeout: TimeInterval
+    var allowUntrustedServer: Bool
     
     let localSocketQueue = DispatchQueue(label: "com.justeat.gcdAsyncSocketDelegateQueue")
     
-    init(host: String, port: UInt16, timeout: TimeInterval, delegate: AsyncSocketManagerDelegate, logActivity: Bool) {
+    init(host: String, port: UInt16, timeout: TimeInterval, delegate: AsyncSocketManagerDelegate, logActivity: Bool, allowUntrustedServer: Bool) {
         
         self.host = host
         self.port = port
         self.timeout = timeout
         self.delegate = delegate
         self.logActivity = logActivity
+        self.allowUntrustedServer = allowUntrustedServer
         super.init()
         
         self.socket = GCDAsyncSocket(delegate: self, delegateQueue: localSocketQueue)
@@ -51,7 +53,10 @@ class AsyncSocketManager: NSObject {
                 print("🔌 <AsyncSocket>, Could not startTLS: \(error.localizedDescription)")
             }
         }
-        self.socket.startTLS([String(kCFStreamSSLPeerName): NSString(string: host)])
+        self.socket.startTLS(self.allowUntrustedServer ?
+            [String(GCDAsyncSocketManuallyEvaluateTrust): NSNumber(value:true)] :
+            [String(kCFStreamSSLPeerName): NSString(string: self.host)]
+        )
     }
     
     func write(_ data: Data, withTimeout timeout: TimeInterval, tag: Int) {
@@ -141,5 +146,12 @@ extension AsyncSocketManager: GCDAsyncSocketDelegate {
             }
         }
         self.delegate?.socket(sock, didDisconnectWithError: err)
+    }
+
+    func socket(_ sock: GCDAsyncSocket, didReceive trust: SecTrust, completionHandler: @escaping (Bool) -> Void) {
+        if logActivity {
+            print("🔌 <AsyncSocket>, did receive trust")
+        }
+        completionHandler(self.allowUntrustedServer)
     }
 }
