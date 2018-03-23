@@ -44,7 +44,12 @@ public final class Logger: NSObject {
     public var logstashTimeout: TimeInterval = 20
     public var logLogstashSocketActivity: Bool = false
     public var logzioToken: String?
-    
+
+    /**
+     Default to `false`, if `true` untrusted certificates (as self-signed are) will be trusted
+     */
+    public var allowUntrustedServer: Bool = false
+
     // logger conf
     public var defaultUserInfo: [String : Any]?
     public var enableConsoleLogging: Bool = true
@@ -86,7 +91,7 @@ public final class Logger: NSObject {
         
         // logstash
         if enableLogstashLogging {
-            logstash = LogstashDestination(host: logstashHost, port: logstashPort, timeout: logstashTimeout, logActivity: logLogstashSocketActivity)
+            logstash = LogstashDestination(host: logstashHost, port: logstashPort, timeout: logstashTimeout, logActivity: logLogstashSocketActivity, allowUntrustedServer: allowUntrustedServer)
             logstash.logzioToken = logzioToken
             internalLogger.addDestination(logstash)
         }

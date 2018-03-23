@@ -64,6 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // logz.io support
         //logger.logzioToken = <logzioToken>
+
+        // untrusted (self-signed) logstash server support
+        //logger.allowUntrustedServer = <Bool>
         
         // default info
         logger.defaultUserInfo = ["application": "JustLog iOS Demo",
