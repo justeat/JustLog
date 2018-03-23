@@ -61,14 +61,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         logger.logstashPort = 5052
         logger.logstashTimeout = 5
         logger.logLogstashSocketActivity = true
-        // change this in case of self-signed certificate on server side
-        logger.isTrustedServer = true
-        logger.didReceiveTrustHandler = { _, _, completionHandler in
-            completionHandler(true)
-        }
 
         // logz.io support
         //logger.logzioToken = <logzioToken>
+
+        // untrusted (self-signed) logstash server support
+        //logger.allowUntrustedServer = <Bool>
         
         // default info
         logger.defaultUserInfo = ["application": "JustLog iOS Demo",

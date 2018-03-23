@@ -13,7 +13,6 @@ import CocoaAsyncSocket
 public class LogstashDestination: BaseDestination  {
     
     public var logzioToken: String?
-    public var didReceiveTrustHandler:((GCDAsyncSocket, SecTrust, (Bool) -> Void) -> Void)?
     
     var logsToShip = [Int : [String : Any]]()
     fileprivate var completionHandler: ((_ error: Error?) -> Void)?
@@ -28,11 +27,11 @@ public class LogstashDestination: BaseDestination  {
         fatalError()
     }
     
-    public required init(host: String, port: UInt16, timeout: TimeInterval, logActivity: Bool, isTrustedServer:Bool = true) {
+    public required init(host: String, port: UInt16, timeout: TimeInterval, logActivity: Bool, allowUntrustedServer: Bool) {
         super.init()
         self.logActivity = logActivity
         self.logDispatchQueue.maxConcurrentOperationCount = 1
-        self.socketManager = AsyncSocketManager(host: host, port: port, timeout: timeout, delegate: self, logActivity: logActivity, isTrustedServer: isTrustedServer)
+        self.socketManager = AsyncSocketManager(host: host, port: port, timeout: timeout, delegate: self, logActivity: logActivity, allowUntrustedServer: allowUntrustedServer)
     }
     
     deinit {
@@ -117,16 +116,6 @@ public class LogstashDestination: BaseDestination  {
 // MARK: - GCDAsyncSocketManager Delegate
 
 extension LogstashDestination: AsyncSocketManagerDelegate {
-    func socket(_ socket: GCDAsyncSocket, didReceiveTrust trust: SecTrust, completionHandler: (Bool) -> Void) {
-        // this method should be called only when the caller choose to manually handle the security evaluation.
-        // in that case `didReceiveTrustHandler` must have a value. If it doesn't let's reject the evaluation
-        guard let didReceiveTrustHandler = self.didReceiveTrustHandler else {
-            completionHandler(false)
-            return
-        }
-        didReceiveTrustHandler(socket, trust, completionHandler)
-    }
-
     
     func socket(_ socket: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
         logDispatchQueue.addOperation {
