@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-               BuildableName = "Example.app"
-               BlueprintName = "Example"
-               ReferencedContainer = "container:Example.xcodeproj">
+               BuildableName = "JustLog_Example.app"
+               BlueprintName = "JustLog_Example"
+               ReferencedContainer = "container:JustLog.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,23 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACE41AFB9204008FA782"
-               BuildableName = "ExampleTests.xctest"
-               BlueprintName = "ExampleTests"
-               ReferencedContainer = "container:Example.xcodeproj">
+               BuildableName = "JustLog_Tests.xctest"
+               BlueprintName = "JustLog_Tests"
+               ReferencedContainer = "container:JustLog.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FDEB41665571893A594DFEE6919B8C35"
+               BuildableName = "Pods_JustLog_Example.framework"
+               BlueprintName = "Pods-JustLog_Example"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -49,9 +63,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "607FACE41AFB9204008FA782"
-               BuildableName = "ExampleTests.xctest"
-               BlueprintName = "ExampleTests"
-               ReferencedContainer = "container:Example.xcodeproj">
+               BuildableName = "JustLog_Tests.xctest"
+               BlueprintName = "JustLog_Tests"
+               ReferencedContainer = "container:JustLog.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -59,9 +73,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "Example.app"
-            BlueprintName = "Example"
-            ReferencedContainer = "container:Example.xcodeproj">
+            BuildableName = "JustLog_Example.app"
+            BlueprintName = "JustLog_Example"
+            ReferencedContainer = "container:JustLog.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -83,9 +97,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "Example.app"
-            BlueprintName = "Example"
-            ReferencedContainer = "container:Example.xcodeproj">
+            BuildableName = "JustLog_Example.app"
+            BlueprintName = "JustLog_Example"
+            ReferencedContainer = "container:JustLog.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -102,9 +116,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "607FACCF1AFB9204008FA782"
-            BuildableName = "Example.app"
-            BlueprintName = "Example"
-            ReferencedContainer = "container:Example.xcodeproj">
+            BuildableName = "JustLog_Example.app"
+            BlueprintName = "JustLog_Example"
+            ReferencedContainer = "container:JustLog.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

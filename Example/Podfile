@@ -1,14 +1,10 @@
 platform :ios, '9.0'
 use_frameworks!
 
-workspace 'JustLog.xcworkspace'
+target 'JustLog_Example' do
+  pod 'JustLog', :path => '../'
 
-target 'Example' do
-  project 'Example/Example.xcodeproj'
-
-  pod 'JustLog', :path => './'
-
-  target 'ExampleTests' do
+  target 'JustLog_Tests' do
     inherit! :search_paths
 
     

@@ -10,8 +10,5 @@ language: objective-c
 # - gem install cocoapods # Since Travis is not always on latest version
 # - pod install --project-directory=Example
 script:
-- set -o pipefail
-- carthage update --platform iOS --no-use-binaries 
-- xcodebuild build -workspace JustLog.xcworkspace -scheme JustLog -sdk iphonesimulator9.3 ONLY_ACTIVE_ARCH=NO | xcpretty
-- xcodebuild test -workspace JustLog.xcworkspace -scheme Example -sdk iphonesimulator9.3 ONLY_ACTIVE_ARCH=NO | xcpretty
+- set -o pipefail && xcodebuild test -workspace Example/JustLog.xcworkspace -scheme JustLog-Example -sdk iphonesimulator9.3 ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint
