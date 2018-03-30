@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   
   s.source_files = 'JustLog/Classes/**/*', 'JustLog/Extensions/**/*'
 
-  s.dependency 'SwiftyBeaver', '~> 1.4.1'
+  s.dependency 'SwiftyBeaver', '~> 1.5.1'
   s.dependency 'CocoaAsyncSocket', '~> 7.6.1'
 
 end
