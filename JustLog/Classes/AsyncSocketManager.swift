@@ -11,6 +11,7 @@ import CocoaAsyncSocket
 
 protocol AsyncSocketManagerDelegate: class {
     func socketDidSecure(_ socket: GCDAsyncSocket)
+    func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16)
     func socket(_ socket: GCDAsyncSocket, didWriteDataWithTag tag: Int)
     func socket(_ socket: GCDAsyncSocket, didDisconnectWithError error: Error?)
 }
@@ -29,16 +30,18 @@ class AsyncSocketManager: NSObject {
     let port: UInt16
     let timeout: TimeInterval
     var allowUntrustedServer: Bool
-    
+    var useSecureSocket: Bool
+
     let localSocketQueue = DispatchQueue(label: "com.justeat.gcdAsyncSocketDelegateQueue")
     
-    init(host: String, port: UInt16, timeout: TimeInterval, delegate: AsyncSocketManagerDelegate, logActivity: Bool, allowUntrustedServer: Bool) {
+    init(host: String, port: UInt16, timeout: TimeInterval, delegate: AsyncSocketManagerDelegate, logActivity: Bool, useSecureSocket: Bool, allowUntrustedServer: Bool) {
         
         self.host = host
         self.port = port
         self.timeout = timeout
         self.delegate = delegate
         self.logActivity = logActivity
+        self.useSecureSocket = useSecureSocket
         self.allowUntrustedServer = allowUntrustedServer
         super.init()
         
@@ -53,14 +56,15 @@ class AsyncSocketManager: NSObject {
                 print("🔌 <AsyncSocket>, Could not startTLS: \(error.localizedDescription)")
             }
         }
-        self.socket.startTLS(self.allowUntrustedServer ?
-            [String(GCDAsyncSocketManuallyEvaluateTrust): NSNumber(value:true)] :
-            [String(kCFStreamSSLPeerName): NSString(string: self.host)]
-        )
+        if self.useSecureSocket {
+            self.socket.startTLS(self.allowUntrustedServer ? 
+                [String(GCDAsyncSocketManuallyEvaluateTrust): NSNumber(value:true)] :
+                [String(kCFStreamSSLPeerName): NSString(string: self.host)])
+        }
     }
     
     func write(_ data: Data, withTimeout timeout: TimeInterval, tag: Int) {
-        if self.isSecure() {
+        if !self.useSecureSocket || self.isSecure() {
             self.socket.write(data, withTimeout: timeout, tag: tag)
         } else {
             print("🔌 <AsyncSocket>, logstash connection was not secure, could not send logs")
@@ -118,8 +122,9 @@ extension AsyncSocketManager: GCDAsyncSocketDelegate {
 
     func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
         if logActivity {
-            print("🔌 <AsyncSocket>, connected!")
+            print("🔌 <AsyncSocket>, connected to host!", host)
         }
+        self.delegate?.socket(sock, didConnectToHost: host, port: port)
     }
     
     func socketDidSecure(_ sock: GCDAsyncSocket) {
