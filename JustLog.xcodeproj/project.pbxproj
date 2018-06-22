@@ -45,7 +45,6 @@
 
 /* Begin PBXFileReference section */
 		4D2F050F20DD2FF9004286A7 /* JustLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D2F051020DD2FF9004286A7 /* JustLog copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "JustLog copy-Info.plist"; path = "/Users/mark/Coding/fireseed/MyPixPo/LoggingframeworkTest/JustLog/JustLog copy-Info.plist"; sourceTree = "<absolute>"; };
 		A60280F62065559400348BCE /* JustLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A60280F92065559400348BCE /* JustLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustLog.h; sourceTree = "<group>"; };
 		A60280FA2065559400348BCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,7 +94,6 @@
 				A60280F82065559400348BCE /* JustLog */,
 				A60280F72065559400348BCE /* Products */,
 				A60281252065560F00348BCE /* Frameworks */,
-				4D2F051020DD2FF9004286A7 /* JustLog copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -342,7 +340,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
 				);
-				INFOPLIST_FILE = "JustLog copy-Info.plist";
+				INFOPLIST_FILE = "JustLog/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.justeat.JustLog;
@@ -367,7 +365,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
 				);
-				INFOPLIST_FILE = "JustLog copy-Info.plist";
+				INFOPLIST_FILE = "JustLog/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.justeat.JustLog;
