@@ -22,6 +22,7 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/justeat_tech'
   
   s.ios.deployment_target = '8.0'
+  s.tvos.deployment_target = '10.0'
   s.swift_version = '4.0'
   
   s.source_files = 'JustLog/Classes/**/*', 'JustLog/Extensions/**/*'
