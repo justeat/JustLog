@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D2F04F820DD2FF9004286A7 /* Dictionary+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A602810E206555D000348BCE /* Dictionary+JSON.swift */; };
+		4D2F04F920DD2FF9004286A7 /* NSError+UnderlyingErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6028111206555D000348BCE /* NSError+UnderlyingErrors.swift */; };
+		4D2F04FA20DD2FF9004286A7 /* String+Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6028112206555D000348BCE /* String+Conversion.swift */; };
+		4D2F04FB20DD2FF9004286A7 /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6028106206555D000348BCE /* ConsoleDestination.swift */; };
+		4D2F04FC20DD2FF9004286A7 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6028109206555D000348BCE /* Logging.swift */; };
+		4D2F04FD20DD2FF9004286A7 /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6028107206555D000348BCE /* FileDestination.swift */; };
+		4D2F04FE20DD2FF9004286A7 /* Dictionary+Flattening.swift in Sources */ = {isa = PBXBuildFile; fileRef = A602810D206555D000348BCE /* Dictionary+Flattening.swift */; };
+		4D2F04FF20DD2FF9004286A7 /* AsyncSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6028105206555D000348BCE /* AsyncSocketManager.swift */; };
+		4D2F050020DD2FF9004286A7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6028108206555D000348BCE /* Logger.swift */; };
+		4D2F050120DD2FF9004286A7 /* LogstashDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A602810A206555D000348BCE /* LogstashDestination.swift */; };
+		4D2F050220DD2FF9004286A7 /* NSError+Readability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6028110206555D000348BCE /* NSError+Readability.swift */; };
+		4D2F050320DD2FF9004286A7 /* Data+Representation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A602810C206555D000348BCE /* Data+Representation.swift */; };
+		4D2F050420DD2FF9004286A7 /* Logger+ObjC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A602810F206555D000348BCE /* Logger+ObjC.swift */; };
+		4D2F050520DD2FF9004286A7 /* UIDevice+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6028113206555D000348BCE /* UIDevice+Info.swift */; };
+		4D2F050720DD2FF9004286A7 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60281262065560F00348BCE /* CocoaAsyncSocket.framework */; };
+		4D2F050820DD2FF9004286A7 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60281272065560F00348BCE /* SwiftyBeaver.framework */; };
+		4D2F050A20DD2FF9004286A7 /* JustLog.h in Headers */ = {isa = PBXBuildFile; fileRef = A60280F92065559400348BCE /* JustLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A60280FB2065559400348BCE /* JustLog.h in Headers */ = {isa = PBXBuildFile; fileRef = A60280F92065559400348BCE /* JustLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A6028116206555D000348BCE /* AsyncSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6028105206555D000348BCE /* AsyncSocketManager.swift */; };
 		A6028117206555D000348BCE /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6028106206555D000348BCE /* ConsoleDestination.swift */; };
@@ -27,6 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D2F050F20DD2FF9004286A7 /* JustLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A60280F62065559400348BCE /* JustLog.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustLog.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A60280F92065559400348BCE /* JustLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustLog.h; sourceTree = "<group>"; };
 		A60280FA2065559400348BCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +67,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4D2F050620DD2FF9004286A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D2F050720DD2FF9004286A7 /* CocoaAsyncSocket.framework in Frameworks */,
+				4D2F050820DD2FF9004286A7 /* SwiftyBeaver.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A60280F22065559400348BCE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -74,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				A60280F62065559400348BCE /* JustLog.framework */,
+				4D2F050F20DD2FF9004286A7 /* JustLog.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,6 +173,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		4D2F050920DD2FF9004286A7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D2F050A20DD2FF9004286A7 /* JustLog.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A60280F32065559400348BCE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -156,6 +192,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		4D2F04F620DD2FF9004286A7 /* JustLog_tvos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D2F050C20DD2FF9004286A7 /* Build configuration list for PBXNativeTarget "JustLog_tvos" */;
+			buildPhases = (
+				4D2F04F720DD2FF9004286A7 /* Sources */,
+				4D2F050620DD2FF9004286A7 /* Frameworks */,
+				4D2F050920DD2FF9004286A7 /* Headers */,
+				4D2F050B20DD2FF9004286A7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JustLog_tvos;
+			productName = JustLog;
+			productReference = 4D2F050F20DD2FF9004286A7 /* JustLog.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		A60280F52065559400348BCE /* JustLog */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A60280FE2065559400348BCE /* Build configuration list for PBXNativeTarget "JustLog" */;
@@ -183,6 +237,9 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Just Eat";
 				TargetAttributes = {
+					4D2F04F620DD2FF9004286A7 = {
+						ProvisioningStyle = Automatic;
+					};
 					A60280F52065559400348BCE = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -202,11 +259,19 @@
 			projectRoot = "";
 			targets = (
 				A60280F52065559400348BCE /* JustLog */,
+				4D2F04F620DD2FF9004286A7 /* JustLog_tvos */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4D2F050B20DD2FF9004286A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A60280F42065559400348BCE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -217,6 +282,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4D2F04F720DD2FF9004286A7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D2F04F820DD2FF9004286A7 /* Dictionary+JSON.swift in Sources */,
+				4D2F04F920DD2FF9004286A7 /* NSError+UnderlyingErrors.swift in Sources */,
+				4D2F04FA20DD2FF9004286A7 /* String+Conversion.swift in Sources */,
+				4D2F04FB20DD2FF9004286A7 /* ConsoleDestination.swift in Sources */,
+				4D2F04FC20DD2FF9004286A7 /* Logging.swift in Sources */,
+				4D2F04FD20DD2FF9004286A7 /* FileDestination.swift in Sources */,
+				4D2F04FE20DD2FF9004286A7 /* Dictionary+Flattening.swift in Sources */,
+				4D2F04FF20DD2FF9004286A7 /* AsyncSocketManager.swift in Sources */,
+				4D2F050020DD2FF9004286A7 /* Logger.swift in Sources */,
+				4D2F050120DD2FF9004286A7 /* LogstashDestination.swift in Sources */,
+				4D2F050220DD2FF9004286A7 /* NSError+Readability.swift in Sources */,
+				4D2F050320DD2FF9004286A7 /* Data+Representation.swift in Sources */,
+				4D2F050420DD2FF9004286A7 /* Logger+ObjC.swift in Sources */,
+				4D2F050520DD2FF9004286A7 /* UIDevice+Info.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A60280F12065559400348BCE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -241,6 +327,56 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		4D2F050D20DD2FF9004286A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = "JustLog/Supporting Files/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.justeat.JustLog;
+				PRODUCT_NAME = JustLog;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4D2F050E20DD2FF9004286A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = "JustLog/Supporting Files/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.justeat.JustLog;
+				PRODUCT_NAME = JustLog;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		A60280FC2065559400348BCE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -407,6 +543,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4D2F050C20DD2FF9004286A7 /* Build configuration list for PBXNativeTarget "JustLog_tvos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D2F050D20DD2FF9004286A7 /* Debug */,
+				4D2F050E20DD2FF9004286A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A60280F02065559400348BCE /* Build configuration list for PBXProject "JustLog" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
