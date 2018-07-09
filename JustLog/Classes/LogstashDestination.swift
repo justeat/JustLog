@@ -27,11 +27,11 @@ public class LogstashDestination: BaseDestination  {
         fatalError()
     }
     
-    public required init(host: String, port: UInt16, timeout: TimeInterval, logActivity: Bool, allowUntrustedServer: Bool = false) {
+    public required init(host: String, port: UInt16, timeout: TimeInterval, logActivity: Bool, useSecureSocket: Bool = true, allowUntrustedServer: Bool = false) {
         super.init()
         self.logActivity = logActivity
         self.logDispatchQueue.maxConcurrentOperationCount = 1
-        self.socketManager = AsyncSocketManager(host: host, port: port, timeout: timeout, delegate: self, logActivity: logActivity, allowUntrustedServer: allowUntrustedServer)
+        self.socketManager = AsyncSocketManager(host: host, port: port, timeout: timeout, delegate: self, logActivity: logActivity, useSecureSocket: useSecureSocket, allowUntrustedServer: allowUntrustedServer)
     }
     
     deinit {
@@ -131,6 +131,12 @@ extension LogstashDestination: AsyncSocketManagerDelegate {
     
     func socketDidSecure(_ socket: GCDAsyncSocket) {
         self.writeLogs()
+    }
+    
+    func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
+        if !self.socketManager.useSecureSocket {
+            self.writeLogs()
+        }
     }
     
     func socket(_ socket: GCDAsyncSocket, didDisconnectWithError error: Error?) {

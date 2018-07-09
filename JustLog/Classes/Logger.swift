@@ -50,6 +50,11 @@ public final class Logger: NSObject {
      */
     public var allowUntrustedServer: Bool = false
 
+    /**
+     Default to `false`, if `true` ssl is not required for socket 
+     */
+    public var useSecureSocket: Bool = true
+
     // logger conf
     public var defaultUserInfo: [String : Any]?
     public var enableConsoleLogging: Bool = true
@@ -91,7 +96,7 @@ public final class Logger: NSObject {
         
         // logstash
         if enableLogstashLogging {
-            logstash = LogstashDestination(host: logstashHost, port: logstashPort, timeout: logstashTimeout, logActivity: logLogstashSocketActivity, allowUntrustedServer: allowUntrustedServer)
+            logstash = LogstashDestination(host: logstashHost, port: logstashPort, timeout: logstashTimeout, logActivity: logLogstashSocketActivity, useSecureSocket: useSecureSocket, allowUntrustedServer: allowUntrustedServer)
             logstash.logzioToken = logzioToken
             internalLogger.addDestination(logstash)
         }
