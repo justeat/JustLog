@@ -27,11 +27,11 @@ public class LogstashDestination: BaseDestination  {
         fatalError()
     }
     
-    public required init(host: String, port: UInt16, timeout: TimeInterval, logActivity: Bool) {
+    public required init(host: String, port: UInt16, timeout: TimeInterval, logActivity: Bool, allowUntrustedServer: Bool = false) {
         super.init()
         self.logActivity = logActivity
         self.logDispatchQueue.maxConcurrentOperationCount = 1
-        self.socketManager = AsyncSocketManager(host: host, port: port, timeout: timeout, delegate: self, logActivity: logActivity)
+        self.socketManager = AsyncSocketManager(host: host, port: port, timeout: timeout, delegate: self, logActivity: logActivity, allowUntrustedServer: allowUntrustedServer)
     }
     
     deinit {
@@ -45,8 +45,8 @@ public class LogstashDestination: BaseDestination  {
     
     // MARK: - Log dispatching
 
-    override public func send(_ level: SwiftyBeaver.Level, msg: String, thread: String,
-                              file: String, function: String, line: Int) -> String? {
+    override public func send(_ level: SwiftyBeaver.Level, msg: String, thread: String, file: String,
+                              function: String, line: Int, context: Any? = nil) -> String? {
         
         if let dict = msg.toDictionary() {
             var flattened = dict.flattened()
@@ -90,7 +90,7 @@ public class LogstashDestination: BaseDestination  {
     
     func addLog(_ dict: [String: Any]) {
         let time = mach_absolute_time()
-        let logTag = Int(truncatingBitPattern: time)
+        let logTag = Int(truncatingIfNeeded: time)
         logsToShip[logTag] = dict
     }
     

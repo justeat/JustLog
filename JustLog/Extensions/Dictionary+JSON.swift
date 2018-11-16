@@ -10,6 +10,9 @@ import Foundation
 
 extension Dictionary {
     
+    /// Parses the dictionary as a json data object and returns the String representation.
+    ///
+    /// - Returns: The String representation of the dictionary
     func toJSON() -> String? {
         
         var json: String? = nil

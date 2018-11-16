@@ -21,8 +21,8 @@ public class ConsoleDestination: BaseDestination {
         levelColor.error = "☠️ "
     }
 
-    override public func send(_ level: SwiftyBeaver.Level, msg: String, thread: String,
-        file: String, function: String, line: Int) -> String? {
+    override public func send(_ level: SwiftyBeaver.Level, msg: String, thread: String, file: String,
+                              function: String, line: Int, context: Any? = nil) -> String? {
         
         var dict = msg.toDictionary()
         guard let innerMessage = dict?["message"] as? String else { return nil }

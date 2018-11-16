@@ -12,7 +12,7 @@ class Dictionary_Flattening: XCTestCase {
         let merged = d1.merged(with: d2)
         let target = ["k1": "v1", "k2": "v2", "k3": "v3", "k4": "v4"]
         
-        XCTAssertEqual(merged, target)
+        XCTAssertEqual(NSDictionary(dictionary:merged), NSDictionary(dictionary: target))
     }
     
     func test_merge_withConflictingDictionies() {
@@ -20,10 +20,11 @@ class Dictionary_Flattening: XCTestCase {
         let d1 = ["k1": "v1", "k2": "v2"]
         let d2 = ["k1": "v1b", "k3": "v3"]
         
+        
         let merged = d1.merged(with: d2)
         let target = ["k1": "v1b", "k2": "v2", "k3": "v3"]
         
-        XCTAssertEqual(merged, target)
+        XCTAssertEqual(NSDictionary(dictionary:merged), NSDictionary(dictionary:target))
     }
     
     func test_flattened() {
@@ -70,8 +71,9 @@ class Dictionary_Flattening: XCTestCase {
         
         XCTAssertEqual(flattened.keys.count, 3)
         XCTAssertEqual(flattened["k1"] as! String, "v1")
+        XCTAssertNil(flattened["k2"])
+        XCTAssertNil(flattened["k4"])
         XCTAssertEqual(flattened["k3"] as! String, "v3")
         XCTAssertEqual(flattened["k5"] as! String, "v5")
     }
-    
 }

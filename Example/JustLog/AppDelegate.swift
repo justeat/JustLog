@@ -48,10 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let logger = Logger.shared
         
         // custom keys
-        logger.logTypeKey = "je_logtype"
-        logger.appVersionKey = "je_feature_version"
-        logger.iosVersionKey = "je_ios_version"
-        logger.deviceTypeKey = "je_ios_device"
+        logger.logTypeKey = "logtype"
+        logger.appVersionKey = "app_version"
+        logger.iosVersionKey = "ios_version"
+        logger.deviceTypeKey = "ios_device"
         
         // file destination
         logger.logFilename = "justeat-demo.log"
@@ -64,12 +64,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // logz.io support
         //logger.logzioToken = <logzioToken>
+
+        // untrusted (self-signed) logstash server support
+        //logger.allowUntrustedServer = <Bool>
         
         // default info
-        logger.defaultUserInfo = ["je_feature": "ios cia",
-                                  "je_environment": "production",
-                                  "je_tenant": "UK",
-                                  "x-je-conversation": sessionID]
+        logger.defaultUserInfo = ["application": "JustLog iOS Demo",
+                                  "environment": "development",
+                                  "session": sessionID]
         logger.setup()
     }
 

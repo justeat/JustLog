@@ -25,8 +25,9 @@ public class FileDestination: BaseDestination {
         levelColor.error = "☠️ "
     }
 
-    override public func send(_ level: SwiftyBeaver.Level, msg: String, thread: String,
-        file: String, function: String, line: Int) -> String? {
+    override public func send(_ level: SwiftyBeaver.Level, msg: String, thread: String, file: String,
+                              function: String, line: Int, context: Any? = nil) -> String? {
+        
         let formattedString = super.send(level, msg: msg, thread: thread, file: file, function: function, line: line)
 
         if let str = formattedString {

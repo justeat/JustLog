@@ -49,10 +49,10 @@ We decided to adopt SwiftyBeaver due to the following reasons:
 A log can be of one of 5 different types, to be used according to the specific need. A reasonable adopted convention on mobile could be the following:
 
 - 📣 **verbose**: Use to trace the code, trying to find one part of a function specifically, sort of debugging with extensive information.
-- 📝 **debug**: Information that is helpful to developers to diagnose an issue. 
-- ℹ️ **info**: Generally useful information to log (service start/stop, configuration assumptions, etc). Info to always have available but usually don't care about under normal circumstances. Out-of-the-box config level. 
-- ⚠️ **warning**: Anything that can potentially cause application oddities but an automatic recovery is possible (such as retrying an operation, missing data, etc.) 
-- ☠️ **error**: Any error which is fatal to the operation, but not the service or application (can't open a required file, missing data, etc.). These errors will force user intervention. These are usually reserved for failed API calls, missing services, etc. 
+- 📝 **debug**: Information that is helpful to developers to diagnose an issue.
+- ℹ️ **info**: Generally useful information to log (service start/stop, configuration assumptions, etc). Info to always have available but usually don't care about under normal circumstances. Out-of-the-box config level.
+- ⚠️ **warning**: Anything that can potentially cause application oddities but an automatic recovery is possible (such as retrying an operation, missing data, etc.)
+- ☠️ **error**: Any error which is fatal to the operation, but not the service or application (can't open a required file, missing data, etc.). These errors will force user intervention. These are usually reserved for failed API calls, missing services, etc.
 
 When using JustLog, the only object to interact with is the shared instance of the `Logger` class, which supports 3 destinations:
 
@@ -60,7 +60,7 @@ When using JustLog, the only object to interact with is the shared instance of t
 - sync writing to File (custom destination)
 - async sending logs to [Logstash](https://www.elastic.co/products/logstash) (usually part of an [ELK](https://www.elastic.co/webinars/introduction-elk-stack) stack)
 
-Following is a code sample to configure and setup the Logger. It should be done at app startup time, in the `applicationDidFinishLaunchingWithOptions` method in the AppDelegate. 
+Following is a code sample to configure and setup the Logger. It should be done at app startup time, in the `applicationDidFinishLaunchingWithOptions` method in the AppDelegate.
 
 ```swift
 let logger = Logger.shared
@@ -82,7 +82,7 @@ logger.defaultUserInfo = ["app": "my iOS App",
 logger.setup()
 ```
 
-The `defaultUserInfo` dictionary contains a set of basic information to add to every log. 
+The `defaultUserInfo` dictionary contains a set of basic information to add to every log.
 
 The Logger class exposes 5 functions for the different types of logs. The only required parameter is the message, optional error and userInfo can be provided. Here are some examples of sending logs to JustLog:
 
@@ -103,18 +103,35 @@ It plays nicely with Objective-C too:
 [Logger.shared error_objc:@"some message" error:someError userInfo:someUserInfo];
 ```
 
+*Please note that metadata such as filename and line number are unavailable in Objective-C.*
+
 The message is the only required argument for each log type, while userInfo and error are optional.
 The Logger unifies the information from `message`, `error`, `error.userInfo`, `userInfo`, `defaultUserInfo` and call-site info/metadata in a single dictionary with the following schema form of type [String : Any] (we call this 'aggregated form'). E.g. in JSON representation:
 
 ```json
 {
-  "message": ...,
-  "userInfo": {
-    "NSLocalizedDescription": ...,
-    "error_domain": ...,
-    "some key": ...,
+  "message": "the log message",
+  "user_info": {
+    "app": "my iOS App",
+    "environment": "production",
+    "custom_key": "some custom value",
     ...
-  },  
+  },
+  "errors": [
+  {
+    "error_domain" : "com.domain",
+    "error_code" : "1234",
+    "NSLocalizedDescription": ...,
+    "NSLocalizedFailureReasonError": ...,
+    ...
+  },
+  {
+    "errorDomain" : "com.domain.inner",
+    "errorCode" : "5678",
+    "NSLocalizedDescription": ...,
+    "NSLocalizedFailureReasonError": ...,
+    ...
+  }],  
   "metadata": {
     "file": ...,
     "function": ...,
@@ -145,14 +162,14 @@ The console prints only the message.
 
 ## File
 
-On file we store all the log info in the 'aggregated form'. 
+On file we store all the log info in the 'aggregated form'.
 
 ```json
-2016-12-24 12:31:02.734  📣 VERBOSE: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"verbose()","device":"x86_64","line":"15"},"userInfo":{"environment":"production","app":"my iOS App","log_type":"verbose","tenant":"UK"},"message":"not so important"}
-2016-12-24 12:31:36.777  📝 DEBUG: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"debug()","device":"x86_64","line":"19"},"userInfo":{"environment":"production","app":"my iOS App","log_type":"debug","tenant":"UK"},"message":"something to debug"}
-2016-12-24 12:31:37.368  ℹ️ INFO: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"info()","device":"x86_64","line":"23"},"userInfo":{"environment":"production","app":"my iOS App","log_type":"info","tenant":"UK","some key":"some extra info"},"message":"a nice information"}
-2016-12-24 12:31:37.884  ⚠️ WARNING: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"warning()","device":"x86_64","line":"27"},"userInfo":{"environment":"production","app":"my iOS App","log_type":"warning","tenant":"UK","some key":"some extra info"},"message":"oh no, that won’t be good"}
-2016-12-24 12:31:38.475  ☠️ ERROR: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"error()","device":"x86_64","line":"47"},"userInfo":{"error_code":1234,"environment":"production","error_domain":"com.just-eat.test","log_type":"error","some key":"some extra info","NSLocalizedDescription":"description","NSLocalizedRecoverySuggestion":"recovery suggestion","app":"my iOS App","tenant":"UK","NSLocalizedFailureReason":"error value"},"message":"ouch, an error did occur!"}
+2016-12-24 12:31:02.734  📣 VERBOSE: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"verbose()","device":"x86_64","line":"15"},"user_info":{"environment":"production","app":"my iOS App","log_type":"verbose","tenant":"UK"},"message":"not so important"}
+2016-12-24 12:31:36.777  📝 DEBUG: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"debug()","device":"x86_64","line":"19"},"user_info":{"environment":"production","app":"my iOS App","log_type":"debug","tenant":"UK"},"message":"something to debug"}
+2016-12-24 12:31:37.368  ℹ️ INFO: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"info()","device":"x86_64","line":"23"},"user_info":{"environment":"production","app":"my iOS App","log_type":"info","tenant":"UK","some key":"some extra info"},"message":"a nice information"}
+2016-12-24 12:31:37.884  ⚠️ WARNING: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"warning()","device":"x86_64","line":"27"},"user_info":{"environment":"production","app":"my iOS App","log_type":"warning","tenant":"UK","some key":"some extra info"},"message":"oh no, that won’t be good"}
+2016-12-24 12:31:38.475  ☠️ ERROR: {"metadata":{"file":"ViewController.swift","app_version":"1.0 (1)","version":"10.1","function":"error()","device":"x86_64","line":"47"},"user_info":{"environment":"production","log_type":"error","some key":"some extra info","app":"my iOS App","tenant":"UK","NSLocalizedFailureReason":"error value"},"errors":[{"error_code":1234,"error_domain":"com.just-eat.test","NSLocalizedDescription":"description","NSLocalizedRecoverySuggestion":"recovery suggestion"}],"message":"ouch, an error did occur!"}
 ```
 
 
@@ -175,12 +192,12 @@ Before sending a log to Logstash, the 'aggregated form' is flattened to a simple
   "file": "ViewController.swift",
   "function": "error()",
   "line": "47",
-
-  "error_domain": "com.just-eat.test",
-  "error_code": "1234",
-  "NSLocalizedDescription": "description",
-  "NSLocalizedFailureReason": "error value",
-  "NSLocalizedRecoverySuggestion": "recovery suggestion"
+  "errors": [{
+    "error_domain": "com.just-eat.test",
+    "error_code": "1234",
+    "NSLocalizedDescription": "description",
+    "NSLocalizedFailureReason": "error value"
+  }]
 }
 ```
 
@@ -216,26 +233,26 @@ or, more generally, in the `applicationDidEnterBackground` and `applicationWillT
 
 ```swift
 func applicationDidEnterBackground(_ application: UIApplication) {
-    forceSendLogs(application)
+  forceSendLogs(application)
 }
 
 func applicationWillTerminate(_ application: UIApplication) {
-    forceSendLogs(application)
+  forceSendLogs(application)
 }
 
 private func forceSendLogs(_ application: UIApplication) {
 
-    var identifier: UIBackgroundTaskIdentifier = 0
+  var identifier: UIBackgroundTaskIdentifier = 0
 
-    identifier = application.beginBackgroundTask(expirationHandler: {
-        application.endBackgroundTask(identifier)
-        identifier = UIBackgroundTaskInvalid
-    })
+  identifier = application.beginBackgroundTask(expirationHandler: {
+    application.endBackgroundTask(identifier)
+    identifier = UIBackgroundTaskInvalid
+  })
 
-    Logger.shared.forceSend { completionHandler in
-        application.endBackgroundTask(identifier)
-        identifier = UIBackgroundTaskInvalid
-    }
+  Logger.shared.forceSend { completionHandler in
+    application.endBackgroundTask(identifier)
+    identifier = UIBackgroundTaskInvalid
+  }
 }
 ```
 
