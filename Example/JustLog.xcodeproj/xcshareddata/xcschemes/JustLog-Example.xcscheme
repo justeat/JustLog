@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "17B7854C1F5F55789F862FEAA780C4AB"
+               BlueprintIdentifier = "FDEB41665571893A594DFEE6919B8C35"
                BuildableName = "Pods_JustLog_Example.framework"
                BlueprintName = "Pods-JustLog_Example"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">

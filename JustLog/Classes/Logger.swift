@@ -55,6 +55,7 @@ public final class Logger: NSObject {
     public var enableConsoleLogging: Bool = true
     public var enableFileLogging: Bool = true
     public var enableLogstashLogging: Bool = true
+    public var baseUrlForFileLogging = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
     public let internalLogger = SwiftyBeaver.self
     private var dispatchTimer: Timer?
     
@@ -83,7 +84,7 @@ public final class Logger: NSObject {
         if enableFileLogging {
             file = JustLog.FileDestination()
             file.format = format
-            if let baseURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first {
+            if let baseURL = self.baseUrlForFileLogging {
                 file.logFileURL = baseURL.appendingPathComponent(logFilename ?? "justeat.log", isDirectory: false)
             }
             internalLogger.addDestination(file)
