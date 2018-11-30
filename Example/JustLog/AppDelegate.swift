@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private var sessionID = UUID().uuidString
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setupLogger()
         return true
     }
@@ -30,16 +30,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func forceSendLogs(_ application: UIApplication) {
         
-        var identifier: UIBackgroundTaskIdentifier = 0
+        var identifier: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 0)
         
         identifier = application.beginBackgroundTask(expirationHandler: {
             application.endBackgroundTask(identifier)
-            identifier = UIBackgroundTaskInvalid
+            identifier = UIBackgroundTaskIdentifier.invalid
         })
         
         Logger.shared.forceSend { completionHandler in
             application.endBackgroundTask(identifier)
-            identifier = UIBackgroundTaskInvalid
+            identifier = UIBackgroundTaskIdentifier.invalid
         }
     }
     
@@ -76,4 +76,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-
