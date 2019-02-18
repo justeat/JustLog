@@ -242,16 +242,16 @@ func applicationWillTerminate(_ application: UIApplication) {
 
 private func forceSendLogs(_ application: UIApplication) {
 
-  var identifier: UIBackgroundTaskIdentifier = 0
+  var identifier = UIBackgroundTaskIdentifier(rawValue: 0)
 
   identifier = application.beginBackgroundTask(expirationHandler: {
     application.endBackgroundTask(identifier)
-    identifier = UIBackgroundTaskInvalid
+    identifier = UIBackgroundTaskIdentifier.invalid
   })
 
   Logger.shared.forceSend { completionHandler in
     application.endBackgroundTask(identifier)
-    identifier = UIBackgroundTaskInvalid
+    identifier = UIBackgroundTaskIdentifier.invalid
   }
 }
 ```
