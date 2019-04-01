@@ -2,7 +2,7 @@
 
 # JustLog
 
-[![Build Status](https://www.bitrise.io/app/cd3b5cb7da89003d.svg?token=gDRpYMHJJg_QMKMZ6Jv7xw&branch=master)](https://www.bitrise.io/app/cd3b5cb7da89003d)
+[![Build Status](https://app.bitrise.io/app/f53e04b86e467ada/status.svg?token=Yqw_vlbQLXlyVXJmYfYzyA&branch=master)](https://app.bitrise.io/app/f53e04b86e467ada)
 [![Version](https://img.shields.io/cocoapods/v/JustLog.svg?style=flat)](http://cocoapods.org/pods/JustLog)
 [![License](https://img.shields.io/cocoapods/l/JustLog.svg?style=flat)](http://cocoapods.org/pods/JustLog)
 [![Platform](https://img.shields.io/cocoapods/p/JustLog.svg?style=flat)](http://cocoapods.org/pods/JustLog)
