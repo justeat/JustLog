@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/justeat/JustLog'
   s.license          = { :type => 'Apache 2.0', :file => 'LICENSE' }
-  s.authors          = { 'Just Eat iOS team' => 'justeat.ios.team@gmail.com', 'Alberto De Bortoli' => 'alberto.debortoli@just-eat.com', 'Shabeer Hussain' => 'shabeer.hussain@just-eat.com', 'Andre Jacobs' => 'andre.jacobs@just-eat.com' }
+  s.authors          = { 'Alberto De Bortoli' => 'alberto.debortoli@just-eat.com', 'Shabeer Hussain' => 'shabeer.hussain@just-eat.com', 'Andre Jacobs' => 'andre.jacobs@just-eat.com' }
   s.source           = { :git => 'https://github.com/justeat/JustLog.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/justeat_tech'
   
