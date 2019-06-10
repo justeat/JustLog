@@ -2,12 +2,14 @@
 
 # JustLog
 
-[![Build Status](https://app.bitrise.io/app/f53e04b86e467ada/status.svg?token=Yqw_vlbQLXlyVXJmYfYzyA&branch=master)](https://app.bitrise.io/app/f53e04b86e467ada)
+[![Build Status](https://travis-ci.org/justeat/JustLog.svg?branch=master)](https://travis-ci.org/justeat/JustLog)
 [![Version](https://img.shields.io/cocoapods/v/JustLog.svg?style=flat)](http://cocoapods.org/pods/JustLog)
 [![License](https://img.shields.io/cocoapods/l/JustLog.svg?style=flat)](http://cocoapods.org/pods/JustLog)
 [![Platform](https://img.shields.io/cocoapods/p/JustLog.svg?style=flat)](http://cocoapods.org/pods/JustLog)
 
 JustLog takes logging on iOS to the next level. It supports console, file and remote Logstash logging via TCP socket with no effort. Support for logz.io available.
+
+- [Just Eat Tech blog](https://tech.just-eat.com/2017/01/18/a-better-local-and-remote-logging-on-ios-with-justlog/)
 
 # Overview
 
