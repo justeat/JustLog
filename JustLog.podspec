@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/justeat/JustLog.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/justeat_tech'
   
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
   s.tvos.deployment_target = '10.0'
   s.swift_version = '5.0'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
