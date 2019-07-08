@@ -4,8 +4,8 @@
 # * https://docs.travis-ci.com/user/languages/objective-c/
 
 rvm:
- - 2.6.3
- 
+ - 2.5.3
+
 osx_image: xcode10.2
 language: swift
 
