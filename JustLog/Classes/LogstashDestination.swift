@@ -89,9 +89,11 @@ public class LogstashDestination: BaseDestination  {
     }
     
     func addLog(_ dict: [String: Any]) {
-        let time = mach_absolute_time()
-        let logTag = Int(truncatingIfNeeded: time)
-        logsToShip[logTag] = dict
+        logDispatchQueue.addOperation {
+            let time = mach_absolute_time()
+            let logTag = Int(truncatingIfNeeded: time)
+            self.logsToShip[logTag] = dict
+        }
     }
     
     func dataToShip(_ dict: [String: Any]) -> Data {
