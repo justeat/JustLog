@@ -65,7 +65,7 @@ class AsyncSocketManager: NSObject {
         
         //If we have cert provided then lets send it
         if let certPath = self.sslCertificatePath {
-            settings[kCFStreamSSLCertificates] = loadCertificats(tlsCertFilePath: certPath)
+            settings[kCFStreamSSLCertificates] = loadCertificates(tlsCertFilePath: certPath)
         }
         
         //If we have a peer name provided then lets send it
