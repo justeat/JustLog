@@ -44,6 +44,8 @@ public final class Logger: NSObject {
     public var logstashTimeout: TimeInterval = 20
     public var logLogstashSocketActivity: Bool = false
     public var logzioToken: String?
+    public var logstashSSLCertFilePath: String?
+    public var logstashSSLPeerName: String?
 
     /**
      Default to `false`, if `true` untrusted certificates (as self-signed are) will be trusted
@@ -57,6 +59,8 @@ public final class Logger: NSObject {
     public var enableLogstashLogging: Bool = true
     public var baseUrlForFileLogging = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
     public let internalLogger = SwiftyBeaver.self
+    
+    private var dispatchInterval: TimeInterval = 5.0
     private var dispatchTimer: Timer?
     
     // destinations
@@ -92,23 +96,26 @@ public final class Logger: NSObject {
         
         // logstash
         if enableLogstashLogging {
-            logstash = LogstashDestination(host: logstashHost, port: logstashPort, timeout: logstashTimeout, logActivity: logLogstashSocketActivity, allowUntrustedServer: allowUntrustedServer)
+            logstash = LogstashDestination(host: logstashHost, port: logstashPort, timeout: logstashTimeout, logActivity: logLogstashSocketActivity, allowUntrustedServer: allowUntrustedServer, sslCertificatePath: logstashSSLCertFilePath, sslPeerName: logstashSSLPeerName)
             logstash.logzioToken = logzioToken
             internalLogger.addDestination(logstash)
+            
+            dispatchTimer = Timer.scheduledTimer(withTimeInterval: dispatchInterval, repeats: true) { [weak self] timer in
+                guard let self = self else { return }
+                self.forceSend()
+            }
         }
-        
-        dispatchTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(scheduledForceSend(_:)), userInfo: nil, repeats: true)
     }
     
     public func forceSend(_ completionHandler: @escaping (_ error: Error?) -> Void = {_ in }) {
         if enableLogstashLogging {
-            logstash.forceSend(completionHandler)
+            logstash?.forceSend(completionHandler)
         }
     }
     
     public func cancelSending() {
         if enableLogstashLogging {
-            logstash.cancelSending()
+            logstash?.cancelSending()
         }
     }
 }
@@ -231,9 +238,4 @@ extension Logger {
         errorInfo[userInfoConst] = errorUserInfo
         return errorInfo
     }
-    
-    @objc fileprivate func scheduledForceSend(_ timer: Timer) {
-        forceSend()
-    }
-    
 }

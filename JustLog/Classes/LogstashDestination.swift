@@ -21,17 +21,20 @@ public class LogstashDestination: BaseDestination  {
     var logActivity: Bool = false
     let logDispatchQueue = OperationQueue()
     var socketManager: AsyncSocketManager!
+    var allowUntrustedServer: Bool = false
     
     @available(*, unavailable)
     override init() {
         fatalError()
     }
     
-    public required init(host: String, port: UInt16, timeout: TimeInterval, logActivity: Bool, allowUntrustedServer: Bool = false) {
+    public required init(host: String, port: UInt16, timeout: TimeInterval, logActivity: Bool, allowUntrustedServer: Bool = false, sslCertificatePath: String?, sslPeerName: String?) {
         super.init()
         self.logActivity = logActivity
         self.logDispatchQueue.maxConcurrentOperationCount = 1
-        self.socketManager = AsyncSocketManager(host: host, port: port, timeout: timeout, delegate: self, logActivity: logActivity, allowUntrustedServer: allowUntrustedServer)
+        self.allowUntrustedServer = allowUntrustedServer
+        
+        self.socketManager = AsyncSocketManager(host: host, port: port, timeout: timeout, delegate: self, logActivity: logActivity, allowUntrustedServer: self.allowUntrustedServer, sslCertificatePath: sslCertificatePath, sslPeerName: sslPeerName)
     }
     
     deinit {
@@ -116,6 +119,10 @@ public class LogstashDestination: BaseDestination  {
 // MARK: - GCDAsyncSocketManager Delegate
 
 extension LogstashDestination: AsyncSocketManagerDelegate {
+    func socket(_ socket: GCDAsyncSocket, didReceiveTrust: SecTrust, completionHandler: @escaping (Bool) -> Void) {
+        completionHandler(self.allowUntrustedServer)
+    }
+    
     
     func socket(_ socket: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
         logDispatchQueue.addOperation {
