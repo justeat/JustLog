@@ -2,12 +2,14 @@
 
 # JustLog
 
-[![Build Status](https://www.bitrise.io/app/cd3b5cb7da89003d.svg?token=gDRpYMHJJg_QMKMZ6Jv7xw&branch=master)](https://www.bitrise.io/app/cd3b5cb7da89003d)
+[![Build Status](https://travis-ci.org/justeat/JustLog.svg?branch=master)](https://travis-ci.org/justeat/JustLog)
 [![Version](https://img.shields.io/cocoapods/v/JustLog.svg?style=flat)](http://cocoapods.org/pods/JustLog)
 [![License](https://img.shields.io/cocoapods/l/JustLog.svg?style=flat)](http://cocoapods.org/pods/JustLog)
 [![Platform](https://img.shields.io/cocoapods/p/JustLog.svg?style=flat)](http://cocoapods.org/pods/JustLog)
 
 JustLog takes logging on iOS to the next level. It supports console, file and remote Logstash logging via TCP socket with no effort. Support for logz.io available.
+
+- [Just Eat Tech blog](https://tech.just-eat.com/2017/01/18/a-better-local-and-remote-logging-on-ios-with-justlog/)
 
 # Overview
 
@@ -242,16 +244,16 @@ func applicationWillTerminate(_ application: UIApplication) {
 
 private func forceSendLogs(_ application: UIApplication) {
 
-  var identifier: UIBackgroundTaskIdentifier = 0
+  var identifier = UIBackgroundTaskIdentifier(rawValue: 0)
 
   identifier = application.beginBackgroundTask(expirationHandler: {
     application.endBackgroundTask(identifier)
-    identifier = UIBackgroundTaskInvalid
+    identifier = UIBackgroundTaskIdentifier.invalid
   })
 
   Logger.shared.forceSend { completionHandler in
     application.endBackgroundTask(identifier)
-    identifier = UIBackgroundTaskInvalid
+    identifier = UIBackgroundTaskIdentifier.invalid
   }
 }
 ```

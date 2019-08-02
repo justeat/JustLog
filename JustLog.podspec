@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JustLog'
-  s.version          = '2.4.1'
+  s.version          = '3.0.0'
   s.summary          = 'JustLog brings logging on iOS to the next level. It supports console, file and remote Logstash logging via TCP socket with no effort.'
 
   s.description      = "<<-DESC
@@ -17,18 +17,18 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/justeat/JustLog'
   s.license          = { :type => 'Apache 2.0', :file => 'LICENSE' }
-  s.authors          = { 'Just Eat iOS team' => 'justeat.ios.team@gmail.com', 'Alberto De Bortoli' => 'alberto.debortoli@just-eat.com', 'Shabeer Hussain' => 'shabeer.hussain@just-eat.com', 'Andre Jacobs' => 'andre.jacobs@just-eat.com' }
+  s.authors          = { 'Alberto De Bortoli' => 'alberto.debortoli@just-eat.com', 'Shabeer Hussain' => 'shabeer.hussain@just-eat.com', 'Andre Jacobs' => 'andre.jacobs@just-eat.com' }
   s.source           = { :git => 'https://github.com/justeat/JustLog.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/justeat_tech'
   
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
   s.tvos.deployment_target = '10.0'
-  s.swift_version = '4.0'
+  s.swift_version = '5.0'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   
   s.source_files = 'JustLog/Classes/**/*', 'JustLog/Extensions/**/*'
 
-  s.dependency 'SwiftyBeaver', '~> 1.5.2'
+  s.dependency 'SwiftyBeaver', '~> 1.7.0'
   s.dependency 'CocoaAsyncSocket', '~> 7.6.3'
 
 end
