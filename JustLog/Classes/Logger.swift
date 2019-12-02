@@ -44,6 +44,8 @@ public final class Logger: NSObject {
     public var logstashTimeout: TimeInterval = 20
     public var logLogstashSocketActivity: Bool = false
     public var logzioToken: String?
+    public var logstashSSLCertFilePath: String?
+    public var logstashSSLPeerName: String?
 
     /**
      Default to `false`, if `true` untrusted certificates (as self-signed are) will be trusted
@@ -94,7 +96,7 @@ public final class Logger: NSObject {
         
         // logstash
         if enableLogstashLogging {
-            logstash = LogstashDestination(host: logstashHost, port: logstashPort, timeout: logstashTimeout, logActivity: logLogstashSocketActivity, allowUntrustedServer: allowUntrustedServer)
+            logstash = LogstashDestination(host: logstashHost, port: logstashPort, timeout: logstashTimeout, logActivity: logLogstashSocketActivity, allowUntrustedServer: allowUntrustedServer, sslCertificatePath: logstashSSLCertFilePath, sslPeerName: logstashSSLPeerName)
             logstash.logzioToken = logzioToken
             internalLogger.addDestination(logstash)
             
