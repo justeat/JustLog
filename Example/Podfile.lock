@@ -1,15 +1,15 @@
 PODS:
   - CocoaAsyncSocket (7.6.3)
-  - JustLog (2.6.0):
+  - JustLog (3.0.4):
     - CocoaAsyncSocket (~> 7.6.3)
-    - SwiftyBeaver (~> 1.7.0)
-  - SwiftyBeaver (1.7.0)
+    - SwiftyBeaver (~> 1.8.3)
+  - SwiftyBeaver (1.8.3)
 
 DEPENDENCIES:
   - JustLog (from `../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - CocoaAsyncSocket
     - SwiftyBeaver
 
@@ -19,9 +19,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
-  JustLog: a594a4d487e1a1af4ef1b0587aa03d6683ec929c
-  SwiftyBeaver: 4cc0080d2e23f980652e28978db11a5c9da39165
+  JustLog: da4a50ef1c3de5937a008e1a222a51da1a953547
+  SwiftyBeaver: 3d3e93a12d648bd400b6f2948a7ef128b5b183c7
 
 PODFILE CHECKSUM: 0682bc8f039b3897a7cc797e15668481c16d38a1
 
-COCOAPODS: 1.6.2
+COCOAPODS: 1.8.4

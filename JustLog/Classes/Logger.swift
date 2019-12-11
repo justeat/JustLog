@@ -58,8 +58,8 @@ public final class Logger: NSObject {
     public var baseUrlForFileLogging = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
     public let internalLogger = SwiftyBeaver.self
     
-    private var dispatchInterval: TimeInterval = 5.0
-    private var dispatchTimer: Timer?
+    private var dispatchInterval: Int = 5
+    private var dispatchTimer: DispatchSourceTimer?
     
     // destinations
     public var console: ConsoleDestination!
@@ -67,7 +67,7 @@ public final class Logger: NSObject {
     public var file: FileDestination!
     
     deinit {
-        dispatchTimer?.invalidate()
+        dispatchTimer?.cancel()
         dispatchTimer = nil
     }
     
@@ -98,10 +98,20 @@ public final class Logger: NSObject {
             logstash.logzioToken = logzioToken
             internalLogger.addDestination(logstash)
             
-            dispatchTimer = Timer.scheduledTimer(withTimeInterval: dispatchInterval, repeats: true) { [weak self] timer in
+            dispatchTimer = DispatchSource.makeTimerSource(flags: [], queue: .main)
+            dispatchTimer?.setEventHandler(handler: { [weak self] in
                 guard let self = self else { return }
                 self.forceSend()
-            }
+            })
+            dispatchTimer?.setCancelHandler(handler: { [weak self] in
+                guard let self = self else { return }
+                self.cancelSending()
+            })
+            let dispatchTimeInterval = DispatchTimeInterval.seconds(dispatchInterval)
+            dispatchTimer?.schedule(deadline: DispatchTime.now(),
+                                    repeating: dispatchTimeInterval,
+                                    leeway: dispatchTimeInterval)
+            dispatchTimer?.activate()
         }
     }
     
