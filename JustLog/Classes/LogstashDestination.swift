@@ -60,6 +60,7 @@ public class LogstashDestination: BaseDestination  {
     }
 
     public func forceSend(_ completionHandler: @escaping (_ error: Error?) -> Void  = {_ in }) {
+        self.logDispatchQueue.waitUntilAllOperationsAreFinished()
         
         if self.logsToShip.count == 0 || self.socketManager.isConnected() {
             completionHandler(nil)
