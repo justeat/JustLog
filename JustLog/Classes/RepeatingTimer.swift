@@ -5,6 +5,7 @@
 //  Created by Junaid Younus on 08/06/2020.
 //  Copyright © 2020 Just Eat. All rights reserved.
 //
+//  https://medium.com/over-engineering/a-background-repeating-timer-in-swift-412cecfd2ef9 
 
 import Foundation
 
