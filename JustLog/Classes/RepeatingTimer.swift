@@ -36,7 +36,7 @@ internal class RepeatingTimer {
 
     private enum State {
         case suspended
-        case resumed
+        case running
     }
 
     private var state: State = .suspended
@@ -48,13 +48,13 @@ internal class RepeatingTimer {
          If the timer is suspended, calling cancel without resuming
          triggers a crash. This is documented here https://forums.developer.apple.com/thread/15902
          */
-        resume()
+        run()
         eventHandler = nil
     }
 
-    func resume() {
-        guard state != .resumed else { return }
-        state = .resumed
+    func run() {
+        guard state != .running else { return }
+        state = .running
         timer.resume()
     }
 

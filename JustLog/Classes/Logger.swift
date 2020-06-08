@@ -109,7 +109,7 @@ public final class Logger: NSObject {
                 self.cancelSending()
             }
             
-            timer?.resume()
+            timer?.run()
         }
     }
     
