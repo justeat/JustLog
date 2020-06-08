@@ -41,6 +41,8 @@
 		A6028123206555D000348BCE /* UIDevice+Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6028113206555D000348BCE /* UIDevice+Info.swift */; };
 		A60281282065560F00348BCE /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60281262065560F00348BCE /* CocoaAsyncSocket.framework */; };
 		A60281292065560F00348BCE /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60281272065560F00348BCE /* SwiftyBeaver.framework */; };
+		ADF64E12248E3F4A0097C92F /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF64E11248E3F4A0097C92F /* RepeatingTimer.swift */; };
+		ADF64E13248E3F4A0097C92F /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF64E11248E3F4A0097C92F /* RepeatingTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,7 @@
 		A6028113206555D000348BCE /* UIDevice+Info.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Info.swift"; sourceTree = "<group>"; };
 		A60281262065560F00348BCE /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 		A60281272065560F00348BCE /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = Carthage/Build/iOS/SwiftyBeaver.framework; sourceTree = "<group>"; };
+		ADF64E11248E3F4A0097C92F /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +136,7 @@
 				A6028108206555D000348BCE /* Logger.swift */,
 				A6028109206555D000348BCE /* Logging.swift */,
 				A602810A206555D000348BCE /* LogstashDestination.swift */,
+				ADF64E11248E3F4A0097C92F /* RepeatingTimer.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -292,6 +296,7 @@
 				4D2F04F920DD2FF9004286A7 /* NSError+UnderlyingErrors.swift in Sources */,
 				4D2F04FA20DD2FF9004286A7 /* String+Conversion.swift in Sources */,
 				4D2F04FB20DD2FF9004286A7 /* ConsoleDestination.swift in Sources */,
+				ADF64E13248E3F4A0097C92F /* RepeatingTimer.swift in Sources */,
 				4D2F04FC20DD2FF9004286A7 /* Logging.swift in Sources */,
 				4D2F04FD20DD2FF9004286A7 /* FileDestination.swift in Sources */,
 				4D2F04FE20DD2FF9004286A7 /* Dictionary+Flattening.swift in Sources */,
@@ -313,6 +318,7 @@
 				A6028121206555D000348BCE /* NSError+UnderlyingErrors.swift in Sources */,
 				A6028122206555D000348BCE /* String+Conversion.swift in Sources */,
 				A6028117206555D000348BCE /* ConsoleDestination.swift in Sources */,
+				ADF64E12248E3F4A0097C92F /* RepeatingTimer.swift in Sources */,
 				A602811A206555D000348BCE /* Logging.swift in Sources */,
 				A6028118206555D000348BCE /* FileDestination.swift in Sources */,
 				A602811D206555D000348BCE /* Dictionary+Flattening.swift in Sources */,
