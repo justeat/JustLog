@@ -8,7 +8,34 @@
 
 import Foundation
 import SwiftyBeaver
-import CocoaAsyncSocket
+
+private class LogstashDestinationURLSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionStreamDelegate {
+    let host: String
+    let logActivity: Bool
+    
+    init(host: String, logActivity: Bool) {
+        self.host = host
+        self.logActivity = logActivity
+        super.init()
+    }
+    
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        if logActivity {
+            print("🔌 <AsyncSocket>, did receive \(challenge.protectionSpace.authenticationMethod) challenge")
+        }
+        if
+            challenge.protectionSpace.host == self.host,
+            let trust = challenge.protectionSpace.serverTrust {
+            let credential = URLCredential(trust: trust)
+            completionHandler(.useCredential, credential)
+        } else {
+            if logActivity {
+                print("🔌 <AsyncSocket>, Could not startTLS: invalid trust")
+            }
+            completionHandler(.cancelAuthenticationChallenge, nil)
+        }
+    }
+}
 
 public class LogstashDestination: BaseDestination  {
     
@@ -20,7 +47,14 @@ public class LogstashDestination: BaseDestination  {
     
     var logActivity: Bool = false
     let logDispatchQueue = OperationQueue()
-    var socketManager: AsyncSocketManager!
+    let localSocketQueue = OperationQueue()
+    let session: URLSession
+    fileprivate let sessionDelegate: LogstashDestinationURLSessionDelegate
+    
+    let allowUntrustedServer: Bool
+    let host: String
+    let port: Int
+    let timeout: TimeInterval
     
     @available(*, unavailable)
     override init() {
@@ -28,10 +62,18 @@ public class LogstashDestination: BaseDestination  {
     }
     
     public required init(host: String, port: UInt16, timeout: TimeInterval, logActivity: Bool, allowUntrustedServer: Bool = false) {
+        
+        self.allowUntrustedServer = allowUntrustedServer
+        self.host = host
+        self.port = Int(port)
+        self.timeout = timeout
+        self.sessionDelegate = LogstashDestinationURLSessionDelegate(host: host, logActivity: logActivity)
+        self.session = URLSession(configuration: .ephemeral,
+                                  delegate: sessionDelegate,
+                                  delegateQueue: localSocketQueue)
         super.init()
         self.logActivity = logActivity
         self.logDispatchQueue.maxConcurrentOperationCount = 1
-        self.socketManager = AsyncSocketManager(host: host, port: port, timeout: timeout, delegate: self, logActivity: logActivity, allowUntrustedServer: allowUntrustedServer)
     }
     
     deinit {
@@ -39,8 +81,7 @@ public class LogstashDestination: BaseDestination  {
     }
     
     public func cancelSending() {
-        self.logDispatchQueue.cancelAllOperations()
-        self.socketManager.disconnect()
+        self.session.invalidateAndCancel()
     }
     
     // MARK: - Log dispatching
@@ -60,31 +101,47 @@ public class LogstashDestination: BaseDestination  {
     }
 
     public func forceSend(_ completionHandler: @escaping (_ error: Error?) -> Void  = {_ in }) {
-        
-        if self.logsToShip.count == 0 || self.socketManager.isConnected() {
-            completionHandler(nil)
-            return
-        }
-
-        self.completionHandler = completionHandler
-        
-        logDispatchQueue.addOperation { [weak self] in
-            self?.socketManager.send()
-        }
+        writeLogs()
     }
     
     func writeLogs() {
         
         self.logDispatchQueue.addOperation{ [weak self] in
             
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             
             for log in self.logsToShip.sorted(by: { $0.0 < $1.0 }) {
+                let tag = log.0
                 let logData = self.dataToShip(log.1)
-                self.socketManager.write(logData, withTimeout: self.socketManager.timeout, tag: log.0)
+                let task = self.session.streamTask(withHostName: self.host, port: self.port)
+                if !self.allowUntrustedServer {
+                    task.startSecureConnection()
+                }
+                task.write(logData, timeout: self.timeout) { (error) in
+                    if let error = error {
+                        if self.logActivity {
+                            print("🔌 <AsyncSocket>, did error: \(error.localizedDescription)")
+                        }
+                        if let completionHandler = self.completionHandler {
+                            completionHandler(error)
+                        }
+                    } else {
+                        if self.logActivity {
+                            print("🔌 <AsyncSocket>, did write")
+                        }
+                        self.logDispatchQueue.addOperation { [weak self, tag] in
+                            guard let self = self else { return }
+                            self.logsToShip[tag] = nil
+                        }
+                        if let completionHandler = self.completionHandler {
+                            completionHandler(nil)
+                        }
+                    }
+                    
+                    self.completionHandler = nil
+                }
+                task.resume()
             }
-            
-            self.socketManager.disconnectSafely()
         }
     }
     
@@ -93,6 +150,7 @@ public class LogstashDestination: BaseDestination  {
             let time = mach_absolute_time()
             let logTag = Int(truncatingIfNeeded: time)
             self?.logsToShip[logTag] = dict
+            self?.writeLogs()
         }
     }
     
@@ -114,34 +172,3 @@ public class LogstashDestination: BaseDestination  {
     }
     
 }
-
-// MARK: - GCDAsyncSocketManager Delegate
-
-extension LogstashDestination: AsyncSocketManagerDelegate {
-    
-    func socket(_ socket: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
-        logDispatchQueue.addOperation { [weak self, tag] in
-            self?.logsToShip[tag] = nil
-        }
-        
-        if let completionHandler = self.completionHandler {
-            completionHandler(nil)
-        }
-        
-        completionHandler = nil
-    }
-    
-    func socketDidSecure(_ socket: GCDAsyncSocket) {
-        self.writeLogs()
-    }
-    
-    func socket(_ socket: GCDAsyncSocket, didDisconnectWithError error: Error?) {
-        
-        if let completionHandler = self.completionHandler {
-            completionHandler(error)
-        }
-        
-        completionHandler = nil
-    }
-}
-
