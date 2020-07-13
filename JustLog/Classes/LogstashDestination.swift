@@ -9,34 +9,6 @@
 import Foundation
 import SwiftyBeaver
 
-private class LogstashDestinationURLSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionStreamDelegate {
-    let host: String
-    let logActivity: Bool
-    
-    init(host: String, logActivity: Bool) {
-        self.host = host
-        self.logActivity = logActivity
-        super.init()
-    }
-    
-    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-        if logActivity {
-            print("🔌 <LogstashDestination>, did receive \(challenge.protectionSpace.authenticationMethod) challenge")
-        }
-        if
-            challenge.protectionSpace.host == self.host,
-            let trust = challenge.protectionSpace.serverTrust {
-            let credential = URLCredential(trust: trust)
-            completionHandler(.useCredential, credential)
-        } else {
-            if logActivity {
-                print("🔌 <LogstashDestination>, Could not startTLS: invalid trust")
-            }
-            completionHandler(.cancelAuthenticationChallenge, nil)
-        }
-    }
-}
-
 /// This entire class relies on `logDispatchQueue` to synchronise access to the `logsToShip` dictionary
 /// Every action is put in the `logDispatchQueue` which is synchronous, even though the actual sending
 /// via `URLSession` is not.
@@ -50,10 +22,6 @@ private class LogstashDestinationURLSessionDelegate: NSObject, URLSessionDelegat
 public class LogstashDestination: BaseDestination  {
     
     /// Settings
-    let allowUntrustedServer: Bool
-    let host: String
-    let port: Int
-    let timeout: TimeInterval
     var logActivity: Bool = false
     public var logzioToken: String?
     
@@ -66,9 +34,7 @@ public class LogstashDestination: BaseDestination  {
     private let logzioTokenKey = "token"
     
     /// Socket
-    private let localSocketQueue = OperationQueue()
-    private var session: URLSession
-    private let sessionDelegate: LogstashDestinationURLSessionDelegate
+    private let socket: LogstashDestinationSocketProtocol
     private var logsInSocketQueue = [Int]()
     
     @available(*, unavailable)
@@ -76,16 +42,9 @@ public class LogstashDestination: BaseDestination  {
         fatalError()
     }
     
-    public required init(host: String, port: UInt16, timeout: TimeInterval, logActivity: Bool, allowUntrustedServer: Bool = false) {
+    public required init(socket: LogstashDestinationSocketProtocol, logActivity: Bool) {
         
-        self.allowUntrustedServer = allowUntrustedServer
-        self.host = host
-        self.port = Int(port)
-        self.timeout = timeout
-        self.sessionDelegate = LogstashDestinationURLSessionDelegate(host: host, logActivity: logActivity)
-        self.session = URLSession(configuration: .ephemeral,
-                                  delegate: sessionDelegate,
-                                  delegateQueue: localSocketQueue)
+        self.socket = socket
         super.init()
         self.logActivity = logActivity
         self.logDispatchQueue.maxConcurrentOperationCount = 1
@@ -97,11 +56,9 @@ public class LogstashDestination: BaseDestination  {
     
     public func cancelSending() {
         self.logDispatchQueue.cancelAllOperations()
+        self.logsToShip = [Int : [String : Any]]()
         self.logsInSocketQueue = [Int]()
-        self.session.invalidateAndCancel()
-        self.session = URLSession(configuration: .ephemeral,
-                                  delegate: sessionDelegate,
-                                  delegateQueue: localSocketQueue)
+        self.socket.cancel()
     }
     
     // MARK: - Log dispatching
@@ -143,31 +100,23 @@ public class LogstashDestination: BaseDestination  {
                 }
                 return
             }
-            let task = self.session.streamTask(withHostName: self.host, port: self.port)
-            if !self.allowUntrustedServer {
-                task.startSecureConnection()
-            }
-            for log in unprocessedLogs.sorted(by: { $0.0 < $1.0 }) {
-                let tag = log.0
-                let logData = self.dataToShip(log.1)
-                task.write(logData, timeout: self.timeout) { (error) in
-                    if let error = error {
-                        if self.logActivity {
-                            print("🔌 <LogstashDestination>, \(tag) did error: \(error.localizedDescription)")
-                        }
-                        self.retryLog(withTag: tag)
-                        self.callCompleteHandlerIfRequired(optionalError: error)
-                    } else {
-                        if self.logActivity {
-                            print("🔌 <LogstashDestination>, did write \(tag)")
-                        }
-                        self.completeLog(withTag:tag)
-                        self.callCompleteHandlerIfRequired()
+            self.socket.sendLogs(unprocessedLogs,
+                                 transform: self.dataToShip,
+                                 enqueued: { self.logsInSocketQueue.append($0) }) { (tag, error) in
+                if let error = error {
+                    if self.logActivity {
+                        print("🔌 <LogstashDestination>, \(tag) did error: \(error.localizedDescription)")
                     }
+                    self.retryLog(withTag: tag)
+                    self.callCompleteHandlerIfRequired(optionalError: error)
+                } else {
+                    if self.logActivity {
+                        print("🔌 <LogstashDestination>, did write \(tag)")
+                    }
+                    self.completeLog(withTag:tag)
+                    self.callCompleteHandlerIfRequired()
                 }
-                self.logsInSocketQueue.append(tag)
             }
-            task.resume()
         }
     }
     

@@ -94,7 +94,12 @@ public final class Logger: NSObject {
         
         // logstash
         if enableLogstashLogging {
-            logstash = LogstashDestination(host: logstashHost, port: logstashPort, timeout: logstashTimeout, logActivity: logLogstashSocketActivity, allowUntrustedServer: allowUntrustedServer)
+            let socket = LogstashDestinationSocket(host: logstashHost,
+                                                   port: logstashPort,
+                                                   timeout: logstashTimeout,
+                                                   logActivity: logLogstashSocketActivity,
+                                                   allowUntrustedServer: allowUntrustedServer)
+            logstash = LogstashDestination(socket: socket, logActivity: logLogstashSocketActivity)
             logstash.logzioToken = logzioToken
             internalLogger.addDestination(logstash)
             
