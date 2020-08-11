@@ -11,14 +11,6 @@ import XCTest
 
 class LogstashDestinationTests: XCTestCase {
 
-    override func setUpWithError() throws {
-
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testBasicLogging() throws {
         let expect = expectation(description: "Send log expectation")
         let mockSocket = MockLogstashDestinationSocket(host: "", port: 0, timeout: 5, logActivity: true, allowUntrustedServer: true)
