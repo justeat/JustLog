@@ -85,7 +85,6 @@ class LogstashDestinationTests: XCTestCase {
         destination.forceSend()
         self.waitForExpectations(timeout: 10.0, handler: nil)
     }
-
 }
 
 enum LogstashDestinationTestError: Error {
@@ -119,6 +118,4 @@ class MockLogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol
             }
         }
     }
-    
-    
 }

@@ -26,8 +26,8 @@ public class LogstashDestination: BaseDestination  {
     public var logzioToken: String?
     
     /// Logs buffer
-    var logsToShip = [Int : [String : Any]]()
-    let logDispatchQueue = OperationQueue()
+    private var logsToShip = [Int : [String : Any]]()
+    private let logDispatchQueue: OperationQueue
     
     /// Private
     private var completionHandler: ((_ error: Error?) -> Void)?
@@ -43,11 +43,11 @@ public class LogstashDestination: BaseDestination  {
     }
     
     public required init(socket: LogstashDestinationSocketProtocol, logActivity: Bool) {
-        
+        self.logDispatchQueue = OperationQueue()
+        self.logDispatchQueue.maxConcurrentOperationCount = 1
         self.socket = socket
         super.init()
         self.logActivity = logActivity
-        self.logDispatchQueue.maxConcurrentOperationCount = 1
     }
     
     deinit {
@@ -56,7 +56,10 @@ public class LogstashDestination: BaseDestination  {
     
     public func cancelSending() {
         self.logDispatchQueue.cancelAllOperations()
-        self.logsToShip = [Int : [String : Any]]()
+        self.logDispatchQueue.addOperation { [weak self] in
+            guard let self = self else { return }
+            self.logsToShip = [Int : [String : Any]]()
+        }
         self.logsInSocketQueue = [Int]()
         self.socket.cancel()
     }
@@ -90,13 +93,13 @@ public class LogstashDestination: BaseDestination  {
             
             guard let self = self else { return }
             
-            let logsInQueue = self.logsInSocketQueue
+            let pendingLogs = Set(self.logsInSocketQueue)
             let unprocessedLogs = self.logsToShip.filter({ (tag: Int, _) -> Bool in
-                !logsInQueue.contains(where: { $0 == tag })
+                !pendingLogs.contains(where: { $0 == tag })
             })
-            guard unprocessedLogs.count > 0 else {
+            guard !unprocessedLogs.isEmpty else {
                 if self.logActivity {
-                    print("writeLogs() - nothing to write, \(logsInQueue.count) in URLSession queue")
+                    print("writeLogs() - nothing to write, \(pendingLogs.count) in URLSession queue")
                 }
                 return
             }
@@ -149,7 +152,7 @@ public class LogstashDestination: BaseDestination  {
         
         self.logDispatchQueue.addOperation{ [weak self] in
             guard let self = self else { return }
-            assert(self.logsInSocketQueue.count > 0, "Completed a session without any tasks scheduled!")
+            assert(!self.logsInSocketQueue.isEmpty, "Completed a session without any tasks scheduled!")
             
             // get the tag for this task & remove from queue
             if self.logsInSocketQueue.contains(tag) {
@@ -188,7 +191,7 @@ public class LogstashDestination: BaseDestination  {
         self.logDispatchQueue.addOperation { [weak self] in
             guard let self = self else { return }
             
-            if self.logsInSocketQueue.count <= 0 {
+            if self.logsInSocketQueue.isEmpty {
                 if let completionHandler = self.completionHandler {
                     if self.logActivity {
                         print("🔌 <LogstashDestination>, calling completion handler")
@@ -199,5 +202,4 @@ public class LogstashDestination: BaseDestination  {
             }
         }
     }
-    
 }
