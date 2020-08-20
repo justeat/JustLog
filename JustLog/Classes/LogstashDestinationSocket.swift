@@ -71,7 +71,6 @@ class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
             if let enqueued = enqueued {
                 enqueued(tag)
             }
-            
         }
         task.resume()
     }
