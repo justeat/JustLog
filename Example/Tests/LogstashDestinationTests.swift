@@ -3,7 +3,7 @@
 //  JustLog_Tests
 //
 //  Created by Antonio Strijdom on 13/07/2020.
-//  Copyright © 2020 CocoaPods. All rights reserved.
+//  Copyright © 2020 Just Eat. All rights reserved.
 //
 
 import XCTest

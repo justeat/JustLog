@@ -3,6 +3,7 @@
 //  JustLog
 //
 //  Created by Antonio Strijdom on 29/06/2020.
+//  Copyright © 2020 Just Eat. All rights reserved.
 //
 
 import Foundation
