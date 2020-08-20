@@ -58,5 +58,8 @@ class ViewController: UIViewController {
         Logger.shared.forceSend()
     }
 
+    @IBAction func cancel(_ sender: Any) {
+        Logger.shared.cancelSending()
+    }
 }
 
