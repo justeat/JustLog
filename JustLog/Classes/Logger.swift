@@ -75,6 +75,8 @@ public final class Logger: NSObject {
         
         let format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $T $C$L$c: $M"
         
+        internalLogger.removeAllDestinations()
+        
         // console
         if enableConsoleLogging {
             console = JustLog.ConsoleDestination()
