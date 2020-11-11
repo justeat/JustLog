@@ -19,7 +19,7 @@ In the mobile world, the common approach to investigating issues is gathering lo
 
 We believe tracking is different in nature from logging and that mobile apps should take advantage of ELK too in order to take their monitoring and analysis to another level. Remote logging the right set of information could provide valuable information that would be difficult to gather otherwise, unveil unexpected behaviours and bugs, and even if the data was properly anonymized, identify the sequences of actions of singular users.
 
-JustLog takes logging on iOS to the next level. It supports console, file and remote Logstash logging via TCP socket out of the box. You can also setup JustLog to use [logz.io](http://logz.io) with no effort. JustLog relies on [CocoaAsyncSocket](https://github.com/robbiehanson/CocoaAsyncSocket) and [SwiftyBeaver](https://github.com/SwiftyBeaver/SwiftyBeaver), exposes a simple swifty API but it also plays just fine with Objective-C.
+JustLog takes logging on iOS to the next level. It supports console, file and remote Logstash logging via TCP socket out of the box. You can also setup JustLog to use [logz.io](http://logz.io) with no effort. JustLog relies on [SwiftyBeaver](https://github.com/SwiftyBeaver/SwiftyBeaver), exposes a simple swifty API but it also plays just fine with Objective-C.
 
 JustLog sets the focus on remote logging, but fully covers the basic needs of local console and file logging.
 
