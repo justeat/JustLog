@@ -7,8 +7,7 @@ let package = Package(
     platforms: [
         .iOS(.v10),
         .watchOS(.v3),
-        .tvOS(.v10),
-        .macOS(.v10_12)
+        .tvOS(.v10)
     ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
@@ -28,9 +27,7 @@ let package = Package(
         .target(
             name: "JustLog",
             dependencies: ["SwiftyBeaver"],
-                path: "JustLog/"),
-        .testTarget(
-            name: "JustLogTests",
-            dependencies: ["JustLog"]),
+                path: "JustLog/",
+        exclude: ["JustLog/Supporting Files/Info.plist", "JustLog/Supporting Files/JustLog.h"]),
     ]
 )
