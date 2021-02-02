@@ -55,6 +55,7 @@ public final class Logger: NSObject {
     public var enableConsoleLogging: Bool = true
     public var enableFileLogging: Bool = true
     public var enableLogstashLogging: Bool = true
+    public var enableCustomLogging: Bool = true
     public var baseUrlForFileLogging = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
     public let internalLogger = SwiftyBeaver.self
     
@@ -65,13 +66,17 @@ public final class Logger: NSObject {
     public var console: ConsoleDestination!
     public var logstash: LogstashDestination!
     public var file: FileDestination!
-    
+    public var custom: CustomDestination?
     deinit {
         timer?.suspend()
         timer = nil
     }
     
     public func setup() {
+        setupWithCustomLogSender()
+    }
+    
+    public func setupWithCustomLogSender(_ customLogSender: CustomDestinationSender? = nil) {
         
         let format = "$Dyyyy-MM-dd HH:mm:ss.SSS$d $T $C$L$c: $M"
         
@@ -117,6 +122,15 @@ public final class Logger: NSObject {
             }
             
             timer?.run()
+        }
+        
+        // custom logging
+        if enableCustomLogging, let customLogSender = customLogSender {
+            let customDestination = CustomDestination(sender: customLogSender)
+            // always send all logs to custom destination
+            customDestination.minLevel = .verbose
+            internalLogger.addDestination(customDestination)
+            self.custom = customDestination
         }
     }
     
