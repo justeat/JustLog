@@ -219,7 +219,7 @@ extension Logger {
                 .map { errorDictionary(for: $0) }
                 .filter {
                     guard JSONSerialization.isValidJSONObject($0) else {
-                        self.warning("Object { \($0) } is filted out from the log", userInfo: ["Module": "JustLog"])
+                        self.warning("Object { \($0) } is filtered out from the log", userInfo: ["Module": "JustLog"])
                         return false
                     }
                     return true
