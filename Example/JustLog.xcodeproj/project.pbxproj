@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1485DA6725C9531700B937BB /* CustomDestinationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1485DA6625C9531700B937BB /* CustomDestinationTests.swift */; };
 		149CC16724BC5679009CC32C /* LogstashDestinationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149CC16624BC5679009CC32C /* LogstashDestinationTests.swift */; };
 		1538E753D83D5441A7F3052E /* Pods_JustLog_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B779DCB16EBC83342A6D171D /* Pods_JustLog_Example.framework */; };
 		4F5519E21E02F0D9009A8F68 /* Dictionary_FlatteningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5519DE1E02F0D7009A8F68 /* Dictionary_FlatteningTests.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1485DA6625C9531700B937BB /* CustomDestinationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDestinationTests.swift; sourceTree = "<group>"; };
 		149CC16624BC5679009CC32C /* LogstashDestinationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogstashDestinationTests.swift; sourceTree = "<group>"; };
 		4F5519DE1E02F0D7009A8F68 /* Dictionary_FlatteningTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary_FlatteningTests.swift; sourceTree = "<group>"; };
 		4F5519DF1E02F0D7009A8F68 /* NSError_ReadabilityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSError_ReadabilityTests.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				1485DA6625C9531700B937BB /* CustomDestinationTests.swift */,
 				4F5519DE1E02F0D7009A8F68 /* Dictionary_FlatteningTests.swift */,
 				4FD9AF4F1E12EE5B00EAF51B /* Dictionary_JSONTests.swift */,
 				4F5519E81E0313F4009A8F68 /* Data_RepresentationTests.swift */,
@@ -362,6 +365,7 @@
 				4FD9AF511E12EE5F00EAF51B /* Dictionary_JSONTests.swift in Sources */,
 				CB39F5BC1F4F2420009E5F68 /* LoggerTests.swift in Sources */,
 				CB9EA83A1F4C68AB002D3EF5 /* NSError_UnderlyingError_tests.swift in Sources */,
+				1485DA6725C9531700B937BB /* CustomDestinationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
