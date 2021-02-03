@@ -276,6 +276,26 @@ When configuring the Logger (before calling `setup()`), simply set the token lik
 logger.logzioToken = <logzio_token>
 ```
 
+## Custom
+
+From 3.2.0 onward JustLog supports a custom destination that can be defined by you. To implement a custom logger, all you need to do is
+provide a type that conforms to the `CustomDestinationSender` protocol to the new overloaded `setupWithCustomLogSender()` method.
+
+Don't forget to set the `enableCustomLogging` property to `true` before calling `setupWithCustomLogSender`.
+
+```swift
+
+class MyCustomDestinationSender: CustomDestinationSender {
+    func log(_ string: String) {
+        // send the log somewhere
+    }
+}
+
+let customSender = MyCustomDestinationSender()
+let logger = Logger.shared
+logger.enableCustomLogging = true
+logger.setupWithCustomLogSender(customSender)
+```
 
 # Conclusion
 
