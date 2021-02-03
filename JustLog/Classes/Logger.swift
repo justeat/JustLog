@@ -217,21 +217,11 @@ extension Logger {
         if let error = error {
             let errorDictionaries = error.disassociatedErrorChain()
                 .map { errorDictionary(for: $0) }
-                .filter {
-                    guard JSONSerialization.isValidJSONObject($0) else {
-                        self.warning("Object { \($0) } is filtered out from the log", userInfo: ["Module": "JustLog"])
-                        return false
-                    }
-                    return true
-                }
+                .filter { JSONSerialization.isValidJSONObject($0) }
             retVal[errorsConst] = errorDictionaries
         }
         
-        guard let jsonString = retVal.toJSON() else {
-            self.warning("Log message '\(message)' can't be serialised", userInfo: ["Module": "JustLog"])
-            return ""
-        }
-        return jsonString
+        return retVal.toJSON() ?? ""
     }
     
     private func metadataDictionary(_ file: String, _ function: String, _ line: UInt) -> [String: Any] {
