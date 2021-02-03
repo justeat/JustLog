@@ -28,9 +28,24 @@ extension NSError {
             case let error as NSError:
                 flattenedUserInfo[key] = error.humanReadableError()
             default:
-                continue
+                
+                if !JSONSerialization.isValidJSONObject(value) {
+                    var nonSerialisableObject: Any
+                    
+                    switch value {
+                    case let object as NSObject:
+                        nonSerialisableObject = object.description
+                    case let object as CustomStringConvertible:
+                        nonSerialisableObject = object.description
+                    default:
+                        nonSerialisableObject = "The value for key '\(key)' can't be serialised"
+                    }
+                    
+                    flattenedUserInfo[key] = nonSerialisableObject
+                }
             }
         }
+        
         return NSError(domain: domain, code: code, userInfo: flattenedUserInfo)
     }
 }

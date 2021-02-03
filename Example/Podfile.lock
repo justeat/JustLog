@@ -1,5 +1,5 @@
 PODS:
-  - JustLog (3.1.3):
+  - JustLog (3.1.4):
     - SwiftyBeaver (~> 1.9.1)
   - SwiftyBeaver (1.9.1)
 
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  JustLog: c1b12fe8fc6a7c22cc31dd874fe7776eaa7089d2
+  JustLog: af67cd16027edcfc977d83add0668d1e269df737
   SwiftyBeaver: a1f5691458561414bcfab51874b2b7445451602b
 
 PODFILE CHECKSUM: 0682bc8f039b3897a7cc797e15668481c16d38a1
