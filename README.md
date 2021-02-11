@@ -31,6 +31,8 @@ JustLog, is available through [CocoaPods](http://cocoapods.org). To install it, 
 pod "JustLog"
 ```
 
+*New in 3.2.1* JustLog is also available via the Swift Package Manager. Simply import JustLog via the Xcode UI and select the JustLog package to import.
+
 Import it into your files like so:
 
 ```swift
