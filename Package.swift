@@ -5,8 +5,8 @@ import PackageDescription
 let package = Package(
     name: "JustLog",
     platforms: [
-       .iOS("10.0"),
-       .tvOS("10.0")
+       .iOS(.v10),
+       .tvOS(.v10)
     ],
     products: [
         .library(name: "JustLog", targets: ["JustLog"]),
