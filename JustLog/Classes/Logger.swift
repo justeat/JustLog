@@ -6,7 +6,7 @@
 //  Copyright © 2017 Just Eat. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import SwiftyBeaver
 
 @objcMembers
