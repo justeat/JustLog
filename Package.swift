@@ -1,9 +1,13 @@
-// swift-tools-version:4.0
+// swift-tools-version:5.0
 
 import PackageDescription
 
 let package = Package(
     name: "JustLog",
+    platforms: [
+       .iOS("10.0"),
+       .tvOS("10.0")
+    ],
     products: [
         .library(name: "JustLog", targets: ["JustLog"]),
     ],
@@ -13,15 +17,14 @@ let package = Package(
     targets: [
         .target(
             name: "JustLog",
-            path: "JustLog",
-            dependencies: ["SwiftyBeaver"]),
-        .target(
-            name: "Example",
-            path: "Example",
-            dependencies: ["JustLog"]),
+            dependencies: ["SwiftyBeaver"],
+            path: "JustLog"),
         .testTarget(
             name: "JustLogTests",
-            path: "Example/Tests",
-            dependencies: ["Example"]),
+            dependencies: ["Example"],
+            path: "Example/Tests"),
+    ],
+    swiftLanguageVersions: [
+        .v5
     ]
 )
