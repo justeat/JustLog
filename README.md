@@ -27,6 +27,8 @@ JustLog sets the focus on remote logging, but fully covers the basic needs of lo
 
 JustLog, is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
+*New in 3.2.1* JustLog is also available via the Swift Package Manager. Simply import the package via the Xcode UI and import the `JustLog` package.
+
 ```ruby
 pod "JustLog"
 ```
