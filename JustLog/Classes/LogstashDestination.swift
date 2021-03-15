@@ -81,11 +81,12 @@ public class LogstashDestination: BaseDestination  {
         return nil
     }
 
-    public func forceSend(_ completionHandler: @escaping (_ error: Error?) -> Void  = {_ in }) {
-
-        self.completionHandler = completionHandler
-
-        writeLogs()
+    public func forceSend(_ completionHandler: @escaping (_ error: Error?) -> Void = {_ in }) {
+        logDispatchQueue.addOperation { [weak self] in
+            guard let self = self else { return }
+            self.completionHandler = completionHandler
+            self.writeLogs()
+        }
     }
     
     func writeLogs() {
