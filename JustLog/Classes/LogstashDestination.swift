@@ -45,6 +45,7 @@ public class LogstashDestination: BaseDestination  {
     public required init(socket: LogstashDestinationSocketProtocol, logActivity: Bool) {
         self.logDispatchQueue = OperationQueue()
         self.logDispatchQueue.maxConcurrentOperationCount = 1
+        self.logDispatchQueue.name = "com.justlog.logDispatchQueue"
         self.socket = socket
         super.init()
         self.logActivity = logActivity
