@@ -45,6 +45,7 @@ public class LogstashDestination: BaseDestination  {
     public required init(socket: LogstashDestinationSocketProtocol, logActivity: Bool) {
         self.logDispatchQueue = OperationQueue()
         self.logDispatchQueue.maxConcurrentOperationCount = 1
+        self.logDispatchQueue.name = "com.justlog.logDispatchQueue"
         self.socket = socket
         super.init()
         self.logActivity = logActivity
@@ -80,11 +81,12 @@ public class LogstashDestination: BaseDestination  {
         return nil
     }
 
-    public func forceSend(_ completionHandler: @escaping (_ error: Error?) -> Void  = {_ in }) {
-
-        self.completionHandler = completionHandler
-
-        writeLogs()
+    public func forceSend(_ completionHandler: @escaping (_ error: Error?) -> Void = {_ in }) {
+        logDispatchQueue.addOperation { [weak self] in
+            guard let self = self else { return }
+            self.completionHandler = completionHandler
+            self.writeLogs()
+        }
     }
     
     func writeLogs() {
