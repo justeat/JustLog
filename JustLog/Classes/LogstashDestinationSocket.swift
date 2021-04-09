@@ -45,6 +45,7 @@ class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
         self.session = URLSession(configuration: .ephemeral,
                                   delegate: self.sessionDelegate,
                                   delegateQueue: localSocketQueue)
+        self.localSocketQueue.name = "com.justlog.localSocketDispatchQueue"
         super.init()
     }
     
