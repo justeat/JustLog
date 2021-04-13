@@ -29,6 +29,7 @@ public final class Logger: NSObject {
     public var appVersionKey = "app_version"
     public var iosVersionKey = "ios_version"
     public var deviceTypeKey = "ios_device"
+    public var appBundleID = "app_bundle_ID"
     
     public var errorDomain = "error_domain"
     public var errorCode = "error_code"
@@ -254,6 +255,7 @@ extension Logger {
         
         fileMetadata[iosVersionKey] = UIDevice.current.systemVersion
         fileMetadata[deviceTypeKey] = UIDevice.current.platform()
+        fileMetadata[appBundleID] = Bundle.main.bundleIdentifier
         
         return fileMetadata
     }
