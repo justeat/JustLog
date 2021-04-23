@@ -20,6 +20,14 @@ public final class Logger: NSObject {
         case info
     }
     
+    internal struct QueuedLog {
+        let type: LogType
+        let message: String
+        let file: String
+        let function: String
+        let line: UInt
+    }
+    
     public var logTypeKey = "log_type"
     
     public var fileKey = "file"
@@ -40,7 +48,7 @@ public final class Logger: NSObject {
     public var logFilename: String?
     
     // logstash conf
-    public var logstashHost: String!
+    public var logstashHost: String = ""
     public var logstashPort: UInt16 = 9300
     public var logstashTimeout: TimeInterval = 20
     public var logLogstashSocketActivity: Bool = false
@@ -62,6 +70,8 @@ public final class Logger: NSObject {
     
     private var timerInterval: TimeInterval = 5
     private var timer: RepeatingTimer?
+    
+    internal private(set) var queuedLogs = [QueuedLog]()
     
     // destinations
     public var console: ConsoleDestination!
@@ -133,6 +143,17 @@ public final class Logger: NSObject {
             internalLogger.addDestination(customDestination)
             self.custom = customDestination
         }
+        
+        sendQueuedLogsIfNeeded()
+    }
+    
+    private func sendQueuedLogsIfNeeded() {
+        if !queuedLogs.isEmpty {
+            queuedLogs.forEach { queuedLog in
+                sendLogMessage(with: queuedLog.type, logMessage: queuedLog.message, queuedLog.file, queuedLog.function, queuedLog.line)
+            }
+            queuedLogs.removeAll()
+        }
     }
     
     public func forceSend(_ completionHandler: @escaping (_ error: Error?) -> Void = {_ in }) {
@@ -188,7 +209,12 @@ extension Logger: Logging {
     
     internal func log(_ type: LogType, _ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: UInt) {
         let messageToLog = logMessage(message, error: error, userInfo: userInfo, file, function, line)
-        sendLogMessage(with: type, logMessage: messageToLog, file, function, line)
+        
+        if !internalLogger.destinations.isEmpty {
+            sendLogMessage(with: type, logMessage: messageToLog, file, function, line)
+        } else {
+            queuedLogs.append(QueuedLog(type: type, message: message, file: file, function: function, line: line))
+        }
     }
     
     internal func sendLogMessage(with type: LogType, logMessage: String, _ file: String, _ function: String, _ line: UInt) {
