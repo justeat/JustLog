@@ -13,7 +13,7 @@ class LoggerTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        _ = Logger.shared
+        Logger.shared.internalLogger.removeAllDestinations()
     }
     
     func test_errorDictionary_ReturnsDictionaryForError() {
@@ -28,7 +28,6 @@ class LoggerTests: XCTestCase {
         XCTAssertNotNil(dict["user_info"])
         XCTAssertNotNil(dict["error_code"])
         XCTAssertNotNil(dict["error_domain"])
-        
     }
     
     func test_errorDictionary_ReturnedDictionaryContainsUserInfo() {
@@ -47,8 +46,55 @@ class LoggerTests: XCTestCase {
         XCTAssertNotNil(dict["error_domain"])
     }
     
-//    func test_metadataDictionary_ReturnsDictionaryForMetadata() {
-//        let metadataDictionary = Logger.shared.metadataDictionary("thisFile.swift", "a function name", 33)
-//        XCTAssert
-//    }
+    func test_logger_whenSetupNotCompleted_thenLogsQueued() {
+        let sut = Logger.shared
+        sut.verbose("Verbose Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.debug("Debug Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.info("Info Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.warning("Warning Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.error("Error Message", error: nil, userInfo: nil, #file, #function, #line)
+        
+        XCTAssertFalse(sut.queuedLogs.isEmpty)
+        XCTAssertEqual(sut.queuedLogs.count, 5)
+        XCTAssertEqual(sut.queuedLogs[0].message, "Verbose Message")
+        XCTAssertEqual(sut.queuedLogs[1].message, "Debug Message")
+        XCTAssertEqual(sut.queuedLogs[2].message, "Info Message")
+        XCTAssertEqual(sut.queuedLogs[3].message, "Warning Message")
+        XCTAssertEqual(sut.queuedLogs[4].message, "Error Message")
+    }
+    
+    func test_logger_whenSetupCompleted_thenLogsNotQueued() {
+        let sut = Logger.shared
+        sut.setup()
+        
+        sut.verbose("Verbose Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.debug("Debug Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.info("Info Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.warning("Warning Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.error("Error Message", error: nil, userInfo: nil, #file, #function, #line)
+        
+        XCTAssertTrue(sut.queuedLogs.isEmpty)
+    }
+    
+    func test_logger_whenSetupCompletedAfterDelay_thenQueuedLogsSent() {
+        let sut = Logger.shared
+        
+        sut.verbose("Verbose Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.debug("Debug Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.info("Info Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.warning("Warning Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.error("Error Message", error: nil, userInfo: nil, #file, #function, #line)
+        
+        XCTAssertFalse(sut.queuedLogs.isEmpty)
+        XCTAssertEqual(sut.queuedLogs.count, 5)
+        XCTAssertEqual(sut.queuedLogs[0].message, "Verbose Message")
+        XCTAssertEqual(sut.queuedLogs[1].message, "Debug Message")
+        XCTAssertEqual(sut.queuedLogs[2].message, "Info Message")
+        XCTAssertEqual(sut.queuedLogs[3].message, "Warning Message")
+        XCTAssertEqual(sut.queuedLogs[4].message, "Error Message")
+        
+        sut.setup()
+        
+        XCTAssertTrue(sut.queuedLogs.isEmpty)
+    }
 }
