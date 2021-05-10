@@ -1,0 +1,35 @@
+default_platform :ios
+
+platform :ios do
+
+	before_all do
+		env_var = 'POD_NAME'
+		$pod_name = ENV[env_var]
+		if $pod_name.nil?
+			$pod_name = prompt(text: "Please provide a value for #{env_var}.")
+		end
+		
+		UI.user_error!("POD_NAME variable undefined") if $pod_name.nil?
+
+		$workspace_file_path = "./Example/#{$pod_name}.xcworkspace"
+	end
+
+	lane :run_pod_install do
+		sh "bundle exec pod install \
+		--project-directory='../Example/' \
+		--repo-update"
+	end
+
+	lane :unittests do |parameters|
+		device = parameters[:device]
+		run_tests(
+			workspace: $workspace_file_path,
+			scheme: "JustLog-Example",
+			device: device,
+			code_coverage: true,
+			result_bundle: true,
+			concurrent_workers: 1
+		)
+	end
+
+end
