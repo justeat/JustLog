@@ -1,0 +1,31 @@
+pipeline {
+
+    agent any
+
+    environment {
+        FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT = 30
+        FASTLANE_XCODEBUILD_SETTINGS_RETRIES = 10
+        POD_NAME = 'JustLog'
+    }
+
+    stages {
+
+        stage('Run bundle install') {
+            steps {
+                sh "bundle install"
+            }
+        }
+
+        stage('Run pod install') {
+            steps {
+                sh "bundle exec fastlane run_pod_install"
+            }
+        }
+
+        stage('Run Unit Tests') {
+            steps {
+                sh "bundle exec fastlane unittests device:'iPhone 12'"
+            }
+        }
+    }
+}
