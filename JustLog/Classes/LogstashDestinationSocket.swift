@@ -9,15 +9,22 @@
 import Foundation
 
 public protocol LogstashDestinationSocketProtocol {
-    typealias LogstashDestinationSocketProtocolEnqueued = (Int) -> Void
-    typealias LogstashDestinationSocketProtocolCompletion = (Int, Error?) -> Void
+    
+    typealias LogstashDestinationSocketProtocolCompletion = ([Int: Error]) -> Void
     typealias LogstashDestinationSocketProtocolTransform = ([String: Any]) -> Data
+    
     init(host: String, port: UInt16, timeout: TimeInterval, logActivity: Bool, allowUntrustedServer: Bool)
+    
     func cancel()
-    func sendLogs(_ logs: [Int: [String: Any]], transform: LogstashDestinationSocketProtocolTransform, enqueued: LogstashDestinationSocketProtocolEnqueued?, complete: @escaping LogstashDestinationSocketProtocolCompletion)
+    
+    func sendLogs(_ logs: [Int: [String: Any]],
+                  transform: LogstashDestinationSocketProtocolTransform,
+                  queue: DispatchQueue,
+                  complete: @escaping LogstashDestinationSocketProtocolCompletion)
 }
 
 class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
+    
     
     /// Settings
     private let allowUntrustedServer: Bool
@@ -57,23 +64,34 @@ class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
     }
     
     /// Create (and resume) stream tasks to send the logs provided to the server
-    func sendLogs(_ logs: [Int: [String: Any]], transform: LogstashDestinationSocketProtocolTransform, enqueued: LogstashDestinationSocketProtocolEnqueued?, complete: @escaping LogstashDestinationSocketProtocolCompletion) {
+    func sendLogs(_ logs: [Int: [String: Any]],
+                  transform: LogstashDestinationSocketProtocolTransform,
+                  queue: DispatchQueue,
+                  complete: @escaping LogstashDestinationSocketProtocolCompletion) {
         
         let task = self.session.streamTask(withHostName: self.host, port: self.port)
         if !self.allowUntrustedServer {
             task.startSecureConnection()
         }
+        let dispatchGroup = DispatchGroup()
+        var sendStatus = [Int: Error]()
         for log in logs.sorted(by: { $0.0 < $1.0 }) {
             let tag = log.0
             let logData = transform(log.1)
-            task.write(logData, timeout: self.timeout) { (error) in
-                complete(tag, error)
-            }
-            if let enqueued = enqueued {
-                enqueued(tag)
+            dispatchGroup.enter()
+            task.write(logData, timeout: self.timeout) { error in
+                if let error = error {
+                    sendStatus[tag] = error
+                }
+                
+                dispatchGroup.leave()
             }
         }
         task.resume()
+        
+        dispatchGroup.notify(queue: queue) {
+            complete(sendStatus)
+        }
     }
 }
 
