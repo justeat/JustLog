@@ -18,7 +18,7 @@ typealias LogTag = Int
 /// Here's a brief summary of what operations are added to the queue and when:
 /// A log is generated via `send` and added to the `logsToShip` dictionary (along with a `tag` identifier).
 /// At some point `writeLogs` is called that creates an `NSURLSessionStreamTask` to send the log to the server.
-/// When the writer finish all streams operation it calls the completion handler passing the logs that failed to push.
+/// Once the writer has completed all operations, it calls the completion handler passing the logs that failed to push.
 /// Those logs are added back to `logsToShip`
 /// An optional `completionHandler` is called when all logs existing before the `forceSend` call have been tried to send once.
 public class LogstashDestination: BaseDestination  {
