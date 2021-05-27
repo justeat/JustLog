@@ -43,8 +43,8 @@ class LogstashDestinationTests: XCTestCase {
     }
 
     func testCompletionHandlers() throws {
-        let expectFirstCompletion = expectation(description: "Send log first expectation")
-        let expectSecondCompletion = expectation(description: "Send log second expectation")
+        let expectation1 = expectation(description: "Send first log expectation")
+        let expectation2 = expectation(description: "Send second log expectation")
         let mockSocket = MockLogstashDestinationSocket(host: "", port: 0, timeout: 5, logActivity: true, allowUntrustedServer: true)
         let destination = LogstashDestination(socket: mockSocket, logActivity: true)
         _ = destination.send(.verbose, msg: "{}", thread: "", file: "", function: "", line: 0)
@@ -53,21 +53,21 @@ class LogstashDestinationTests: XCTestCase {
         _ = destination.send(.warning, msg: "{}", thread: "", file: "", function: "", line: 0)
         _ = destination.send(.error, msg: "{}", thread: "", file: "", function: "", line: 0)
         destination.forceSend { _ in
-            expectFirstCompletion.fulfill()
+            expectation1.fulfill()
         }
         destination.forceSend { _ in
-            expectSecondCompletion.fulfill()
+            expectation2.fulfill()
         }
         self.waitForExpectations(timeout: 10.0, handler: nil)
     }
 
     func testLoggingError() throws {
         let expect = expectation(description: "Error log expectation")
-        let expectFirstCompletion = expectation(description: "First completion expectation")
+        let expectation1 = expectation(description: "First completion expectation")
         let mockSocket = MockLogstashDestinationSocket(host: "", port: 0, timeout: 5, logActivity: true, allowUntrustedServer: true)
         mockSocket.errorState = true
         mockSocket.networkOperationCountExpectation = expect
-        mockSocket.completionHandlerCalledExpectation = expectFirstCompletion
+        mockSocket.completionHandlerCalledExpectation = expectation1
         let destination = LogstashDestination(socket: mockSocket, logActivity: true)
         _ = destination.send(.verbose, msg: "{}", thread: "", file: "", function: "", line: 0)
         _ = destination.send(.debug, msg: "{}", thread: "", file: "", function: "", line: 0)
@@ -80,20 +80,20 @@ class LogstashDestinationTests: XCTestCase {
         mockSocket.errorState = false
         let expect2 = expectation(description: "Send log expectation")
         expect2.expectedFulfillmentCount = 5
-        let expectSecondCompletion = expectation(description: "Second completion expectation")
+        let expectation2 = expectation(description: "Second completion expectation")
         mockSocket.networkOperationCountExpectation = expect2
-        mockSocket.completionHandlerCalledExpectation = expectSecondCompletion
+        mockSocket.completionHandlerCalledExpectation = expectation2
         destination.forceSend()
         self.waitForExpectations(timeout: 10.0, handler: nil)
     }
     
     func testLoggingCancel() throws {
         let expect = expectation(description: "Error log expectation")
-        let expectFirstCompletion = expectation(description: "First completion expectation")
+        let expectation1 = expectation(description: "First completion expectation")
         let mockSocket = MockLogstashDestinationSocket(host: "", port: 0, timeout: 5, logActivity: true, allowUntrustedServer: true)
         mockSocket.errorState = true
         mockSocket.networkOperationCountExpectation = expect
-        mockSocket.completionHandlerCalledExpectation = expectFirstCompletion
+        mockSocket.completionHandlerCalledExpectation = expectation1
         let destination = LogstashDestination(socket: mockSocket, logActivity: true)
         _ = destination.send(.verbose, msg: "{}", thread: "", file: "", function: "", line: 0)
         _ = destination.send(.debug, msg: "{}", thread: "", file: "", function: "", line: 0)
@@ -106,9 +106,9 @@ class LogstashDestinationTests: XCTestCase {
         destination.cancelSending()
         mockSocket.errorState = false
         let expect2 = expectation(description: "Send log expectation")
-        let expectSecondCompletion = expectation(description: "Second completion expectation")
+        let expectation2 = expectation(description: "Second completion expectation")
         mockSocket.networkOperationCountExpectation = expect2
-        mockSocket.completionHandlerCalledExpectation = expectSecondCompletion
+        mockSocket.completionHandlerCalledExpectation = expectation2
         _ = destination.send(.error, msg: "{}", thread: "", file: "", function: "", line: 0)
         destination.forceSend()
         self.waitForExpectations(timeout: 10.0, handler: nil)
