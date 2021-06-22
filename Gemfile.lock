@@ -75,6 +75,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-18
+  x86_64-darwin-20
 
 DEPENDENCIES
   cocoapods (~> 1.8.4)
