@@ -21,6 +21,6 @@ let package = Package(
             name: "JustLog",
             dependencies: ["SwiftyBeaver"],
                 path: "JustLog/",
-        exclude: ["JustLog/Supporting Files/Info.plist", "JustLog/Supporting Files/JustLog.h"]),
+            exclude: ["Supporting Files/Info.plist", "Supporting Files/JustLog.h"]),
     ]
 )
