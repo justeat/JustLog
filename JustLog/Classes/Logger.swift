@@ -12,7 +12,7 @@ import SwiftyBeaver
 @objcMembers
 public final class Logger: NSObject {
     
-    internal enum LogType {
+    internal enum LogType: String {  //Could make this external if required (maybe) -- Set as string to map - comparision at name level
         case debug
         case warning
         case verbose
@@ -26,6 +26,11 @@ public final class Logger: NSObject {
         let file: String
         let function: String
         let line: UInt
+    }
+    
+    public var sanitizer: (_ message: String, _ type: String) -> String = { message, type  in
+        
+        return message
     }
     
     public var logTypeKey = "log_type"
@@ -208,12 +213,17 @@ extension Logger: Logging {
     }
     
     internal func log(_ type: LogType, _ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: UInt) {
+        
         let messageToLog = logMessage(message, error: error, userInfo: userInfo, file, function, line)
         
+        let sanitizedMessageToLog = sanitizer(messageToLog, "", )
+        
+        let sanitizedMesaage = sanitizer(message,"")
+        
         if !internalLogger.destinations.isEmpty {
-            sendLogMessage(with: type, logMessage: messageToLog, file, function, line)
+            sendLogMessage(with: type, logMessage: sanitizedMessageToLog, file, function, line)
         } else {
-            queuedLogs.append(QueuedLog(type: type, message: message, file: file, function: function, line: line))
+            queuedLogs.append(QueuedLog(type: type, message: sanitizedMesaage, file: file, function: function, line: line))
         }
     }
     

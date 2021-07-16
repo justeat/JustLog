@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         forceSendLogs(application)
     }
-
+    
     private func forceSendLogs(_ application: UIApplication) {
         
         var identifier: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 0)
@@ -62,6 +62,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         logger.logstashTimeout = 5
         logger.logLogstashSocketActivity = true
 
+        logger.sanitizer = { message, type  in
+            //Implementation
+            //Hardcoded tweaks values 
+            return message
+        }
+        
         // logz.io support
         //logger.logzioToken = <logzioToken>
 
