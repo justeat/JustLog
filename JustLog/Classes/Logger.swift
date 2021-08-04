@@ -28,7 +28,7 @@ public final class Logger: NSObject {
         let line: UInt
     }
     
-    public var sanitizer: (_ message: String, _ type: String) -> String = { message, type  in
+    public var sanitizer: (_ message: String, _ minimumLogType: String) -> String = { message, minimumLogType in
         
         return message
     }
@@ -215,10 +215,10 @@ extension Logger: Logging {
     internal func log(_ type: LogType, _ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: UInt) {
         
         let messageToLog = logMessage(message, error: error, userInfo: userInfo, file, function, line)
+    
+        let sanitizedMessageToLog = sanitizer(messageToLog, "")
         
-        let sanitizedMessageToLog = sanitizer(messageToLog, "", )
-        
-        let sanitizedMesaage = sanitizer(message,"")
+        let sanitizedMesaage = sanitizer(message, "")
         
         if !internalLogger.destinations.isEmpty {
             sendLogMessage(with: type, logMessage: sanitizedMessageToLog, file, function, line)

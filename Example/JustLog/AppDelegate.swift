@@ -28,6 +28,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         forceSendLogs(application)
     }
     
+    func redactValues(message: String, loggerExeptionList: [String], matches: [NSTextCheckingResult]) -> String {
+        
+        var redactedLogMessage = logMessagePlaceholder
+        
+        for match in matches.reversed() {
+            let key = match.range(at: 1)
+            let value = match.range(at: 2)
+            
+            let keyRange = Range(key, in: redactedLogMessage)!
+            let valueRange = Range(value, in: redactedLogMessage)!
+            
+            for listedException in loggerExeptionList {
+                if listedException != redactedLogMessage[valueRange] {
+                    redactedLogMessage.replaceSubrange(keyRange, with: "****")
+                    redactedLogMessage.replaceSubrange(valueRange, with: "****")
+                }
+            }
+            return redactedLogMessage
+        }
+    }
+    
     private func forceSendLogs(_ application: UIApplication) {
         
         var identifier: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 0)
@@ -42,6 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             identifier = UIBackgroundTaskIdentifier.invalid
         }
     }
+
+    var regexRules = [[#"(name) = \\*"(.*?[^\\]+)"#, "function()", "minimumLevel"]]
     
     private func setupLogger() {
         
@@ -62,10 +85,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         logger.logstashTimeout = 5
         logger.logLogstashSocketActivity = true
 
-        logger.sanitizer = { message, type  in
-            //Implementation
-            //Hardcoded tweaks values 
-            return message
+        logger.sanitizer = { message, type, regexRules, loggerExeptionList in
+        
+            var sanitizedMessage = message
+            
+            for pattern in regexPattern {
+                if let regex = try? NSRegularExpression(pattern: pattern , options: NSRegularExpression.Options.caseInsensitive) {
+                    
+                    let range = NSRange(message.startIndex..<message.endIndex, in: message)
+                    let matches = regex.matches(in: message, options: [], range: range)
+                    
+                    sanitizedMessage = self.redactValues(message: message, loggerExeptionList: [""], matches: matches)
+                }
+            }
+            
+            return sanitizedMessage
         }
         
         // logz.io support
