@@ -215,15 +215,11 @@ extension Logger: Logging {
     internal func log(_ type: LogType, _ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: UInt) {
         
         let messageToLog = logMessage(message, error: error, userInfo: userInfo, file, function, line)
-    
-        let sanitizedMessageToLog = sanitizer(messageToLog, type)
-        
-        let sanitizedMesaage = sanitizer(message, type)
         
         if !internalLogger.destinations.isEmpty {
-            sendLogMessage(with: type, logMessage: sanitizedMessageToLog, file, function, line)
+            sendLogMessage(with: type, logMessage: sanitizer(messageToLog, type), file, function, line)
         } else {
-            queuedLogs.append(QueuedLog(type: type, message: sanitizedMesaage, file: file, function: function, line: line))
+            queuedLogs.append(QueuedLog(type: type, message: sanitizer(message, type), file: file, function: function, line: line))
         }
     }
     

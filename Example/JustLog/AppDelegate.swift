@@ -68,8 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             redactedLogMessage.replaceSubrange(valueRange, with: redactedValue)
             redactedLogMessage.replaceSubrange(keyRange, with: redactedKey)
-            
-            return redactedLogMessage
         }
         return redactedLogMessage
     }
