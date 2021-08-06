@@ -97,4 +97,16 @@ class LoggerTests: XCTestCase {
         
         XCTAssertTrue(sut.queuedLogs.isEmpty)
     }
+    
+func test_logger_whenLogMessagesAreSanitized_thenExpectedResultRetrived() {
+        let sut = Logger.shared
+        sut.setup()
+        var message = "conversation = {name = \\\"John Smith\\\";\\n; \\n token = \\\"123453423\\\";\\n"
+        let expectedMessage = "conversation = {n***e = \\\"*****\\\";\\n; \\n t***n = \\\"*****\\\";\\n"
+    
+        message = sut.sanitizer(message, Logger.LogType.error)
+        sut.error(message, error: nil, userInfo: nil, #file, #function, #line)
+
+        XCTAssertEqual(message, expectedMessage)
+    }
 }

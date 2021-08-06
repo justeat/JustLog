@@ -299,6 +299,23 @@ logger.enableCustomLogging = true
 logger.setupWithCustomLogSender(customSender)
 ```
 
+## Log Sanitization 
+
+As of 3.6.0, JustLog supports the implementation of a sanitizer method that can be expanded upon within the client. This method accepts two placeholder variables:
+
+- Message:  This variable concerns the log message that you wish to sanitize.
+- Log Type: This variable the log level applied to the given log message.
+
+```
+public var sanitizer: (_ message: String, _ minimumLogType: LogType) -> String = { message, minimumLogType in
+
+    return message
+}
+```
+
+This closure method is set up and called within Logger.Swift. If this method not expanded upon within the client it will simply return the original message, as expected. An example of how we have adopted this sanitizer method can be seen within AppDelegate.swift in which we redact certain values based upon an input list. Clicking on 'Sanitized Log Message' in the example app will provide an example of the santizer method in action. 
+
+
 # Conclusion
 
 JustLog aims to be an easy-to-use working solution with minimal setup. It covers the most basic logging needs (console and file logging) via the great foundations given by SwiftBeaver, but also provides an advanced remote logging solution for Logstash (which is usually paired with Elasticsearch and Kibana in an [ELK](https://www.elastic.co/webinars/introduction-elk-stack) stack). JustLog integrates with [logz.io](http://logz.io), one of the most widely used ELK SaaS, placing itself as the only solution in the market (at the time of writing) to leverage such stack on iOS.

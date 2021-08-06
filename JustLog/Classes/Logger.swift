@@ -12,7 +12,7 @@ import SwiftyBeaver
 @objcMembers
 public final class Logger: NSObject {
     
-    internal enum LogType: String {  //Could make this external if required (maybe) -- Set as string to map - comparision at name level
+    public enum LogType: String {
         case debug
         case warning
         case verbose
@@ -28,8 +28,8 @@ public final class Logger: NSObject {
         let line: UInt
     }
     
-    public var sanitizer: (_ message: String, _ minimumLogType: String) -> String = { message, minimumLogType in
-        
+    public var sanitizer: (_ message: String, _ minimumLogType: LogType) -> String = { message, minimumLogType in
+    
         return message
     }
     
@@ -216,9 +216,9 @@ extension Logger: Logging {
         
         let messageToLog = logMessage(message, error: error, userInfo: userInfo, file, function, line)
     
-        let sanitizedMessageToLog = sanitizer(messageToLog, "")
+        let sanitizedMessageToLog = sanitizer(messageToLog, type)
         
-        let sanitizedMesaage = sanitizer(message, "")
+        let sanitizedMesaage = sanitizer(message, type)
         
         if !internalLogger.destinations.isEmpty {
             sendLogMessage(with: type, logMessage: sanitizedMessageToLog, file, function, line)
