@@ -33,6 +33,13 @@ class ViewController: UIViewController {
         logNumber += 1
     }
     
+    @IBAction func warningSanitized() {
+        let messageToSanitize = "conversation ={\\n id = \\\"123455\\\";\\n};\\n from = {\\n id = 123456;\\n name = \\\"John Smith\\\";\\n; \\n token = \\\"123456\\\";\\n"
+        let sanitizedMessage = Logger.shared.sanitize(messageToSanitize, Logger.LogType.warning)
+        Logger.shared.warning(sanitizedMessage, userInfo: ["userInfo key": "userInfo value"])
+        logNumber += 1
+    }
+    
     @IBAction func error() {
         
         let underlyingUnreadableUserInfoError = [
