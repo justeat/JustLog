@@ -301,19 +301,19 @@ logger.setupWithCustomLogSender(customSender)
 
 ## Log Sanitization 
 
-As of 3.6.0, JustLog supports the implementation of a sanitizer method that can be set within the client. This method accepts two placeholder variables:
+As of 3.6.0, JustLog supports the implementation of a sanitize method that can be set within the client. This method accepts two placeholder variables:
 
 - Message:  This variable concerns the log message that you wish to sanitize.
 - Log Type: This variable concerns the log level applied to the given log message.
 
 ```
-public var sanitizer: (_ message: String, _ minimumLogType: LogType) -> String = { message, minimumLogType in
+public var sanitize: (_ message: String, _ minimumLogType: LogType) -> String = { message, minimumLogType in
 
     return message
 }
 ```
 
-This closure method is set up and called within Logger.Swift. If this method not expanded upon within the client it will simply return the original message, as expected. An example of how we have adopted this sanitizer method can be seen within AppDelegate.swift in which we redact certain values based upon an input list. Clicking on 'Sanitized Log Message' in the example app will provide an example of the santizer method in action. 
+This closure method is set up and called within Logger.Swift. If this method not expanded upon within the client it will simply return the original message, as expected. An example of how we have adopted this sanitize method can be seen within AppDelegate.swift in which we redact certain values based upon an input list. Clicking on 'Sanitized Log Message' in the example app will provide an example of the santizer method in action. 
 
 
 # Conclusion
