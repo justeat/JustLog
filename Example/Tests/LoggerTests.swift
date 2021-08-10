@@ -104,7 +104,7 @@ func test_logger_whenLogMessagesAreSanitized_thenExpectedResultRetrived() {
         var message = "conversation = {name = \\\"John Smith\\\";\\n; \\n token = \\\"123453423\\\";\\n"
         let expectedMessage = "conversation = {n***e = \\\"*****\\\";\\n; \\n t***n = \\\"*****\\\";\\n"
     
-        message = sut.sanitizer(message, Logger.LogType.error)
+        message = sut.sanitize(message, Logger.LogType.error)
         sut.error(message, error: nil, userInfo: nil, #file, #function, #line)
 
         XCTAssertEqual(message, expectedMessage)

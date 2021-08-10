@@ -28,8 +28,8 @@ public final class Logger: NSObject {
         let line: UInt
     }
     
-    public var sanitizer: (_ message: String, _ minimumLogType: LogType) -> String = { message, minimumLogType in
-    
+    public var sanitize: (_ message: String, _ minimumLogType: LogType) -> String = { message, minimumLogType in
+        
         return message
     }
     
@@ -217,9 +217,9 @@ extension Logger: Logging {
         let messageToLog = logMessage(message, error: error, userInfo: userInfo, file, function, line)
         
         if !internalLogger.destinations.isEmpty {
-            sendLogMessage(with: type, logMessage: sanitizer(messageToLog, type), file, function, line)
+            sendLogMessage(with: type, logMessage: sanitize(messageToLog, type), file, function, line)
         } else {
-            queuedLogs.append(QueuedLog(type: type, message: sanitizer(message, type), file: file, function: function, line: line))
+            queuedLogs.append(QueuedLog(type: type, message: sanitize(message, type), file: file, function: function, line: line))
         }
     }
     

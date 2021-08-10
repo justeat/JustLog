@@ -110,7 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          let regexRuleList = "[{\"pattern\": \"(name) = \\\\\\\\*\\\"(.*?[^\\\\\\\\]+)\", \"minimumLogLevel\": \"warning\"}, {\"pattern\": \"(token) = \\\\\\\\*\\\"(.*?[^\\\\\\\\]+)\", \"minimumLogLevel\": \"warning\"}]".data(using: .utf8)
          let sanitizationExeceptionList = "[{\"value\": \"Dan Jones\"}, {\"value\": \"Jack Jones\"}]".data(using: .utf8)
         
-        logger.sanitizer = { message, type in
+        logger.sanitize = { message, type in
             var sanitizedMessage = message
             
             guard let ruleList = try? decoder.decode([RegexListReponse].self, from: regexRuleList!) else { return "sanitizedMessage" }

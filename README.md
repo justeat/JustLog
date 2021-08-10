@@ -301,10 +301,10 @@ logger.setupWithCustomLogSender(customSender)
 
 ## Log Sanitization 
 
-As of 3.6.0, JustLog supports the implementation of a sanitizer method that can be expanded upon within the client. This method accepts two placeholder variables:
+As of 3.6.0, JustLog supports the implementation of a sanitizer method that can be set within the client. This method accepts two placeholder variables:
 
 - Message:  This variable concerns the log message that you wish to sanitize.
-- Log Type: This variable the log level applied to the given log message.
+- Log Type: This variable concerns the log level applied to the given log message.
 
 ```
 public var sanitizer: (_ message: String, _ minimumLogType: LogType) -> String = { message, minimumLogType in
