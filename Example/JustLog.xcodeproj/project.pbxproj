@@ -41,6 +41,7 @@
 		4F5519DE1E02F0D7009A8F68 /* Dictionary_FlatteningTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary_FlatteningTests.swift; sourceTree = "<group>"; };
 		4F5519DF1E02F0D7009A8F68 /* NSError_ReadabilityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSError_ReadabilityTests.swift; sourceTree = "<group>"; };
 		4F5519E81E0313F4009A8F68 /* Data_RepresentationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data_RepresentationTests.swift; sourceTree = "<group>"; };
+		4F7E257E26CD2C4B001F66F7 /* UnitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnitTests.xctestplan; sourceTree = "<group>"; };
 		4FD9AF4F1E12EE5B00EAF51B /* Dictionary_JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary_JSONTests.swift; sourceTree = "<group>"; };
 		4FD9AF521E1325E600EAF51B /* String_ConversionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String_ConversionTests.swift; sourceTree = "<group>"; };
 		564BD780F1731F3DAD2A2DFE /* Pods_JustLog_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustLog_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +152,7 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				4F7E257E26CD2C4B001F66F7 /* UnitTests.xctestplan */,
 				1485DA6625C9531700B937BB /* CustomDestinationTests.swift */,
 				4F5519DE1E02F0D7009A8F68 /* Dictionary_FlatteningTests.swift */,
 				4FD9AF4F1E12EE5B00EAF51B /* Dictionary_JSONTests.swift */,
@@ -515,6 +517,7 @@
 			baseConfigurationReference = F17BCAE05ED5D114342EB2A1 /* Pods-JustLog_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = JustLog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -528,6 +531,7 @@
 			baseConfigurationReference = 9BC0DBDFF6F20D0F760626A4 /* Pods-JustLog_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = JustLog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -540,6 +544,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BD372BE74878367C4FFD8637 /* Pods-JustLog_Tests.debug.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -560,6 +565,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F3D8E67BA655C94F1421168D /* Pods-JustLog_Tests.release.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
