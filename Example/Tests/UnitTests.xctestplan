@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "5A711260-3791-4C71-A5E3-7110C1327E20",
+      "name" : "Default",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:JustLog.xcodeproj",
+      "identifier" : "607FACCF1AFB9204008FA782",
+      "name" : "JustLog_Example"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:JustLog.xcodeproj",
+        "identifier" : "607FACE41AFB9204008FA782",
+        "name" : "JustLog_Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
