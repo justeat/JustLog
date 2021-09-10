@@ -43,7 +43,10 @@ public final class Logger: NSObject {
             if let sanitizeClosure = sanitizeClosure {
                 return sanitizeClosure
             } else {
-                fatalError("Sanitization closure not set")
+                assertionFailure("Sanitization closure not set")
+                return { message, _ in
+                    return message
+                }
             }
         }
         set {
