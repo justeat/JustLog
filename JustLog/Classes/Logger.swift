@@ -28,9 +28,32 @@ public final class Logger: NSObject {
         let line: UInt
     }
     
-    public var sanitize: (_ message: String, _ minimumLogType: LogType) -> String = { message, minimumLogType in
+    public typealias SanitizeClosureType = (_ message: String, _ minimumLogType: LogType) -> String
+    private var _sanitize: SanitizeClosureType = { message, minimumLogType in
         
         return message
+    }
+    private let sanitizePropertyQueue = DispatchQueue(label: "com.justeat.justlog.sanitizePropertyQueue", qos: .default, attributes: .concurrent)
+    public var sanitize: SanitizeClosureType {
+        get {
+            var sanitizeClosure: SanitizeClosureType? = nil
+            sanitizePropertyQueue.sync {
+                sanitizeClosure = _sanitize
+            }
+            if let sanitizeClosure = sanitizeClosure {
+                return sanitizeClosure
+            } else {
+                assertionFailure("Sanitization closure not set")
+                return { message, _ in
+                    return message
+                }
+            }
+        }
+        set {
+            sanitizePropertyQueue.async(flags: .barrier) {
+                self._sanitize = newValue
+            }
+        }
     }
     
     public var logTypeKey = "log_type"
