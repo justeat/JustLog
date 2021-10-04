@@ -87,12 +87,17 @@ class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
                 let tag = log.0
                 let logData = transform(log.1)
                 dispatchGroup.enter()
-                task.write(logData, timeout: self.timeout) { error in
+                task.write(logData, timeout: self.timeout) { [weak self] error in
+                    guard let self = self else {
+                        dispatchGroup.leave()
+                        return
+                    }
+
                     self.dispatchQueue.async {
                         if let error = error {
                             sendStatus[tag] = error
                         }
-                        
+
                         dispatchGroup.leave()
                     }
                 }
