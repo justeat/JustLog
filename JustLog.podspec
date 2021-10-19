@@ -1,11 +1,3 @@
-#
-# Be sure to run `pod lib lint JustLog.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = 'JustLog'
   s.version          = '3.7.2'
@@ -17,7 +9,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/justeat/JustLog'
   s.license          = { :type => 'Apache 2.0', :file => 'LICENSE' }
-  s.authors          = { 'Alberto De Bortoli' => 'alberto.debortoli@just-eat.com', 'Shabeer Hussain' => 'shabeer.hussain@just-eat.com', 'Andre Jacobs' => 'andre.jacobs@just-eat.com', 'Antonio Strijdom' => 'antonio.strijdom"just-eat.com' }
+  s.author           = 'Just Eat Takeaway iOS Team'
   s.source           = { :git => 'https://github.com/justeat/JustLog.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/justeat_tech'
 
