@@ -66,7 +66,8 @@ public final class Logger: NSObject {
     public var iosVersionKey = "ios_version"
     public var deviceTypeKey = "ios_device"
     public var appBundleID = "app_bundle_ID"
-    
+    public var deviceTimestampKey = "device_timestamp"
+
     public var errorDomain = "error_domain"
     public var errorCode = "error_code"
     
@@ -264,7 +265,7 @@ extension Logger: Logging {
 
 extension Logger {
     
-    internal func logMessage(_ message: String, error: NSError?, userInfo: [String : Any]?, _ file: String, _ function: String, _ line: UInt) -> String {
+    internal func logMessage(_ message: String, error: NSError?, userInfo: [String : Any]?, currentDate: Date = Date(), _ file: String, _ function: String, _ line: UInt) -> String {
     
         let messageConst = "message"
         let userInfoConst = "user_info"
@@ -275,7 +276,7 @@ extension Logger {
         
         var retVal = [String : Any]()
         retVal[messageConst] = message
-        retVal[metadataConst] = metadataDictionary(file, function, line)
+        retVal[metadataConst] = metadataDictionary(file, function, line, currentDate)
         
         if let userInfo = userInfo {
             for (key, value) in userInfo {
@@ -294,7 +295,7 @@ extension Logger {
         return retVal.toJSON() ?? ""
     }
     
-    private func metadataDictionary(_ file: String, _ function: String, _ line: UInt) -> [String: Any] {
+    private func metadataDictionary(_ file: String, _ function: String, _ line: UInt, _ currentDate: Date) -> [String: Any] {
         var fileMetadata = [String : String]()
         
         if let url = URL(string: file) {
@@ -311,6 +312,7 @@ extension Logger {
         fileMetadata[iosVersionKey] = UIDevice.current.systemVersion
         fileMetadata[deviceTypeKey] = UIDevice.current.platform()
         fileMetadata[appBundleID] = Bundle.main.bundleIdentifier
+        fileMetadata[deviceTimestampKey] = "\(currentDate.timeIntervalSince1970)"
         
         return fileMetadata
     }
