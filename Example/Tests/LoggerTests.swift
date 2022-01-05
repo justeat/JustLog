@@ -98,15 +98,34 @@ class LoggerTests: XCTestCase {
         XCTAssertTrue(sut.queuedLogs.isEmpty)
     }
     
-func test_logger_whenLogMessagesAreSanitized_thenExpectedResultRetrived() {
+    func test_logger_whenLogMessagesAreSanitized_thenExpectedResultRetrived() {
         let sut = Logger.shared
         sut.setup()
         var message = "conversation = {name = \\\"John Smith\\\";\\n; \\n token = \\\"123453423\\\";\\n"
         let expectedMessage = "conversation = {n***e = \\\"*****\\\";\\n; \\n t***n = \\\"*****\\\";\\n"
-    
+        
         message = sut.sanitize(message, Logger.LogType.error)
         sut.error(message, error: nil, userInfo: nil, #file, #function, #line)
-
+        
         XCTAssertEqual(message, expectedMessage)
+    }
+    
+    func test_logger_sendsDeviceTimestampAsMetadata() throws {
+        let sut = Logger.shared
+        
+        let currentDate = Date()
+        let message = sut.logMessage("Log message", error: nil, userInfo: nil, currentDate: currentDate, #file, #function, #line)
+        
+        let data = try XCTUnwrap(message.data(using: .utf8))
+        guard let parsedMessage = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any] else {
+            XCTFail("Failed to parse log message")
+            return
+        }
+        
+        let parsedMetadata = try XCTUnwrap(parsedMessage["metadata"] as? [String: String])
+        let parsedDeviceTimestamp = try XCTUnwrap(parsedMetadata["device_timestamp"])
+        let expectedDeviceTimestamp = "\(currentDate.timeIntervalSince1970)"
+        
+        XCTAssertEqual(parsedDeviceTimestamp, expectedDeviceTimestamp)
     }
 }
