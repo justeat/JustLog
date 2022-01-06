@@ -117,7 +117,7 @@ class LoggerTests: XCTestCase {
         let message = sut.logMessage("Log message", error: nil, userInfo: nil, currentDate: currentDate, #file, #function, #line)
         
         let data = try XCTUnwrap(message.data(using: .utf8))
-        guard let parsedMessage = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any] else {
+        guard let parsedMessage = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
             XCTFail("Failed to parse log message")
             return
         }
