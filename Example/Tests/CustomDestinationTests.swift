@@ -11,12 +11,16 @@ import XCTest
 
 class MockCustomDestinationSender: CustomDestinationSender {
     let expectation: XCTestExpectation
+    var logs: [String]
+    
     init(expectation: XCTestExpectation) {
         self.expectation = expectation
+        self.logs = []
     }
     
     func log(_ string: String) {
-        self.expectation.fulfill()
+        expectation.fulfill()
+        logs.append(string)
     }
 }
 
@@ -37,5 +41,24 @@ class CustomDestinationTests: XCTestCase {
         }
         self.waitForExpectations(timeout: 10.0, handler: nil)
     }
+    
+    func test_logger_sendsDeviceTimestampForEachLogType() {
+        let sut = Logger.shared
+        sut.enableCustomLogging = true
+        
+        let expectation = expectation(description: #function)
+        expectation.expectedFulfillmentCount = 5
 
+        let mockSender = MockCustomDestinationSender(expectation: expectation)
+        sut.setupWithCustomLogSender(mockSender)
+        
+        sut.verbose("Verbose Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.debug("Debug Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.info("Info Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.warning("Warning Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.error("Error Message", error: nil, userInfo: nil, #file, #function, #line)
+        
+        mockSender.logs.forEach { XCTAssertTrue($0.contains("device_timestamp")) }
+        self.waitForExpectations(timeout: 10.0, handler: nil)
+    }
 }
