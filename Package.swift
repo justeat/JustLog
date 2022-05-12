@@ -14,7 +14,10 @@ let package = Package(
             targets: ["JustLog"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver", from: "1.9.6")
+        .package(
+		url: "https://github.com/SwiftyBeaver/SwiftyBeaver",
+		.exact("1.9.6")
+	)
     ],
     targets: [
         .target(
