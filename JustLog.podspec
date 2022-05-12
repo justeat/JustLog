@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'JustLog'
-  s.version          = '3.8.0'
+  s.version          = '4.0.0'
   s.summary          = 'JustLog brings logging on iOS to the next level. It supports console, file and remote Logstash logging via TCP socket with no effort.'
 
   s.description      = "<<-DESC
@@ -13,13 +13,13 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/justeat/JustLog.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/justeat_tech'
 
-  s.ios.deployment_target = '10.0'
-  s.tvos.deployment_target = '10.0'
+  s.ios.deployment_target = '13.4'
+  s.tvos.deployment_target = '13.4'
   s.swift_version = '5.0'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 
   s.source_files = 'JustLog/Classes/**/*', 'JustLog/Extensions/**/*'
 
-  s.dependency 'SwiftyBeaver', '~> 1.9.3'
+  s.dependency 'SwiftyBeaver', '1.9.6'
 
 end

@@ -5,8 +5,8 @@ import PackageDescription
 let package = Package(
     name: "JustLog",
     platforms: [
-        .iOS(.v10),
-        .tvOS(.v10)
+        .iOS(.v13.4),
+        .tvOS(.v13.4)
     ],
     products: [
         .library(
@@ -14,7 +14,10 @@ let package = Package(
             targets: ["JustLog"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver", from: "1.9.3")
+        .package(
+            url: "https://github.com/SwiftyBeaver/SwiftyBeaver",
+            .exact("1.9.6")
+	)
     ],
     targets: [
         .target(
