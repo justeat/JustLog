@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'JustLog'
-  s.version          = '4.0.0'
+  s.version          = ENV['LIB_VERSION']
   s.summary          = 'JustLog brings logging on iOS to the next level. It supports console, file and remote Logstash logging via TCP socket with no effort.'
 
   s.description      = "<<-DESC
