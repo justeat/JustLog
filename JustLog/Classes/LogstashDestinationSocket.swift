@@ -9,14 +9,14 @@
 import Foundation
 
 public protocol LogstashDestinationSocketProtocol {
-    
+
     typealias LogstashDestinationSocketProtocolCompletion = ([Int: Error]) -> Void
     typealias LogstashDestinationSocketProtocolTransform = ([String: Any]) -> Data
-    
+
     init(host: String, port: UInt16, timeout: TimeInterval, logActivity: Bool, allowUntrustedServer: Bool)
-    
+
     func cancel()
-    
+
     func sendLogs(_ logs: [Int: [String: Any]],
                   transform: @escaping LogstashDestinationSocketProtocolTransform,
                   queue: DispatchQueue,
@@ -24,27 +24,27 @@ public protocol LogstashDestinationSocketProtocol {
 }
 
 class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
-    
-    
+
+
     /// Settings
     private let allowUntrustedServer: Bool
     private let host: String
     private let port: Int
     private let timeout: TimeInterval
     private let logActivity: Bool
-    
+
     private let localSocketQueue = OperationQueue()
     private let dispatchQueue = DispatchQueue(label: "com.justlog.localSocket.dispatchQueue")
-    
+
     private let sessionDelegate: LogstashDestinationURLSessionDelegate
     private var session: URLSession
-    
+
     required init(host: String,
                   port: UInt16,
                   timeout: TimeInterval,
                   logActivity: Bool,
                   allowUntrustedServer: Bool = false) {
-        
+
         self.allowUntrustedServer = allowUntrustedServer
         self.host = host
         self.port = Int(port)
@@ -57,7 +57,7 @@ class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
         self.localSocketQueue.name = "com.justlog.localSocketDispatchQueue"
         super.init()
     }
-    
+
     /// Cancel all active tasks and invalidate the session
     func cancel() {
         self.session.invalidateAndCancel()
@@ -65,7 +65,7 @@ class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
                                   delegate: sessionDelegate,
                                   delegateQueue: localSocketQueue)
     }
-    
+
     /// Create (and resume) stream tasks to send the logs provided to the server
     func sendLogs(_ logs: [Int: [String: Any]],
                   transform: @escaping LogstashDestinationSocketProtocolTransform,
@@ -76,7 +76,7 @@ class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
                 complete([:])
                 return
             }
-            
+
             let task = self.session.streamTask(withHostName: self.host, port: self.port)
             if !self.allowUntrustedServer {
                 task.startSecureConnection()
@@ -103,8 +103,9 @@ class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
                 }
             }
             task.resume()
-            
+
             dispatchGroup.notify(queue: queue) {
+                task.cancel()
                 complete(sendStatus)
             }
         }
@@ -114,13 +115,13 @@ class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
 private class LogstashDestinationURLSessionDelegate: NSObject, URLSessionDelegate, URLSessionTaskDelegate, URLSessionStreamDelegate {
     private let host: String
     private let logActivity: Bool
-    
+
     init(host: String, logActivity: Bool) {
         self.host = host
         self.logActivity = logActivity
         super.init()
     }
-    
+
     func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         if logActivity {
             print("🔌 <LogstashDestination>, did receive \(challenge.protectionSpace.authenticationMethod) challenge")
