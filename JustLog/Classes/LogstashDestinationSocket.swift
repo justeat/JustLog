@@ -103,7 +103,9 @@ class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
             task.resume()
 
             dispatchGroup.notify(queue: queue) {
-                task.cancel()
+                task.closeRead()
+                task.closeWrite()
+
                 complete(sendStatus)
             }
         }
