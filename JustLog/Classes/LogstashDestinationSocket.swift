@@ -93,10 +93,12 @@ class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
                         return
                     }
 
-                    self.dispatchQueue.async(group: dispatchGroup) {
+                    self.dispatchQueue.async {
                         if let error = error {
                             sendStatus[tag] = error
                         }
+
+                        dispatchGroup.leave()
                     }
                 }
             }
