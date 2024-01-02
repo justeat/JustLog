@@ -5,32 +5,14 @@ jobs:
     runs-on: macOS-latest
     timeout-minutes: 15
     steps:
-    - name: Cancel previous jobs
-      uses: styfle/cancel-workflow-action@0.6.0
-      with:
-        access_token: ${{ github.token }}
     - name: Git checkout
       uses: actions/checkout@v2.3.4
       with:
-        fetch-depth: 0
         ref: ${{ github.ref }}
     - name: Setup Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: latest-stable
-    - name: Setup ruby and bundler dependencies
-      uses: ruby/setup-ruby@v1.81.0
-      with:
-        bundler-cache: true
-    - name: Run pod install
-      run: |
-        set -eo pipefail
-        export LIB_VERSION=$(git describe --tags `git rev-list --tags --max-count=1`)
-        bundle exec pod install --project-directory=Example
     - name: Run tests
-      run: bundle exec fastlane unit_tests device:'iPhone 11'
-    - name: Validate lib
-      run: |
-        set -eo pipefail
-        export LIB_VERSION=$(git describe --tags `git rev-list --tags --max-count=1`)
-        bundle exec pod lib lint --allow-warnings
+      run: swift test
+      

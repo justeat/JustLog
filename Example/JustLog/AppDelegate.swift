@@ -37,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         forceSendLogs(application)
     }
     
+    private var logger: Logger!
+
     func redactValues(message: String, loggerExeptionList: [ExceptionListResponse], matches: [NSTextCheckingResult]) -> String {
         
         var redactedLogMessage = message
@@ -81,51 +83,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             identifier = UIBackgroundTaskIdentifier.invalid
         })
         
-        Logger.shared.forceSend { completionHandler in
+        logger.forceSend { completionHandler in
             application.endBackgroundTask(identifier)
             identifier = UIBackgroundTaskIdentifier.invalid
         }
     }
     
     private func setupLogger() {
-        let logger = Logger.shared
         let decoder = JSONDecoder()
-        
-        // custom keys
-        logger.logTypeKey = "logtype"
-        logger.appVersionKey = "app_version"
-        logger.iosVersionKey = "ios_version"
-        logger.deviceTypeKey = "ios_device"
-        
-        // file destination
-        logger.logFilename = "justeat-demo.log"
-        
-        // logstash destination
-        logger.logstashHost = "listener.logz.io"
-        logger.logstashPort = 5052
-        logger.logstashTimeout = 5
-        logger.logLogstashSocketActivity = true
-        
-        
-         let regexRuleList = "[{\"pattern\": \"(name) = \\\\\\\\*\\\"(.*?[^\\\\\\\\]+)\", \"minimumLogLevel\": \"warning\"}, {\"pattern\": \"(token) = \\\\\\\\*\\\"(.*?[^\\\\\\\\]+)\", \"minimumLogLevel\": \"warning\"}]".data(using: .utf8)
-         let sanitizationExeceptionList = "[{\"value\": \"Dan Jones\"}, {\"value\": \"Jack Jones\"}]".data(using: .utf8)
-        
+
+        let configuration = Configuration(
+            logFilename: "justeat-demo.log",
+            logstashHost: "listener.logz.io",
+            logstashPort: 5052,
+            logstashTimeout: 5,
+            logLogstashSocketActivity: true
+        )
+
+        logger = Logger(
+            configuration: configuration,
+            logMessageFormatter: JSONStringLogMessageFormatter(keys: FormatterKeys())
+        )
+
+        let regexRuleList = "[{\"pattern\": \"(name) = \\\\\\\\*\\\"(.*?[^\\\\\\\\]+)\", \"minimumLogLevel\": \"warning\"}, {\"pattern\": \"(token) = \\\\\\\\*\\\"(.*?[^\\\\\\\\]+)\", \"minimumLogLevel\": \"warning\"}]".data(using: .utf8)
+        let sanitizationExeceptionList = "[{\"value\": \"Dan Jones\"}, {\"value\": \"Jack Jones\"}]".data(using: .utf8)
+
         logger.sanitize = { message, type in
             var sanitizedMessage = message
-            
+
             guard let ruleList = try? decoder.decode([RegexListReponse].self, from: regexRuleList!) else { return "sanitizedMessage" }
             guard let exceptionList = try? decoder.decode([ExceptionListResponse].self, from: sanitizationExeceptionList!) else { return "sanitizedMessage" }
-            
-                for value in ruleList {
-                    if (value.minimumLogLevel >= type.rawValue) {
-                        if let regex = try? NSRegularExpression(pattern: value.pattern , options: NSRegularExpression.Options.caseInsensitive) {
-                            
-                            let range = NSRange(sanitizedMessage.startIndex..<sanitizedMessage.endIndex, in: sanitizedMessage)
-                            let matches = regex.matches(in: sanitizedMessage, options: [], range: range)
-                            
-                            sanitizedMessage = self.redactValues(message: sanitizedMessage, loggerExeptionList: exceptionList, matches: matches)
-                        }
+
+            for value in ruleList {
+                if (value.minimumLogLevel >= type.rawValue) {
+                    if let regex = try? NSRegularExpression(pattern: value.pattern , options: NSRegularExpression.Options.caseInsensitive) {
+
+                        let range = NSRange(sanitizedMessage.startIndex..<sanitizedMessage.endIndex, in: sanitizedMessage)
+                        let matches = regex.matches(in: sanitizedMessage, options: [], range: range)
+
+                        sanitizedMessage = self.redactValues(message: sanitizedMessage, loggerExeptionList: exceptionList, matches: matches)
                     }
+                }
             }
             return sanitizedMessage
         }
@@ -135,12 +133,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // untrusted (self-signed) logstash server support
         //logger.allowUntrustedServer = <Bool>
-        
-        // default info
-        logger.defaultUserInfo = ["application": "JustLog iOS Demo",
-                                  "environment": "development",
-                                  "session": sessionID]
-        logger.setup()
     }
     
     
