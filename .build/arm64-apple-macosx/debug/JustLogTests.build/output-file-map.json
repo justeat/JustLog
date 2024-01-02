@@ -1,0 +1,83 @@
+{
+  "": {
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/master.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Tests/CustomDestinationTests.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/CustomDestinationTests.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/CustomDestinationTests.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/CustomDestinationTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/CustomDestinationTests.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Tests/Data_RepresentationTests.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Data_RepresentationTests.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Data_RepresentationTests.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Data_RepresentationTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Data_RepresentationTests.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Tests/Dictionary_FlatteningTests.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Dictionary_FlatteningTests.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Dictionary_FlatteningTests.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Dictionary_FlatteningTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Dictionary_FlatteningTests.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Tests/Dictionary_JSONTests.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Dictionary_JSONTests.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Dictionary_JSONTests.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Dictionary_JSONTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Dictionary_JSONTests.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Tests/JSONStringLogMessageFormatterTests.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/JSONStringLogMessageFormatterTests.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/JSONStringLogMessageFormatterTests.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/JSONStringLogMessageFormatterTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/JSONStringLogMessageFormatterTests.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Tests/LoggerTests.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LoggerTests.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LoggerTests.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LoggerTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LoggerTests.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Tests/LogstashDestinationSendingSchedulerTests.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LogstashDestinationSendingSchedulerTests.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LogstashDestinationSendingSchedulerTests.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LogstashDestinationSendingSchedulerTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LogstashDestinationSendingSchedulerTests.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Tests/LogstashDestinationTests.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LogstashDestinationTests.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LogstashDestinationTests.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LogstashDestinationTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LogstashDestinationTests.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Tests/MockLoggerFactory.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/MockLoggerFactory.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/MockLoggerFactory.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/MockLoggerFactory~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/MockLoggerFactory.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Tests/MockLogstashDestinationSendingScheduler.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/MockLogstashDestinationSendingScheduler.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/MockLogstashDestinationSendingScheduler.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/MockLogstashDestinationSendingScheduler~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/MockLogstashDestinationSendingScheduler.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Tests/NSError_ReadabilityTests.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/NSError_ReadabilityTests.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/NSError_ReadabilityTests.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/NSError_ReadabilityTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/NSError_ReadabilityTests.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Tests/NSError_UnderlyingError_tests.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/NSError_UnderlyingError_tests.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/NSError_UnderlyingError_tests.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/NSError_UnderlyingError_tests~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/NSError_UnderlyingError_tests.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Tests/String_ConversionTests.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/String_ConversionTests.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/String_ConversionTests.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/String_ConversionTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/String_ConversionTests.swiftdeps"
+  }
+}

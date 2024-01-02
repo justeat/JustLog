@@ -3,67 +3,26 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1485DA6725C9531700B937BB /* CustomDestinationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1485DA6625C9531700B937BB /* CustomDestinationTests.swift */; };
-		149CC16724BC5679009CC32C /* LogstashDestinationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149CC16624BC5679009CC32C /* LogstashDestinationTests.swift */; };
-		1538E753D83D5441A7F3052E /* Pods_JustLog_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B779DCB16EBC83342A6D171D /* Pods_JustLog_Example.framework */; };
-		4F5519E21E02F0D9009A8F68 /* Dictionary_FlatteningTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5519DE1E02F0D7009A8F68 /* Dictionary_FlatteningTests.swift */; };
-		4F5519E31E02F0D9009A8F68 /* NSError_ReadabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5519DF1E02F0D7009A8F68 /* NSError_ReadabilityTests.swift */; };
-		4F5519EA1E031483009A8F68 /* Data_RepresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5519E81E0313F4009A8F68 /* Data_RepresentationTests.swift */; };
-		4FD9AF511E12EE5F00EAF51B /* Dictionary_JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD9AF4F1E12EE5B00EAF51B /* Dictionary_JSONTests.swift */; };
-		4FD9AF531E1325E600EAF51B /* String_ConversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD9AF521E1325E600EAF51B /* String_ConversionTests.swift */; };
-		55E60F97DD1F0D83DEAD1849 /* Pods_JustLog_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 564BD780F1731F3DAD2A2DFE /* Pods_JustLog_Tests.framework */; };
+		4FC4B3BC2B442540003E67C4 /* JustLog in Frameworks */ = {isa = PBXBuildFile; productRef = 4FC4B3BB2B442540003E67C4 /* JustLog */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		CB39F5BC1F4F2420009E5F68 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB39F5BB1F4F2420009E5F68 /* LoggerTests.swift */; };
-		CB9EA83A1F4C68AB002D3EF5 /* NSError_UnderlyingError_tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EA8391F4C68AB002D3EF5 /* NSError_UnderlyingError_tests.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		607FACE61AFB9204008FA782 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
-			remoteInfo = JustLog;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		1485DA6625C9531700B937BB /* CustomDestinationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDestinationTests.swift; sourceTree = "<group>"; };
-		149CC16624BC5679009CC32C /* LogstashDestinationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogstashDestinationTests.swift; sourceTree = "<group>"; };
-		4F5519DE1E02F0D7009A8F68 /* Dictionary_FlatteningTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary_FlatteningTests.swift; sourceTree = "<group>"; };
-		4F5519DF1E02F0D7009A8F68 /* NSError_ReadabilityTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSError_ReadabilityTests.swift; sourceTree = "<group>"; };
-		4F5519E81E0313F4009A8F68 /* Data_RepresentationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data_RepresentationTests.swift; sourceTree = "<group>"; };
-		4F7E257E26CD2C4B001F66F7 /* UnitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = UnitTests.xctestplan; sourceTree = "<group>"; };
-		4FD9AF4F1E12EE5B00EAF51B /* Dictionary_JSONTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary_JSONTests.swift; sourceTree = "<group>"; };
-		4FD9AF521E1325E600EAF51B /* String_ConversionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String_ConversionTests.swift; sourceTree = "<group>"; };
-		564BD780F1731F3DAD2A2DFE /* Pods_JustLog_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustLog_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C5541999840C3151B0753EC /* JustLog.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = JustLog.podspec; path = ../JustLog.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		607FACD01AFB9204008FA782 /* JustLog_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustLog_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		607FACD01AFB9204008FA782 /* DemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		607FACE51AFB9204008FA782 /* JustLog_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JustLog_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9B14BEA0090ED9CEBC74E11C /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		9BC0DBDFF6F20D0F760626A4 /* Pods-JustLog_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustLog_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustLog_Example/Pods-JustLog_Example.release.xcconfig"; sourceTree = "<group>"; };
-		B779DCB16EBC83342A6D171D /* Pods_JustLog_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustLog_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BD372BE74878367C4FFD8637 /* Pods-JustLog_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustLog_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustLog_Tests/Pods-JustLog_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		CB39F5BB1F4F2420009E5F68 /* LoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
-		CB9EA8391F4C68AB002D3EF5 /* NSError_UnderlyingError_tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSError_UnderlyingError_tests.swift; sourceTree = "<group>"; };
-		CDD0E7F9B7B30113E921A4BB /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		F17BCAE05ED5D114342EB2A1 /* Pods-JustLog_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustLog_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustLog_Example/Pods-JustLog_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		F3D8E67BA655C94F1421168D /* Pods-JustLog_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustLog_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustLog_Tests/Pods-JustLog_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,58 +30,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1538E753D83D5441A7F3052E /* Pods_JustLog_Example.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		607FACE21AFB9204008FA782 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				55E60F97DD1F0D83DEAD1849 /* Pods_JustLog_Tests.framework in Frameworks */,
+				4FC4B3BC2B442540003E67C4 /* JustLog in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0C15E61F2EE47DA08879F9C2 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F17BCAE05ED5D114342EB2A1 /* Pods-JustLog_Example.debug.xcconfig */,
-				9BC0DBDFF6F20D0F760626A4 /* Pods-JustLog_Example.release.xcconfig */,
-				BD372BE74878367C4FFD8637 /* Pods-JustLog_Tests.debug.xcconfig */,
-				F3D8E67BA655C94F1421168D /* Pods-JustLog_Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		312B2974F6050480A5634680 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				B779DCB16EBC83342A6D171D /* Pods_JustLog_Example.framework */,
-				564BD780F1731F3DAD2A2DFE /* Pods_JustLog_Tests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for JustLog */,
-				607FACE81AFB9204008FA782 /* Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
-				0C15E61F2EE47DA08879F9C2 /* Pods */,
-				312B2974F6050480A5634680 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		607FACD11AFB9204008FA782 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD01AFB9204008FA782 /* JustLog_Example.app */,
-				607FACE51AFB9204008FA782 /* JustLog_Tests.xctest */,
+				607FACD01AFB9204008FA782 /* DemoApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,42 +75,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		607FACE81AFB9204008FA782 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				4F7E257E26CD2C4B001F66F7 /* UnitTests.xctestplan */,
-				1485DA6625C9531700B937BB /* CustomDestinationTests.swift */,
-				4F5519DE1E02F0D7009A8F68 /* Dictionary_FlatteningTests.swift */,
-				4FD9AF4F1E12EE5B00EAF51B /* Dictionary_JSONTests.swift */,
-				4F5519E81E0313F4009A8F68 /* Data_RepresentationTests.swift */,
-				4F5519DF1E02F0D7009A8F68 /* NSError_ReadabilityTests.swift */,
-				4FD9AF521E1325E600EAF51B /* String_ConversionTests.swift */,
-				CB9EA8391F4C68AB002D3EF5 /* NSError_UnderlyingError_tests.swift */,
-				607FACE91AFB9204008FA782 /* Supporting Files */,
-				CB39F5BB1F4F2420009E5F68 /* LoggerTests.swift */,
-				149CC16624BC5679009CC32C /* LogstashDestinationTests.swift */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		607FACE91AFB9204008FA782 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				607FACEA1AFB9204008FA782 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
-			isa = PBXGroup;
-			children = (
-				5C5541999840C3151B0753EC /* JustLog.podspec */,
-				CDD0E7F9B7B30113E921A4BB /* README.md */,
-				9B14BEA0090ED9CEBC74E11C /* LICENSE */,
-			);
-			name = "Podspec Metadata";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -192,39 +82,21 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "JustLog_Example" */;
 			buildPhases = (
-				18378FDBED4364A270792213 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				CB7EA20FF7E32C2E06D4B187 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = JustLog_Example;
+			packageProductDependencies = (
+				4FC4B3BB2B442540003E67C4 /* JustLog */,
+			);
 			productName = JustLog;
-			productReference = 607FACD01AFB9204008FA782 /* JustLog_Example.app */;
+			productReference = 607FACD01AFB9204008FA782 /* DemoApp.app */;
 			productType = "com.apple.product-type.application";
-		};
-		607FACE41AFB9204008FA782 /* JustLog_Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "JustLog_Tests" */;
-			buildPhases = (
-				07DA07D991B56405352089A9 /* [CP] Check Pods Manifest.lock */,
-				607FACE11AFB9204008FA782 /* Sources */,
-				607FACE21AFB9204008FA782 /* Frameworks */,
-				607FACE31AFB9204008FA782 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				607FACE71AFB9204008FA782 /* PBXTargetDependency */,
-			);
-			name = JustLog_Tests;
-			productName = Tests;
-			productReference = 607FACE51AFB9204008FA782 /* JustLog_Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -240,11 +112,6 @@
 						CreatedOnToolsVersion = 6.3.1;
 						LastSwiftMigration = 1020;
 					};
-					607FACE41AFB9204008FA782 = {
-						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 1020;
-						TestTargetID = 607FACCF1AFB9204008FA782;
-					};
 				};
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "JustLog" */;
@@ -256,12 +123,14 @@
 				Base,
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
+			packageReferences = (
+				4FC4B3BA2B442540003E67C4 /* XCLocalSwiftPackageReference ".." */,
+			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				607FACCF1AFB9204008FA782 /* JustLog_Example */,
-				607FACE41AFB9204008FA782 /* JustLog_Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -277,73 +146,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		607FACE31AFB9204008FA782 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		07DA07D991B56405352089A9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-JustLog_Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		18378FDBED4364A270792213 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-JustLog_Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CB7EA20FF7E32C2E06D4B187 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-JustLog_Example/Pods-JustLog_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/JustLog/JustLog.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JustLog.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JustLog_Example/Pods-JustLog_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		607FACCC1AFB9204008FA782 /* Sources */ = {
@@ -355,31 +158,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		607FACE11AFB9204008FA782 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4F5519EA1E031483009A8F68 /* Data_RepresentationTests.swift in Sources */,
-				4F5519E31E02F0D9009A8F68 /* NSError_ReadabilityTests.swift in Sources */,
-				4F5519E21E02F0D9009A8F68 /* Dictionary_FlatteningTests.swift in Sources */,
-				149CC16724BC5679009CC32C /* LogstashDestinationTests.swift in Sources */,
-				4FD9AF531E1325E600EAF51B /* String_ConversionTests.swift in Sources */,
-				4FD9AF511E12EE5F00EAF51B /* Dictionary_JSONTests.swift in Sources */,
-				CB39F5BC1F4F2420009E5F68 /* LoggerTests.swift in Sources */,
-				CB9EA83A1F4C68AB002D3EF5 /* NSError_UnderlyingError_tests.swift in Sources */,
-				1485DA6725C9531700B937BB /* CustomDestinationTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 607FACCF1AFB9204008FA782 /* JustLog_Example */;
-			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
@@ -401,6 +180,35 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4F1BAF192B44261F00CE591B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.0;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = JustLog/Info.plist;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.justeattakeaway.demo.JustLog;
+				PRODUCT_NAME = DemoApp;
+			};
+			name = Debug;
+		};
+		4F1BAF1A2B44261F00CE591B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1.0;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = JustLog/Info.plist;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.justeattakeaway.demo.JustLog;
+				PRODUCT_NAME = DemoApp;
+			};
+			name = Release;
+		};
 		607FACED1AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -450,7 +258,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -502,79 +310,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		607FACF01AFB9204008FA782 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F17BCAE05ED5D114342EB2A1 /* Pods-JustLog_Example.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = JustLog/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		607FACF11AFB9204008FA782 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9BC0DBDFF6F20D0F760626A4 /* Pods-JustLog_Example.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = JustLog/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		607FACF31AFB9204008FA782 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD372BE74878367C4FFD8637 /* Pods-JustLog_Tests.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JustLog_Example.app/JustLog_Example";
-			};
-			name = Debug;
-		};
-		607FACF41AFB9204008FA782 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3D8E67BA655C94F1421168D /* Pods-JustLog_Tests.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JustLog_Example.app/JustLog_Example";
 			};
 			name = Release;
 		};
@@ -593,22 +336,27 @@
 		607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "JustLog_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				607FACF01AFB9204008FA782 /* Debug */,
-				607FACF11AFB9204008FA782 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "JustLog_Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				607FACF31AFB9204008FA782 /* Debug */,
-				607FACF41AFB9204008FA782 /* Release */,
+				4F1BAF192B44261F00CE591B /* Debug */,
+				4F1BAF1A2B44261F00CE591B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		4FC4B3BA2B442540003E67C4 /* XCLocalSwiftPackageReference ".." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4FC4B3BB2B442540003E67C4 /* JustLog */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JustLog;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 607FACC81AFB9204008FA782 /* Project object */;
 }

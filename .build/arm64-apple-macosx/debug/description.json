@@ -1,0 +1,926 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogPackageTests.xctest/Contents/MacOS/JustLogPackageTests",
+      "productName" : "JustLogPackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.JustLog-debug.module" : {
+      "executable" : "/Applications/Xcode-15.1.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "importPath" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Classes/Configuration.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Classes/ConsoleDestination.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Classes/CustomDestination.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Classes/FileDestination.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Classes/JSONStringLogMessageFormatter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Classes/Log.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Classes/Logger.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestination.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationHTTP.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationSending.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationSendingScheduler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationSocket.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationWriter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Classes/RepeatingTimer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/Data+Representation.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/DeviceInfo.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/Dictionary+Flattening.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/Dictionary+JSON.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/NSError+Readability.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/NSError+UnderlyingErrors.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/String+Conversion.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/Configurable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/LogMessageFormatting.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/Loggable.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/Logging.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.swiftmodule"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "JustLog",
+      "moduleOutputPath" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.swiftmodule",
+      "objects" : [
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Configuration.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/ConsoleDestination.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/CustomDestination.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/FileDestination.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/JSONStringLogMessageFormatter.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Log.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Logger.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestination.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationHTTP.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSending.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSendingScheduler.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSocket.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationWriter.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/RepeatingTimer.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Data+Representation.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/DeviceInfo.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Dictionary+Flattening.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Dictionary+JSON.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/NSError+Readability.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/NSError+UnderlyingErrors.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/String+Conversion.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Configurable.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/LogMessageFormatting.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Loggable.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Logging.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx12.0",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-g",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/JustLog-Swift.h",
+        "-color-diagnostics",
+        "-sdk",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk",
+        "-F",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC"
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Configuration.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/ConsoleDestination.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/CustomDestination.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/FileDestination.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/JSONStringLogMessageFormatter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Log.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Logger.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestination.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationHTTP.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSending.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSendingScheduler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSocket.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationWriter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/RepeatingTimer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Data+Representation.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/DeviceInfo.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Dictionary+Flattening.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Dictionary+JSON.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/NSError+Readability.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/NSError+UnderlyingErrors.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/String+Conversion.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Configurable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/LogMessageFormatting.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Loggable.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Logging.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/alberto.debortoli/src/JustLog/Sources/Classes/Configuration.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Classes/ConsoleDestination.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Classes/CustomDestination.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Classes/FileDestination.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Classes/JSONStringLogMessageFormatter.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Classes/Log.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Classes/Logger.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestination.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationHTTP.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationSending.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationSendingScheduler.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationSocket.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationWriter.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Classes/RepeatingTimer.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/Data+Representation.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/DeviceInfo.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/Dictionary+Flattening.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/Dictionary+JSON.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/NSError+Readability.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/NSError+UnderlyingErrors.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/String+Conversion.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/Configurable.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/LogMessageFormatting.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/Loggable.swift",
+        "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/Logging.swift"
+      ],
+      "tempsPath" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.JustLogTests-debug.module" : {
+      "executable" : "/Applications/Xcode-15.1.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "importPath" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Tests/CustomDestinationTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Tests/Data_RepresentationTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Tests/Dictionary_FlatteningTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Tests/Dictionary_JSONTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Tests/JSONStringLogMessageFormatterTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Tests/LoggerTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Tests/LogstashDestinationSendingSchedulerTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Tests/LogstashDestinationTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Tests/MockLoggerFactory.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Tests/MockLogstashDestinationSendingScheduler.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Tests/NSError_ReadabilityTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Tests/NSError_UnderlyingError_tests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/Tests/String_ConversionTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.swiftmodule"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "JustLogTests",
+      "moduleOutputPath" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.swiftmodule",
+      "objects" : [
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/CustomDestinationTests.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Data_RepresentationTests.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Dictionary_FlatteningTests.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Dictionary_JSONTests.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/JSONStringLogMessageFormatterTests.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LoggerTests.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LogstashDestinationSendingSchedulerTests.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LogstashDestinationTests.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/MockLoggerFactory.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/MockLogstashDestinationSendingScheduler.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/NSError_ReadabilityTests.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/NSError_UnderlyingError_tests.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/String_ConversionTests.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx13.0",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-g",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-color-diagnostics",
+        "-sdk",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk",
+        "-F",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC"
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/CustomDestinationTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Data_RepresentationTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Dictionary_FlatteningTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/Dictionary_JSONTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/JSONStringLogMessageFormatterTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LoggerTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LogstashDestinationSendingSchedulerTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/LogstashDestinationTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/MockLoggerFactory.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/MockLogstashDestinationSendingScheduler.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/NSError_ReadabilityTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/NSError_UnderlyingError_tests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build/String_ConversionTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/alberto.debortoli/src/JustLog/Tests/CustomDestinationTests.swift",
+        "/Users/alberto.debortoli/src/JustLog/Tests/Data_RepresentationTests.swift",
+        "/Users/alberto.debortoli/src/JustLog/Tests/Dictionary_FlatteningTests.swift",
+        "/Users/alberto.debortoli/src/JustLog/Tests/Dictionary_JSONTests.swift",
+        "/Users/alberto.debortoli/src/JustLog/Tests/JSONStringLogMessageFormatterTests.swift",
+        "/Users/alberto.debortoli/src/JustLog/Tests/LoggerTests.swift",
+        "/Users/alberto.debortoli/src/JustLog/Tests/LogstashDestinationSendingSchedulerTests.swift",
+        "/Users/alberto.debortoli/src/JustLog/Tests/LogstashDestinationTests.swift",
+        "/Users/alberto.debortoli/src/JustLog/Tests/MockLoggerFactory.swift",
+        "/Users/alberto.debortoli/src/JustLog/Tests/MockLogstashDestinationSendingScheduler.swift",
+        "/Users/alberto.debortoli/src/JustLog/Tests/NSError_ReadabilityTests.swift",
+        "/Users/alberto.debortoli/src/JustLog/Tests/NSError_UnderlyingError_tests.swift",
+        "/Users/alberto.debortoli/src/JustLog/Tests/String_ConversionTests.swift"
+      ],
+      "tempsPath" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLogTests.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.SwiftyBeaver-debug.module" : {
+      "executable" : "/Applications/Xcode-15.1.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "importPath" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/AES256CBC.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/Base64.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/BaseDestination.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/ConsoleDestination.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/Extensions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/FileDestination.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/Filter.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/FilterValidator.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/GoogleCloudDestination.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/SBPlatformDestination.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/SwiftyBeaver.swift"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "SwiftyBeaver",
+      "moduleOutputPath" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.swiftmodule",
+      "objects" : [
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/AES256CBC.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/Base64.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/BaseDestination.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/ConsoleDestination.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/Extensions.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/FileDestination.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/Filter.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/FilterValidator.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/GoogleCloudDestination.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/SBPlatformDestination.swift.o",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/SwiftyBeaver.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx10.13",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-g",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-emit-objc-header",
+        "-emit-objc-header-path",
+        "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/SwiftyBeaver-Swift.h",
+        "-color-diagnostics",
+        "-sdk",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk",
+        "-F",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-suppress-warnings"
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/AES256CBC.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/Base64.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/BaseDestination.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/ConsoleDestination.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/Extensions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/FileDestination.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/Filter.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/FilterValidator.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/GoogleCloudDestination.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/SBPlatformDestination.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/SwiftyBeaver.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/AES256CBC.swift",
+        "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/Base64.swift",
+        "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/BaseDestination.swift",
+        "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/ConsoleDestination.swift",
+        "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/Extensions.swift",
+        "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/FileDestination.swift",
+        "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/Filter.swift",
+        "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/FilterValidator.swift",
+        "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/GoogleCloudDestination.swift",
+        "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/SBPlatformDestination.swift",
+        "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/SwiftyBeaver.swift"
+      ],
+      "tempsPath" : "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "JustLog" : [
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "JustLog",
+      "-incremental",
+      "-c",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Classes/Configuration.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Classes/ConsoleDestination.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Classes/CustomDestination.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Classes/FileDestination.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Classes/JSONStringLogMessageFormatter.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Classes/Log.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Classes/Logger.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestination.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationHTTP.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationSending.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationSendingScheduler.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationSocket.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationWriter.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Classes/RepeatingTimer.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/Data+Representation.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/DeviceInfo.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/Dictionary+Flattening.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/Dictionary+JSON.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/NSError+Readability.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/NSError+UnderlyingErrors.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/String+Conversion.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/Configurable.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/LogMessageFormatting.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/Loggable.swift",
+      "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/Logging.swift",
+      "-I",
+      "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug",
+      "-target",
+      "arm64-apple-macosx12.0",
+      "-swift-version",
+      "5",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-g",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/JustLog-Swift.h",
+      "-color-diagnostics",
+      "-sdk",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk",
+      "-F",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "JustLogTests" : [
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "JustLogTests",
+      "-incremental",
+      "-c",
+      "/Users/alberto.debortoli/src/JustLog/Tests/CustomDestinationTests.swift",
+      "/Users/alberto.debortoli/src/JustLog/Tests/Data_RepresentationTests.swift",
+      "/Users/alberto.debortoli/src/JustLog/Tests/Dictionary_FlatteningTests.swift",
+      "/Users/alberto.debortoli/src/JustLog/Tests/Dictionary_JSONTests.swift",
+      "/Users/alberto.debortoli/src/JustLog/Tests/JSONStringLogMessageFormatterTests.swift",
+      "/Users/alberto.debortoli/src/JustLog/Tests/LoggerTests.swift",
+      "/Users/alberto.debortoli/src/JustLog/Tests/LogstashDestinationSendingSchedulerTests.swift",
+      "/Users/alberto.debortoli/src/JustLog/Tests/LogstashDestinationTests.swift",
+      "/Users/alberto.debortoli/src/JustLog/Tests/MockLoggerFactory.swift",
+      "/Users/alberto.debortoli/src/JustLog/Tests/MockLogstashDestinationSendingScheduler.swift",
+      "/Users/alberto.debortoli/src/JustLog/Tests/NSError_ReadabilityTests.swift",
+      "/Users/alberto.debortoli/src/JustLog/Tests/NSError_UnderlyingError_tests.swift",
+      "/Users/alberto.debortoli/src/JustLog/Tests/String_ConversionTests.swift",
+      "-I",
+      "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug",
+      "-target",
+      "arm64-apple-macosx13.0",
+      "-swift-version",
+      "5",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-g",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-color-diagnostics",
+      "-sdk",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk",
+      "-F",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ],
+    "SwiftyBeaver" : [
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "SwiftyBeaver",
+      "-incremental",
+      "-c",
+      "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/AES256CBC.swift",
+      "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/Base64.swift",
+      "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/BaseDestination.swift",
+      "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/ConsoleDestination.swift",
+      "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/Extensions.swift",
+      "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/FileDestination.swift",
+      "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/Filter.swift",
+      "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/FilterValidator.swift",
+      "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/GoogleCloudDestination.swift",
+      "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/SBPlatformDestination.swift",
+      "/Users/alberto.debortoli/src/JustLog/.build/checkouts/SwiftyBeaver/Sources/SwiftyBeaver.swift",
+      "-I",
+      "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug",
+      "-target",
+      "arm64-apple-macosx10.13",
+      "-swift-version",
+      "5",
+      "-enable-batch-mode",
+      "-index-store-path",
+      "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/index/store",
+      "-Onone",
+      "-enable-testing",
+      "-g",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DDEBUG",
+      "-module-cache-path",
+      "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/ModuleCache",
+      "-parseable-output",
+      "-parse-as-library",
+      "-emit-objc-header",
+      "-emit-objc-header-path",
+      "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/SwiftyBeaver-Swift.h",
+      "-color-diagnostics",
+      "-sdk",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk",
+      "-F",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-suppress-warnings",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode-15.1.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "JustLog" : [
+      "SwiftyBeaver"
+    ],
+    "JustLogTests" : [
+      "JustLog",
+      "SwiftyBeaver"
+    ],
+    "SwiftyBeaver" : [
+
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  }
+}

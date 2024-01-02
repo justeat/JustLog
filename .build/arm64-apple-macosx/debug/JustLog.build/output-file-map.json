@@ -1,0 +1,155 @@
+{
+  "": {
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/master.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Classes/Configuration.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Configuration.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Configuration.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Configuration~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Configuration.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Classes/ConsoleDestination.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/ConsoleDestination.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/ConsoleDestination.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/ConsoleDestination~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/ConsoleDestination.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Classes/CustomDestination.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/CustomDestination.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/CustomDestination.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/CustomDestination~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/CustomDestination.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Classes/FileDestination.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/FileDestination.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/FileDestination.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/FileDestination~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/FileDestination.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Classes/JSONStringLogMessageFormatter.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/JSONStringLogMessageFormatter.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/JSONStringLogMessageFormatter.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/JSONStringLogMessageFormatter~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/JSONStringLogMessageFormatter.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Classes/Log.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Log.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Log.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Log~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Log.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Classes/Logger.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Logger.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Logger.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Logger~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/Logger.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestination.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestination.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestination.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestination~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestination.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationHTTP.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationHTTP.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationHTTP.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationHTTP~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationHTTP.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationSending.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSending.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSending.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSending~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSending.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationSendingScheduler.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSendingScheduler.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSendingScheduler.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSendingScheduler~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSendingScheduler.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationSocket.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSocket.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSocket.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSocket~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationSocket.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Classes/LogstashDestinationWriter.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationWriter.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationWriter.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationWriter~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/LogstashDestinationWriter.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Classes/RepeatingTimer.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/RepeatingTimer.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/RepeatingTimer.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/RepeatingTimer~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Classes/RepeatingTimer.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/Data+Representation.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Data+Representation.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Data+Representation.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Data+Representation~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Data+Representation.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/DeviceInfo.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/DeviceInfo.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/DeviceInfo.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/DeviceInfo~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/DeviceInfo.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/Dictionary+Flattening.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Dictionary+Flattening.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Dictionary+Flattening.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Dictionary+Flattening~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Dictionary+Flattening.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/Dictionary+JSON.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Dictionary+JSON.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Dictionary+JSON.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Dictionary+JSON~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/Dictionary+JSON.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/NSError+Readability.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/NSError+Readability.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/NSError+Readability.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/NSError+Readability~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/NSError+Readability.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/NSError+UnderlyingErrors.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/NSError+UnderlyingErrors.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/NSError+UnderlyingErrors.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/NSError+UnderlyingErrors~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/NSError+UnderlyingErrors.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Extensions/String+Conversion.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/String+Conversion.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/String+Conversion.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/String+Conversion~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Extensions/String+Conversion.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/Configurable.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Configurable.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Configurable.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Configurable~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Configurable.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/LogMessageFormatting.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/LogMessageFormatting.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/LogMessageFormatting.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/LogMessageFormatting~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/LogMessageFormatting.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/Loggable.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Loggable.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Loggable.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Loggable~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Loggable.swiftdeps"
+  },
+  "/Users/alberto.debortoli/src/JustLog/Sources/Protocols/Logging.swift": {
+    "dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Logging.d",
+    "object": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Logging.swift.o",
+    "swiftmodule": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Logging~partial.swiftmodule",
+    "swift-dependencies": "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/Protocols/Logging.swiftdeps"
+  }
+}

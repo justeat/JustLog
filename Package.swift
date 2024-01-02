@@ -8,7 +8,12 @@ import PackageDescription
 let package = Package(
     name: "JustLog",
     defaultLocalization: "en",
-    platforms: [.iOS(.v15)],
+    platforms: [
+        .iOS(.v15),
+        .macOS(.v12),
+        .watchOS(.v7),
+        .tvOS(.v15)
+    ],
     products: [
         .library(
             name: "JustLog",
@@ -27,14 +32,14 @@ let package = Package(
             dependencies: [
                 .product(name: "SwiftyBeaver", package: "SwiftyBeaver"),
             ],
-            path: "JustLog"
+            path: "Sources"
         ),
         .testTarget(
             name: "JustLogTests",
             dependencies: [
                 .byName(name: "JustLog"),
             ],
-            path: "Example/Tests"
+            path: "Tests"
         ),
     ]
 )

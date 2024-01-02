@@ -1,0 +1,4 @@
+module SwiftyBeaver {
+    header "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/SwiftyBeaver.build/SwiftyBeaver-Swift.h"
+    requires objc
+}
