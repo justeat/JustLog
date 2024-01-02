@@ -1,15 +1,8 @@
-//
 //  NSError+Readability.swift
-//  JustLog
-//
-//  Created by Alberto De Bortoli on 15/12/2016.
-//
-//
 
 import Foundation
 
 extension NSError {
-    
     
     /// Parses Data values in the user info key as String and recursively does the same to all associated underying errors.
     ///
@@ -20,7 +13,7 @@ extension NSError {
         
         for (key, value) in userInfo {
             
-            switch (value) {
+            switch value {
             case let string as String:
                 flattenedUserInfo[key] = string
             case let data as Data:

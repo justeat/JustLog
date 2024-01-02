@@ -1,10 +1,4 @@
-//
 //  Dictionary+Flattening.swift
-//  JustLog
-//
-//  Created by Alberto De Bortoli on 15/12/2016.
-//  Copyright © 2017 Just Eat. All rights reserved.
-//
 
 import Foundation
 
@@ -15,9 +9,9 @@ extension Dictionary where Key == String {
     /// - override: Overrides the keys and the values.
     /// - encapsulateFlatten: keeps the keys and adds the values to an array.
     
-    func flattened() -> [String : Any] {
+    func flattened() -> [String: Any] {
         
-        var retVal = [String : Any]()
+        var retVal = [String: Any]()
         
         for (k, v) in self {
             switch v {
@@ -26,15 +20,15 @@ extension Dictionary where Key == String {
                  is Double,
                  is Bool:
                 retVal.updateValue(v, forKey: k)
-            case is [String : Any]:
-                if let value: [String : Any] = v as? [String : Any] {
+            case is [String: Any]:
+                if let value: [String: Any] = v as? [String: Any] {
                     let inner = value.flattened()
                     retVal = retVal.merged(with: inner)
                 }
                 else {
                     continue
                 }
-            case is Array<Any>:
+            case is [Any]:
                 retVal.updateValue(String(describing: v), forKey: k)
             case is NSError:
                 if let inner = v as? NSError {
@@ -51,8 +45,8 @@ extension Dictionary where Key == String {
         return retVal
     }
     
-    func merged(with dictionary: [String : Any]) -> [String : Any] {
-        var retValue = self as [String :Any]
+    func merged(with dictionary: [String: Any]) -> [String: Any] {
+        var retValue = self as [String: Any]
         dictionary.forEach { (key, value) in
             retValue.updateValue(value, forKey: key)
         }

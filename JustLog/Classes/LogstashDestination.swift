@@ -1,10 +1,4 @@
-//
 //  LogstashDestination.swift
-//  JustLog
-//
-//  Created by Shabeer Hussain on 06/12/2016.
-//  Copyright © 2017 Just Eat. All rights reserved.
-//
 
 import Foundation
 import SwiftyBeaver
@@ -21,7 +15,7 @@ typealias LogTag = Int
 /// Once the writer has completed all operations, it calls the completion handler passing the logs that failed to push.
 /// Those logs are added back to `logsToShip`
 /// An optional `completionHandler` is called when all logs existing before the `forceSend` call have been tried to send once.
-public class LogstashDestination: BaseDestination  {
+public class LogstashDestination: BaseDestination {
     
     /// Settings
     var shouldLogActivity: Bool = false
@@ -35,19 +29,19 @@ public class LogstashDestination: BaseDestination  {
     private let logzioTokenKey = "token"
     
     /// Socket
-    private let socket: LogstashDestinationSocketProtocol
+    private let sender: LogstashDestinationSending
     
     @available(*, unavailable)
     override init() {
         fatalError()
     }
     
-    public required init(socket: LogstashDestinationSocketProtocol, logActivity: Bool) {
+    required init(sender: LogstashDestinationSending, logActivity: Bool) {
         self.operationQueue = OperationQueue()
         self.operationQueue.underlyingQueue = dispatchQueue
         self.operationQueue.maxConcurrentOperationCount = 1
         self.operationQueue.name = "com.justlog.LogstashDestination.operationQueue"
-        self.socket = socket
+        self.sender = sender
         super.init()
         self.shouldLogActivity = logActivity
     }
@@ -59,10 +53,10 @@ public class LogstashDestination: BaseDestination  {
     public func cancelSending() {
         self.operationQueue.cancelAllOperations()
         self.operationQueue.addOperation { [weak self] in
-            guard let self = self else { return }
+            guard let self else { return }
             self.logsToShip = [LogTag: LogContent]()
         }
-        self.socket.cancel()
+        self.sender.cancel()
     }
     
     // MARK: - Log dispatching
@@ -88,7 +82,7 @@ public class LogstashDestination: BaseDestination  {
 
     private func addLog(_ dict: LogContent) {
         operationQueue.addOperation { [weak self] in
-            guard let self = self else { return }
+            guard let self else { return }
             
             let time = mach_absolute_time()
             let logTag = Int(truncatingIfNeeded: time)
@@ -98,18 +92,18 @@ public class LogstashDestination: BaseDestination  {
 
     public func forceSend(_ completionHandler: @escaping (_ error: Error?) -> Void = {_ in }) {
         operationQueue.addOperation { [weak self] in
-            guard let self = self else { return }
-            let writer = LogstashDestinationWriter(socket: self.socket, shouldLogActivity: self.shouldLogActivity)
+            guard let self else { return }
+            let writer = LogstashDestinationWriter(sender: self.sender, shouldLogActivity: self.shouldLogActivity)
             let logsBatch = self.logsToShip
             self.logsToShip = [LogTag: LogContent]()
             writer.write(logs: logsBatch, queue: self.dispatchQueue) { [weak self] missing, error in
-                guard let self = self else {
+                guard let self else {
                     completionHandler(error)
                     return
                 }
                 
                 if let unsent = missing {
-                    self.logsToShip.merge(unsent) { lhs, rhs in lhs }
+                    self.logsToShip.merge(unsent) { lhs, _ in lhs }
                     self.printActivity("🔌 <LogstashDestination>, \(unsent.count) failed tasks")
                 }
                 completionHandler(error)

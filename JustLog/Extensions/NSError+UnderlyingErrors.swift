@@ -1,10 +1,4 @@
-//
 //  NSError+UnderlyingErrors.swift
-//  Pods
-//
-//  Created by Alkiviadis Papadakis on 22/08/2017.
-//
-//
 
 import Foundation
 extension NSError {

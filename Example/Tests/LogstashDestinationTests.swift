@@ -1,10 +1,4 @@
-//
 //  LogstashDestinationTests.swift
-//  JustLog_Tests
-//
-//  Created by Antonio Strijdom on 13/07/2020.
-//  Copyright © 2020 Just Eat. All rights reserved.
-//
 
 import XCTest
 @testable import JustLog
@@ -16,7 +10,24 @@ class LogstashDestinationTests: XCTestCase {
         let mockSocket = MockLogstashDestinationSocket(host: "", port: 0, timeout: 5, logActivity: true, allowUntrustedServer: true)
         mockSocket.networkOperationCountExpectation = expect
         mockSocket.completionHandlerCalledExpectation = expectation(description: "completionHandlerCalledExpectation")
-        let destination = LogstashDestination(socket: mockSocket, logActivity: true)
+        let destination = LogstashDestination(sender: mockSocket, logActivity: true)
+        _ = destination.send(.verbose, msg: "{}", thread: "", file: "", function: "", line: 0)
+        _ = destination.send(.debug, msg: "{}", thread: "", file: "", function: "", line: 0)
+        _ = destination.send(.info, msg: "{}", thread: "", file: "", function: "", line: 0)
+        _ = destination.send(.warning, msg: "{}", thread: "", file: "", function: "", line: 0)
+        _ = destination.send(.error, msg: "{}", thread: "", file: "", function: "", line: 0)
+        expect.expectedFulfillmentCount = 5
+        destination.forceSend()
+        self.waitForExpectations(timeout: 10.0, handler: nil)
+    }
+    
+    func testBasicLogging_HTTP() throws {
+        let expect = expectation(description: "Send log expectation")
+        var mockScheduler = MockLogstashDestinationSendingScheduler()
+        mockScheduler.networkOperationCountExpectation = expect
+        let sender = LogstashDestinationHTTP(host: "testing.com", port: 0, timeout: 5, logActivity: false)
+        sender.scheduler = mockScheduler
+        let destination = LogstashDestination(sender: sender, logActivity: true)
         _ = destination.send(.verbose, msg: "{}", thread: "", file: "", function: "", line: 0)
         _ = destination.send(.debug, msg: "{}", thread: "", file: "", function: "", line: 0)
         _ = destination.send(.info, msg: "{}", thread: "", file: "", function: "", line: 0)
@@ -30,7 +41,7 @@ class LogstashDestinationTests: XCTestCase {
     func testCompletionHandler() throws {
         let expect = expectation(description: "Send log expectation")
         let mockSocket = MockLogstashDestinationSocket(host: "", port: 0, timeout: 5, logActivity: true, allowUntrustedServer: true)
-        let destination = LogstashDestination(socket: mockSocket, logActivity: true)
+        let destination = LogstashDestination(sender: mockSocket, logActivity: true)
         _ = destination.send(.verbose, msg: "{}", thread: "", file: "", function: "", line: 0)
         _ = destination.send(.debug, msg: "{}", thread: "", file: "", function: "", line: 0)
         _ = destination.send(.info, msg: "{}", thread: "", file: "", function: "", line: 0)
@@ -46,7 +57,7 @@ class LogstashDestinationTests: XCTestCase {
         let expectation1 = expectation(description: "Send first log expectation")
         let expectation2 = expectation(description: "Send second log expectation")
         let mockSocket = MockLogstashDestinationSocket(host: "", port: 0, timeout: 5, logActivity: true, allowUntrustedServer: true)
-        let destination = LogstashDestination(socket: mockSocket, logActivity: true)
+        let destination = LogstashDestination(sender: mockSocket, logActivity: true)
         _ = destination.send(.verbose, msg: "{}", thread: "", file: "", function: "", line: 0)
         _ = destination.send(.debug, msg: "{}", thread: "", file: "", function: "", line: 0)
         _ = destination.send(.info, msg: "{}", thread: "", file: "", function: "", line: 0)
@@ -68,7 +79,7 @@ class LogstashDestinationTests: XCTestCase {
         mockSocket.errorState = true
         mockSocket.networkOperationCountExpectation = expect
         mockSocket.completionHandlerCalledExpectation = expectation1
-        let destination = LogstashDestination(socket: mockSocket, logActivity: true)
+        let destination = LogstashDestination(sender: mockSocket, logActivity: true)
         _ = destination.send(.verbose, msg: "{}", thread: "", file: "", function: "", line: 0)
         _ = destination.send(.debug, msg: "{}", thread: "", file: "", function: "", line: 0)
         _ = destination.send(.info, msg: "{}", thread: "", file: "", function: "", line: 0)
@@ -94,7 +105,7 @@ class LogstashDestinationTests: XCTestCase {
         mockSocket.errorState = true
         mockSocket.networkOperationCountExpectation = expect
         mockSocket.completionHandlerCalledExpectation = expectation1
-        let destination = LogstashDestination(socket: mockSocket, logActivity: true)
+        let destination = LogstashDestination(sender: mockSocket, logActivity: true)
         _ = destination.send(.verbose, msg: "{}", thread: "", file: "", function: "", line: 0)
         _ = destination.send(.debug, msg: "{}", thread: "", file: "", function: "", line: 0)
         _ = destination.send(.info, msg: "{}", thread: "", file: "", function: "", line: 0)
@@ -119,7 +130,7 @@ enum LogstashDestinationTestError: Error {
     case whoops
 }
 
-class MockLogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
+class MockLogstashDestinationSocket: NSObject, LogstashDestinationSending {
     
     var networkOperationCountExpectation: XCTestExpectation?
     var completionHandlerCalledExpectation: XCTestExpectation?
@@ -136,7 +147,7 @@ class MockLogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol
     func sendLogs(_ logs: [LogTag: LogContent],
                   transform: (LogContent) -> Data,
                   queue: DispatchQueue,
-                  complete: @escaping LogstashDestinationSocketProtocolCompletion) {
+                  complete: @escaping LogstashDestinationSendingCompletion) {
         
         let dispatchGroup = DispatchGroup()
         var sendStatus = [Int: Error]()

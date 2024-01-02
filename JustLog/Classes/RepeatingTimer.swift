@@ -1,13 +1,8 @@
-//
 //  RepeatingTimer.swift
-//  JustLog
-//
-//  Created by Junaid Younus on 08/06/2020.
-//  Copyright © 2020 Just Eat. All rights reserved.
-//
-//  https://medium.com/over-engineering/a-background-repeating-timer-in-swift-412cecfd2ef9 
 
 import Foundation
+
+///  https://medium.com/over-engineering/a-background-repeating-timer-in-swift-412cecfd2ef9
 
 /// RepeatingTimer mimics the API of DispatchSourceTimer but in a way that prevents crashes that occur from calling resume multiple times on a timer that is
 /// already resumed (noted by https://github.com/SiftScience/sift-ios/issues/52)

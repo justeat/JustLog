@@ -1,10 +1,4 @@
-//
 //  CustomDestinationTests.swift
-//  JustLog_Tests
-//
-//  Created by Antonio Strijdom on 02/02/2021.
-//  Copyright © 2021 Just Eat. All rights reserved.
-//
 
 import XCTest
 @testable import JustLog
@@ -25,7 +19,7 @@ class MockCustomDestinationSender: CustomDestinationSender {
 }
 
 class CustomDestinationTests: XCTestCase {
-
+    
     func testBasicLogging() throws {
         let expect = expectation(description: "Send log expectation")
         expect.expectedFulfillmentCount = 5
@@ -43,20 +37,18 @@ class CustomDestinationTests: XCTestCase {
     }
     
     func test_logger_sendsDeviceTimestampForEachLogType() {
-        let sut = Logger.shared
-        sut.enableCustomLogging = true
-        
         let expectation = expectation(description: #function)
         expectation.expectedFulfillmentCount = 5
-
-        let mockSender = MockCustomDestinationSender(expectation: expectation)
-        sut.setupWithCustomLogSender(mockSender)
         
-        sut.verbose("Verbose Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.debug("Debug Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.info("Info Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.warning("Warning Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.error("Error Message", error: nil, userInfo: nil, #file, #function, #line)
+        let mockSender = MockCustomDestinationSender(expectation: expectation)
+
+        let sut = Logger(configuration: Configuration(), logMessageFormatter: JSONStringLogMessageFormatter(keys: FormatterKeys()), customLogSender: mockSender)
+        
+        sut.send(Log(type: .verbose, message: "Verbose Message"))
+        sut.send(Log(type: .debug, message: "Debug Message"))
+        sut.send(Log(type: .info, message: "Info Message"))
+        sut.send(Log(type: .warning, message: "Warning Message"))
+        sut.send(Log(type: .error, message: "Error Message"))
         
         mockSender.logs.forEach { XCTAssertTrue($0.contains("device_timestamp")) }
         self.waitForExpectations(timeout: 10.0, handler: nil)

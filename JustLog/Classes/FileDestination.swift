@@ -1,10 +1,4 @@
-//
 //  FileDestination.swift
-//  JustLog
-//
-//  Created by Alberto De Bortoli on 20/12/2016.
-//  Copyright © 2017 Just Eat. All rights reserved.
-//
 
 import Foundation
 import SwiftyBeaver
@@ -13,7 +7,7 @@ public class FileDestination: BaseDestination {
 
     public var logFileURL: URL?
 
-    var fileHandle: FileHandle? = nil
+    var fileHandle: FileHandle?
     
     public override init() {
         super.init()
@@ -31,7 +25,7 @@ public class FileDestination: BaseDestination {
         let formattedString = super.send(level, msg: msg, thread: thread, file: file, function: function, line: line)
 
         if let str = formattedString {
-            let _ = saveToFile(str: str)
+            _ = saveToFile(str: str)
         }
         return formattedString
     }
@@ -53,7 +47,7 @@ public class FileDestination: BaseDestination {
                     fileHandle = try FileHandle(forWritingTo: url as URL)
                 }
                 if let fileHandle = fileHandle {
-                    let _ = fileHandle.seekToEndOfFile()
+                    _ = fileHandle.seekToEndOfFile()
                     let line = str + "\n"
                     if let data = line.data(using: String.Encoding.utf8) {
                         fileHandle.write(data)

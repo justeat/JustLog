@@ -1,10 +1,4 @@
-//
 //  CustomDestination.swift
-//  JustLog
-//
-//  Created by Antonio Strijdom on 02/02/2021.
-//  Copyright © 2021 Just Eat. All rights reserved.
-//
 
 import Foundation
 import SwiftyBeaver

@@ -1,20 +1,15 @@
-//
 //  LogstashDestinationWriter.swift
-//  JustLog
-//
-//  Created by Luigi Parpinel on 25/05/21.
-//
 
 import Foundation
 
 class LogstashDestinationWriter {
 
-    private let socket: LogstashDestinationSocketProtocol
+    private let sender: LogstashDestinationSending
 
     private let shouldLogActivity: Bool
     
-    init(socket: LogstashDestinationSocketProtocol, shouldLogActivity: Bool) {
-        self.socket = socket
+    init(sender: LogstashDestinationSending, shouldLogActivity: Bool) {
+        self.sender = sender
         self.shouldLogActivity = shouldLogActivity
     }
     
@@ -29,7 +24,7 @@ class LogstashDestinationWriter {
         }
 
         let shouldLogActivity = self.shouldLogActivity
-        socket.sendLogs(logs, transform: transformLogToData, queue: queue) { status in
+        sender.sendLogs(logs, transform: transformLogToData, queue: queue) { status in
             let unsentLog = logs.filter { status.keys.contains($0.key) }
             if unsentLog.isEmpty {
                 Self.printActivity("🔌 <LogstashDestination>, did write tags: \(logs.keys)", shouldLogActivity: shouldLogActivity)
@@ -49,7 +44,7 @@ class LogstashDestinationWriter {
     
     private func transformLogToData(_ dict: LogContent) -> Data {
         do {
-            var data = try JSONSerialization.data(withJSONObject:dict, options:[])
+            var data = try JSONSerialization.data(withJSONObject: dict, options: [])
             if let encodedData = "\n".data(using: String.Encoding.utf8) {
                 data.append(encodedData)
             }

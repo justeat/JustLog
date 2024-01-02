@@ -1,30 +1,8 @@
-//
 //  LogstashDestinationSocket.swift
-//  JustLog
-//
-//  Created by Antonio Strijdom on 29/06/2020.
-//  Copyright © 2020 Just Eat. All rights reserved.
-//
 
 import Foundation
 
-public protocol LogstashDestinationSocketProtocol {
-
-    typealias LogstashDestinationSocketProtocolCompletion = ([Int: Error]) -> Void
-    typealias LogstashDestinationSocketProtocolTransform = ([String: Any]) -> Data
-
-    init(host: String, port: UInt16, timeout: TimeInterval, logActivity: Bool, allowUntrustedServer: Bool)
-
-    func cancel()
-
-    func sendLogs(_ logs: [Int: [String: Any]],
-                  transform: @escaping LogstashDestinationSocketProtocolTransform,
-                  queue: DispatchQueue,
-                  complete: @escaping LogstashDestinationSocketProtocolCompletion)
-}
-
-class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
-
+class LogstashDestinationSocket: NSObject, LogstashDestinationSending {
 
     /// Settings
     private let allowUntrustedServer: Bool
@@ -68,11 +46,11 @@ class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
 
     /// Create (and resume) stream tasks to send the logs provided to the server
     func sendLogs(_ logs: [Int: [String: Any]],
-                  transform: @escaping LogstashDestinationSocketProtocolTransform,
+                  transform: @escaping LogstashDestinationSendingTransform,
                   queue: DispatchQueue,
-                  complete: @escaping LogstashDestinationSocketProtocolCompletion) {
+                  complete: @escaping LogstashDestinationSendingCompletion) {
         dispatchQueue.async { [weak self] in
-            guard let self = self else {
+            guard let self else {
                 complete([:])
                 return
             }
@@ -88,7 +66,7 @@ class LogstashDestinationSocket: NSObject, LogstashDestinationSocketProtocol {
                 let logData = transform(log.1)
                 dispatchGroup.enter()
                 task.write(logData, timeout: self.timeout) { [weak self] error in
-                    guard let self = self else {
+                    guard let self else {
                         dispatchGroup.leave()
                         return
                     }

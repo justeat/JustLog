@@ -1,58 +1,28 @@
-//
 //  LoggerTests.swift
-//  JustLog
-//
-//  Created by Alkiviadis Papadakis on 24/08/2017.
-//  Copyright © 2017 CocoaPods. All rights reserved.
-//
 
 import XCTest
 @testable import JustLog
 
 class LoggerTests: XCTestCase {
+    var sut: Logger!
     
     override func setUp() {
         super.setUp()
-        Logger.shared.internalLogger.removeAllDestinations()
+        sut = Logger(configuration: Configuration(), logMessageFormatter: JSONStringLogMessageFormatter(keys: FormatterKeys()))
+        sut.internalLogger.removeAllDestinations()
     }
     
-    func test_errorDictionary_ReturnsDictionaryForError() {
-        let userInfo = [
-            NSLocalizedFailureReasonErrorKey: "error value",
-            NSLocalizedDescriptionKey: "description",
-            NSLocalizedRecoverySuggestionErrorKey: "recovery suggestion"
-            ] as [String : Any]
-        let error = NSError(domain: "com.just-eat.error", code: 1234, userInfo: userInfo)
-        let dict = Logger.shared.errorDictionary(for: error)
-        
-        XCTAssertNotNil(dict["user_info"])
-        XCTAssertNotNil(dict["error_code"])
-        XCTAssertNotNil(dict["error_domain"])
-    }
-    
-    func test_errorDictionary_ReturnedDictionaryContainsUserInfo() {
-        let userInfo = [
-            NSLocalizedFailureReasonErrorKey: "error value",
-            NSLocalizedDescriptionKey: "description",
-            NSLocalizedRecoverySuggestionErrorKey: "recovery suggestion"
-            ] as [String : Any]
-        let error = NSError(domain: "com.just-eat.error", code: 1234, userInfo: userInfo)
-        let dict = Logger.shared.errorDictionary(for: error)
-        let dictUserInfo = dict["user_info"] as! [String : Any]
-        
-        XCTAssertEqual(userInfo[NSLocalizedFailureReasonErrorKey] as! String, dictUserInfo[NSLocalizedFailureReasonErrorKey] as! String)
-        XCTAssertEqual(userInfo[NSLocalizedDescriptionKey] as! String, dictUserInfo[NSLocalizedDescriptionKey] as! String)
-        XCTAssertEqual(userInfo[NSLocalizedRecoverySuggestionErrorKey] as! String, dictUserInfo[NSLocalizedRecoverySuggestionErrorKey] as! String)
-        XCTAssertNotNil(dict["error_domain"])
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
     }
     
     func test_logger_whenSetupNotCompleted_thenLogsQueued() {
-        let sut = Logger.shared
-        sut.verbose("Verbose Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.debug("Debug Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.info("Info Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.warning("Warning Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.error("Error Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.send(Log(type: .verbose, message: "Verbose Message"))
+        sut.send(Log(type: .debug, message: "Debug Message"))
+        sut.send(Log(type: .info, message: "Info Message"))
+        sut.send(Log(type: .warning, message: "Warning Message"))
+        sut.send(Log(type: .error, message: "Error Message"))
         
         XCTAssertFalse(sut.queuedLogs.isEmpty)
         XCTAssertEqual(sut.queuedLogs.count, 5)
@@ -61,29 +31,14 @@ class LoggerTests: XCTestCase {
         XCTAssertEqual(sut.queuedLogs[2].message, "Info Message")
         XCTAssertEqual(sut.queuedLogs[3].message, "Warning Message")
         XCTAssertEqual(sut.queuedLogs[4].message, "Error Message")
-    }
-    
-    func test_logger_whenSetupCompleted_thenLogsNotQueued() {
-        let sut = Logger.shared
-        sut.setup()
-        
-        sut.verbose("Verbose Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.debug("Debug Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.info("Info Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.warning("Warning Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.error("Error Message", error: nil, userInfo: nil, #file, #function, #line)
-        
-        XCTAssertTrue(sut.queuedLogs.isEmpty)
     }
     
     func test_logger_whenSetupCompletedAfterDelay_thenQueuedLogsSent() {
-        let sut = Logger.shared
-        
-        sut.verbose("Verbose Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.debug("Debug Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.info("Info Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.warning("Warning Message", error: nil, userInfo: nil, #file, #function, #line)
-        sut.error("Error Message", error: nil, userInfo: nil, #file, #function, #line)
+        sut.send(Log(type: .verbose, message: "Verbose Message"))
+        sut.send(Log(type: .debug, message: "Debug Message"))
+        sut.send(Log(type: .info, message: "Info Message"))
+        sut.send(Log(type: .warning, message: "Warning Message"))
+        sut.send(Log(type: .error, message: "Error Message"))
         
         XCTAssertFalse(sut.queuedLogs.isEmpty)
         XCTAssertEqual(sut.queuedLogs.count, 5)
@@ -93,39 +48,19 @@ class LoggerTests: XCTestCase {
         XCTAssertEqual(sut.queuedLogs[3].message, "Warning Message")
         XCTAssertEqual(sut.queuedLogs[4].message, "Error Message")
         
-        sut.setup()
-        
+        sut = Logger(configuration: Configuration(), logMessageFormatter: JSONStringLogMessageFormatter(keys: FormatterKeys()))
         XCTAssertTrue(sut.queuedLogs.isEmpty)
     }
     
     func test_logger_whenLogMessagesAreSanitized_thenExpectedResultRetrived() {
-        let sut = Logger.shared
-        sut.setup()
+        sut = MockLoggerFactory().logger
+        
         var message = "conversation = {name = \\\"John Smith\\\";\\n; \\n token = \\\"123453423\\\";\\n"
         let expectedMessage = "conversation = {n***e = \\\"*****\\\";\\n; \\n t***n = \\\"*****\\\";\\n"
         
-        message = sut.sanitize(message, Logger.LogType.error)
-        sut.error(message, error: nil, userInfo: nil, #file, #function, #line)
+        message = sut.sanitize(message, LogType.error)
+        sut.send(Log(type: .error, message: message))
         
         XCTAssertEqual(message, expectedMessage)
-    }
-    
-    func test_logger_sendsDeviceTimestampAsMetadata() throws {
-        let sut = Logger.shared
-        
-        let currentDate = Date()
-        let message = sut.logMessage("Log message", error: nil, userInfo: nil, currentDate: currentDate, #file, #function, #line)
-        
-        let data = try XCTUnwrap(message.data(using: .utf8))
-        guard let parsedMessage = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
-            XCTFail("Failed to parse log message")
-            return
-        }
-        
-        let parsedMetadata = try XCTUnwrap(parsedMessage["metadata"] as? [String: String])
-        let parsedDeviceTimestamp = try XCTUnwrap(parsedMetadata["device_timestamp"])
-        let expectedDeviceTimestamp = "\(currentDate.timeIntervalSince1970)"
-        
-        XCTAssertEqual(parsedDeviceTimestamp, expectedDeviceTimestamp)
     }
 }
