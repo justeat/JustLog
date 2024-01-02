@@ -1,4 +1,0 @@
-module JustLog {
-    header "/Users/alberto.debortoli/src/JustLog/.build/arm64-apple-macosx/debug/JustLog.build/JustLog-Swift.h"
-    requires objc
-}

@@ -53,3 +53,4 @@ default.profraw
 fastlane/test_output/
 fastlane/report.xml
 derived_data/
+.build/
