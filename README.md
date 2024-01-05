@@ -1,5 +1,7 @@
 ![JustLog Banner](./img/just_log_banner.png)
 
+### Warning: This library is not supported by Just Eat Takeaway anymore and therefore considered deprecated. The repository has been archived.
+
 # JustLog
 
 [![Build Status](https://travis-ci.org/justeat/JustLog.svg?branch=master)](https://travis-ci.org/justeat/JustLog)
